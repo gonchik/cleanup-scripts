@@ -4,10 +4,10 @@ import com.atlassian.jira.issue.fields.screen.issuetype.IssueTypeScreenSchemeMan
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
 
-def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupUsUsedIssueTypeScreenManager")
+def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupUnAssociatedIssueTypeScreen")
 log.setLevel(Level.DEBUG)
 
-def schemeManager = ComponentAccessor.issueTypeScreenSchemeManager
+def schemeManager = ComponentAccessor.issueTypeScreenManager
 def sb = new StringBuilder()
 
 sb.append("Deleted issue type screen schemes with no associated projects:<br/><br/>\n")
