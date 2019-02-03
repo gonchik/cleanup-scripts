@@ -1,6 +1,5 @@
 boolean isPreview = true
 import com.atlassian.jira.component.ComponentAccessor
-import com.atlassian.jira.issue.fields.screen.issuetype.IssueTypeScreenSchemeManager
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
 
@@ -16,10 +15,10 @@ schemeManager.fieldScreenSchemes().each {
         return
     }
     try {
-        if (schemeManager.getProjects(it).size() < 1) {
+        if (schemeManager.getProjects(it).size() == 0) {
             sb.append("${it.name}<br/>\n")
             if (!isPreview) {
-                schemeManager.removeIssueTypeScreenScheme(it)
+                schemeManager.removeFieldScreenScheme(it)
             }
         }
     }

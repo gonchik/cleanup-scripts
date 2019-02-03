@@ -7,6 +7,7 @@ import org.apache.log4j.Level
 def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupUnAssociatedIssueType")
 log.setLevel(Level.DEBUG)
 
+// Cleanup of the cleanupUnAssociatedIssueType
 def issueTypeManager = ComponentAccessor.getComponent(IssueTypeManager)
 def sb = new StringBuilder()
 
