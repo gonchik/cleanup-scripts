@@ -1,3 +1,5 @@
+boolean isPreview = true
+
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.bc.user.search.UserSearchService
 import com.atlassian.jira.bc.user.search.UserSearchParams
@@ -14,8 +16,13 @@ UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchS
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
 WatcherManager watcherManager = ComponentAccessor.getComponent(WatcherManager.class)
 
+def sb = new StringBuilder()
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
     ApplicationUser userToRemove = appUser
-    watcherManager.removeAllWatchesForUser(userToRemove)
-    log.debug('Done for ' + userToRemove.getName())
+    if (!isPreview) {
+        watcherManager.removeAllWatchesForUser(userToRemove)
+    }
+    sb.append("${userToRemove.name}<br/>\n")
 }
+
+return sb.toString()

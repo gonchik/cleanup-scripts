@@ -1,4 +1,5 @@
 boolean isPreview = true
+
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.config.IssueTypeManager
 import org.apache.log4j.Logger

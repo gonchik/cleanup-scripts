@@ -13,9 +13,10 @@ log.setLevel(Level.DEBUG)
 UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
 VoteManager voteManager = ComponentAccessor.getComponent(VoteManager.class)
-
+def sb = new StringBuilder()
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
     ApplicationUser userToRemove = appUser
     voteManager.removeVotesForUser(userToRemove)
-    log.debug('Done for ' + userToRemove.getName())
+    sb.append("${userToRemove.name}<br/>\n")
 }
+return sb.toString()

@@ -14,31 +14,45 @@ import org.apache.log4j.Level
 def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupDashBoardsForInactiveUsers")
 log.setLevel(Level.DEBUG)
 
-
-def deletePrivateDashBoards(ApplicationUser appUser) {
+/**
+ * That method delete Private Dashboards
+ * @param appUser
+ * @return
+ */
+def deletePrivateDashBoards(ApplicationUser appUser, int notPopularCount) {
     def portalPageService = ComponentAccessor.getComponent(PortalPageService.class)
     def pages = portalPageService.getOwnedPortalPages(appUser)
     JiraServiceContext serviceContext = new JiraServiceContextImpl(appUser)
     pages.each { page ->
-        if (page.permissions.isPrivate() || page.favouriteCount <= 1) {
+        if (page.permissions.isPrivate() || page.favouriteCount < notPopularCount) {
             portalPageService.deletePortalPage(serviceContext, (long) page.id)
             log.debug "| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |"
         }
     }
 }
 
+/**
+ * Method to delete private filters
+ * @param appUser
+ * @return
+ */
 def deletePrivateFilters(ApplicationUser appUser) {
     def searchRequestService = ComponentAccessor.getComponent(SearchRequestService.class)
     def filters = searchRequestService.getOwnedFilters(appUser)
     JiraServiceContext serviceContext = new JiraServiceContextImpl(appUser)
-    filters.findAll { filter ->
-        if (filter.permissions.isPrivate() || filter.favouriteCount <= 1) {
+    filters.each { filter ->
+        if (filter.permissions.isPrivate()) {
             searchRequestService.deleteFilter(serviceContext, (long) filter.id)
             log.debug "| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |"
         }
     }
 }
 
+/**
+ * Remove from favourites filters and dashboards for inactive users
+ * @param appUser
+ * @return
+ */
 def decreaseFavouriteCounter(ApplicationUser appUser) {
     def portalPageService = ComponentAccessor.getComponent(PortalPageService.class)
     def pages = portalPageService.getFavouritePortalPages(appUser)
@@ -52,7 +66,7 @@ def decreaseFavouriteCounter(ApplicationUser appUser) {
     // decrease the filter counts
     def searchRequestService = ComponentAccessor.getComponent(SearchRequestService.class)
     def filters = searchRequestService.getFavouriteFilters(appUser)
-    filters.findAll { filter ->
+    filters.each { filter ->
         searchRequestService.updateFilter(serviceContext, filter, isFavourite)
         log.debug "| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |"
     }
@@ -81,6 +95,6 @@ UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchS
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
     decreaseFavouriteCounter(appUser)
-    deletePrivateDashBoards(appUser)
+    deletePrivateDashBoards(appUser, 1)
     deletePrivateFilters(appUser)
 }

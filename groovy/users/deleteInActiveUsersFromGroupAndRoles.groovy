@@ -1,3 +1,5 @@
+boolean isPreview = true
+
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.ComponentManager
 import com.atlassian.jira.bc.user.search.UserSearchService
@@ -20,7 +22,6 @@ log.setLevel(Level.DEBUG)
 
 UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
-boolean isPreview = false
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
     ApplicationUser user = appUser
     def userUtil = ComponentAccessor.userUtil
@@ -30,7 +31,7 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
     log.debug("deactivateUser ${user.getName()}")
     // Remove user from all groups...
     def groups = userUtil.getGroupsForUser(user.name)
-    if (!groups.isEmpty()) {
+    if (!groups.isEmpty() && !isPreview) {
         try {
             userUtil.removeUserFromGroups(groups, user)
             log.info(userToRemove.name + " from groups")
