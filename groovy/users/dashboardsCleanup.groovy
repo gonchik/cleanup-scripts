@@ -6,6 +6,7 @@ import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.user.ApplicationUser
 import com.atlassian.jira.bc.user.search.UserSearchService
 import com.atlassian.jira.bc.user.search.UserSearchParams
+import com.atlassian.jira.favourites.FavouritesManager
 import com.atlassian.jira.portal.PortletConfiguration
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
@@ -54,12 +55,14 @@ def deletePrivateFilters(ApplicationUser appUser) {
  * @return
  */
 def decreaseFavouriteCounter(ApplicationUser appUser) {
+    def favouritesManager = ComponentAccessor.getComponent(FavouritesManager.class)
     def portalPageService = ComponentAccessor.getComponent(PortalPageService.class)
     def pages = portalPageService.getFavouritePortalPages(appUser)
     JiraServiceContext serviceContext = new JiraServiceContextImpl(appUser)
     def isFavourite = false
     pages.each { page ->
         portalPageService.updatePortalPage(serviceContext, page, isFavourite)
+        favouritesManager.removeFavourite(appUser, page)
         log.debug "| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |"
     }
 
@@ -68,8 +71,18 @@ def decreaseFavouriteCounter(ApplicationUser appUser) {
     def filters = searchRequestService.getFavouriteFilters(appUser)
     filters.each { filter ->
         searchRequestService.updateFilter(serviceContext, filter, isFavourite)
+        favouritesManager.removeFavourite(appUser, filter)
         log.debug "| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |"
     }
+}
+
+def deleteAllDashboardsAndFilters(ApplicationUser appUser){
+    def portalPageService = ComponentAccessor.getComponent(PortalPageService.class)
+    def searchRequestService = ComponentAccessor.getComponent(SearchRequestService.class)
+    JiraServiceContext serviceContext = new JiraServiceContextImpl(appUser)
+    // delete all filters and dashboards for user
+    portalPageService.deleteAllPortalPagesForUser(appUser)
+    searchRequestService.deleteAllFiltersForUser(serviceContext, appUser)
 }
 
 def removeGadget(ApplicationUser appUser) {
