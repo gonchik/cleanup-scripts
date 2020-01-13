@@ -25,6 +25,6 @@ WHERE  jiraissue.issuestatus IS NULL;
 -- And can be fixed with the following:
 UPDATE jiraissue
 SET    issuestatus = (SELECT state
-                      FROM   os_wfentry
+                      FROM   OS_WFENTRY
                       WHERE  id = workflow_id)
 WHERE  issuestatus IS NULL;
