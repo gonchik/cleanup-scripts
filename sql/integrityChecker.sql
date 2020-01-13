@@ -9,6 +9,8 @@ ON     jiraissue.workflow_id = OS_WFENTRY.id
 WHERE  OS_WFENTRY.state IS NULL
 OR     OS_WFENTRY.state = 0;
 
+-- fix by
+-- UPDATE OS_WFENTRY SET state = 1 WHERE id in (OS_WFENTRY_ID_VALUES)
 
 -- Jira Issues with Null Status
 SELECT jiraissue.id,
@@ -22,7 +24,7 @@ JOIN   OS_CURRENTSTEP currentStep
 ON     jiraissue.workflow_id = currentStep.entry_id
 WHERE  jiraissue.issuestatus IS NULL;
 
--- And can be fixed with the following:
+-- And can be fixed by:
 UPDATE jiraissue
 SET    issuestatus = (SELECT state
                       FROM   OS_WFENTRY
