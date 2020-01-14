@@ -1,5 +1,5 @@
 boolean isPreview = true
-
+// Find unassociated issue types to projects
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.config.IssueTypeManager
 import org.apache.log4j.Logger

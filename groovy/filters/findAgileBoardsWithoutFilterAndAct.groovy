@@ -1,11 +1,12 @@
 // https://kb.botronsoft.com/x/gYBk
+// Find Agile boards without any base filter
 import com.atlassian.greenhopper.model.rapid.RapidView
 import com.atlassian.greenhopper.manager.rapidview.RapidViewManager
 import com.onresolve.scriptrunner.runner.customisers.JiraAgileBean
 import com.atlassian.jira.issue.search.SearchRequestManager
 import com.atlassian.jira.component.ComponentAccessor
 
-def fix = false
+boolean fix = false
 
 public class NoCheck implements RapidViewManager.RapidViewPermissionCheck {
     public boolean check(RapidView view) {
