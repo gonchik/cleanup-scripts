@@ -1,3 +1,7 @@
+/*
+    This script do cleanup of filters, dashboards for inactive users
+ */
+boolean isPreview = true
 import com.atlassian.jira.bc.JiraServiceContextImpl
 import com.atlassian.jira.bc.JiraServiceContext
 import com.atlassian.jira.bc.portal.PortalPageService
@@ -26,8 +30,10 @@ def deletePrivateDashBoards(ApplicationUser appUser, int notPopularCount) {
     JiraServiceContext serviceContext = new JiraServiceContextImpl(appUser)
     pages.each { page ->
         if (page.permissions.isPrivate() || page.favouriteCount < notPopularCount) {
-            portalPageService.deletePortalPage(serviceContext, (long) page.id)
-            log.debug "| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |"
+            if (!isPreview) {
+                portalPageService.deletePortalPage(serviceContext, (long) page.id)
+            }
+            log.debug("| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |")
         }
     }
 }
@@ -43,8 +49,10 @@ def deletePrivateFilters(ApplicationUser appUser) {
     JiraServiceContext serviceContext = new JiraServiceContextImpl(appUser)
     filters.each { filter ->
         if (filter.permissions.isPrivate()) {
-            searchRequestService.deleteFilter(serviceContext, (long) filter.id)
-            log.debug "| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |"
+            if (!isPreview) {
+                searchRequestService.deleteFilter(serviceContext, (long) filter.id)
+            }
+            log.debug("| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |")
         }
     }
 }
@@ -61,9 +69,11 @@ def decreaseFavouriteCounter(ApplicationUser appUser) {
     JiraServiceContext serviceContext = new JiraServiceContextImpl(appUser)
     def isFavourite = false
     pages.each { page ->
-        portalPageService.updatePortalPage(serviceContext, page, isFavourite)
-        favouritesManager.removeFavourite(appUser, page)
-        log.debug "| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |"
+        if (!isPreview) {
+            portalPageService.updatePortalPage(serviceContext, page, isFavourite)
+            favouritesManager.removeFavourite(appUser, page)
+        }
+        log.debug("| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |")
     }
 
     // decrease the filter counts
@@ -72,11 +82,11 @@ def decreaseFavouriteCounter(ApplicationUser appUser) {
     filters.each { filter ->
         searchRequestService.updateFilter(serviceContext, filter, isFavourite)
         favouritesManager.removeFavourite(appUser, filter)
-        log.debug "| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |"
+        log.info("| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |")
     }
 }
 
-def deleteAllDashboardsAndFilters(ApplicationUser appUser){
+def deleteAllDashboardsAndFilters(ApplicationUser appUser) {
     def portalPageService = ComponentAccessor.getComponent(PortalPageService.class)
     def searchRequestService = ComponentAccessor.getComponent(SearchRequestService.class)
     JiraServiceContext serviceContext = new JiraServiceContextImpl(appUser)
@@ -95,7 +105,7 @@ def removeGadget(ApplicationUser appUser) {
         def portletConfigurationsList = portalPageService.getPortletConfigurations(serviceContext, (long) page.id)
         portletConfigurationsList.each { portletConfigurations ->
             portletConfigurations.each { portletConfiguration ->
-                log.debug portletConfiguration.getGadgetURI()
+                log.debug(portletConfiguration.getGadgetURI())
             }
         }
     }
@@ -103,11 +113,11 @@ def removeGadget(ApplicationUser appUser) {
 }
 
 // This script can be run from Jira -> Administration -> Add-ons -> Script Console
-log.debug "| ID | Name | FavouriteCounts | Owner | Is Private |"
+log.info("| ID | Name | FavouriteCounts | Owner | Is Private |")
 UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
     decreaseFavouriteCounter(appUser)
-    deletePrivateDashBoards(appUser, 1)
     deletePrivateFilters(appUser)
+    deletePrivateDashBoards(appUser, 1)
 }
