@@ -1,4 +1,5 @@
-boolean isPreview = false
+// please, be informed that script works based on the exception for com.atlassian.jira.config.StatusManager.removeStatus()
+// Disclaimer: please, check on test env before run prod
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.config.StatusManager
 import org.apache.log4j.Logger
@@ -10,9 +11,16 @@ log.setLevel(Level.DEBUG)
 def statusManager = ComponentAccessor.getComponent(StatusManager)
 def sb = new StringBuilder()
 
-sb.append("Deleted issue type screen schemes with no associated projects:<br/><br/>\n")
+sb.append("Delete statuses with no associated workflow:<br/><br/>\n")
 statusManager.statuses.each {
-    log.debug it.name
+    try {
+        statusManager.removeStatus(it.id)
+        sb.append("Removed status ${it.name}<br/>\n")
+    } catch (IllegalStateException e){
+        log.error(e)
+    } catch (IllegalArgumentException e){
+        log.error(e)
+    }
 }
 
 return sb.toString()

@@ -1,4 +1,4 @@
-boolean isPreview = false
+boolean isPreview = true
 import com.atlassian.jira.component.ComponentAccessor
 import org.apache.log4j.Logger
 import org.apache.log4j.Level

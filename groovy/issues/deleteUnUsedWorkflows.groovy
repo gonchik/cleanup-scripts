@@ -1,4 +1,4 @@
-boolean isPreview = false
+boolean isPreview = true
 // This script investigate the workflows and workflows schemes
 import com.atlassian.jira.component.ComponentAccessor
 import org.apache.log4j.Logger
