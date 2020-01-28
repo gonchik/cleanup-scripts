@@ -1,24 +1,21 @@
 boolean isPreview = true
 import com.atlassian.jira.component.ComponentAccessor
+import com.atlassian.jira.issue.fields.screen.FieldScreenSchemeManager
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
 
 def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupUsUsedIssueTypeScreenManager")
 log.setLevel(Level.DEBUG)
 
-def schemeManager = ComponentAccessor.issueTypeScreenSchemeManager
+def schemeManager = ComponentAccessor.getComponent(FieldScreenSchemeManager.class)
 def sb = new StringBuilder()
 
-sb.append("Deleted issue type screen schemes with no associated projects:<br/><br/>\n")
-schemeManager.issueTypeScreenSchemes.each {
-    if (it.isDefault()) {
-        return
-    }
+sb.append("Deleted screen schemes with no screens projects:<br/><br/>\n")
+schemeManager.getFieldScreenSchemes().each {
     try {
-        if (schemeManager.getProjects(it).size() < 1) {
-            sb.append("${it.name}<br/>\n")
+        if (schemeManager.getFieldScreenSchemeItems(it).size() < 1) {
             if (!isPreview) {
-                schemeManager.removeIssueTypeScreenScheme(it)
+                schemeManager.removeFieldScreenScheme(it)
             }
         }
     }
@@ -26,5 +23,5 @@ schemeManager.issueTypeScreenSchemes.each {
         sb.append("Error: " + e + "<br/>\n")
     }
 }
-
+schemeManager.refresh()
 return sb.toString()
