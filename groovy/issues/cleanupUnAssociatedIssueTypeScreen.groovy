@@ -7,7 +7,7 @@ import org.apache.log4j.Level
 def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupUnAssociatedIssueTypeScreen")
 log.setLevel(Level.DEBUG)
 
-def schemeManager = ComponentAccessor.issueTypeScreenManager
+def schemeManager = ComponentAccessor.issueTypeScreenSchemeManager
 def sb = new StringBuilder()
 
 sb.append("Deleted issue type screen schemes with no associated projects:<br/><br/>\n")
