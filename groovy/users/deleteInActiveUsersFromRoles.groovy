@@ -1,5 +1,5 @@
 boolean isPreview = true
-// remove inactive users from role
+// remove inactive users from project roles
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.ComponentManager
 import com.atlassian.jira.bc.user.search.UserSearchService
