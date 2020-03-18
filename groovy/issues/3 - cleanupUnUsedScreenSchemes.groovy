@@ -10,6 +10,11 @@ log.setLevel(Level.DEBUG)
 def schemeManager = ComponentAccessor.getComponent(FieldScreenSchemeManager.class)
 def sb = new StringBuilder()
 
+if (isPreview == true) {
+    sb.append("<b>Please, note it works as preview. For execute change variable isPreview = true </b><br/><br/>\n")
+} else {
+    sb.append("<b>Please, note it works in execute mode</b><br/><br/>\n")
+}
 sb.append("Deleted screen schemes with no screens projects:<br/><br/>\n")
 schemeManager.getFieldScreenSchemes().each {
     try {
