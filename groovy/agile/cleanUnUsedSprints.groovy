@@ -32,14 +32,14 @@ sprintManager.getAllSprints().value.findAll {
     def query = jqlQueryParser.parseQuery("sprint = $sprint.id")
     def hasNoIssues = !searchService.searchCount(user, query)
     if (hasNoIssues) {
-        log.warn("Found sprint '$sprint.name' with no issues.")
-        sb.append("Found sprint '$sprint.name' with no issues.<br />\n")
+        log.warn("Found sprint '${sprint.name}' with no issues.")
+        sb.append("Found sprint '${sprint.name}' with no issues.<br />\n")
     }
     hasNoIssues
 }.each { Sprint sprint ->
     if (!isPreview) {
-        sb.append("Removing sprint $sprint.name <br />\n")
-        log.warn("Removing sprint $sprint.name")
+        sb.append("Removing sprint ${sprint.name} <br />\n")
+        log.warn("Removing sprint ${sprint.name}")
         sprintManager.deleteSprint(sprint)
     }
 }

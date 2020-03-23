@@ -1,4 +1,5 @@
 /* This script works without notification and history and as a service */
+boolean isPreview = true
 
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.CustomFieldManager
@@ -39,6 +40,12 @@ CustomFieldManager customerFieldManager = ComponentAccessor.getCustomFieldManage
 CustomField sprintField = customerFieldManager.getCustomFieldObjectByName("Sprint")
 
 def issueIndexingService = ComponentAccessor.getComponent(IssueIndexingService.class)
+def sb = new StringBuilder()
+if (isPreview == true) {
+    sb.append("<b>Please, note it works as preview. For execute change variable isPreview = true </b><br/><br/>\n")
+} else {
+    sb.append("<b>Please, note it works in execute mode</b><br/><br/>\n")
+}
 
 
 String jqlSearch = 'Sprint  in futureSprints() and status in (Closed, Done)  '
@@ -62,7 +69,9 @@ if (parseResult.isValid()) {
             newSprintValues.add(sprint)
         }
         if (newSprintValues.size == 0) { newSprintValues = null; changed = true; }
-        if ( changed ){
+
+        sb.append("Removing future sprint for  ${issue.key} <br />\n")
+        if ( changed && !isPreview ){
             sprintField.updateValue(null, issue, new ModifiedValue(null, newSprintValues), new DefaultIssueChangeHolder())
             boolean wasIndexing = ImportUtils.isIndexIssues()
             ImportUtils.setIndexIssues(true);
@@ -72,3 +81,5 @@ if (parseResult.isValid()) {
         }
     }
 }
+
+return sb.toString()
