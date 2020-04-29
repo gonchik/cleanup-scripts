@@ -1,5 +1,4 @@
 /*
-    WIP
     This script do cleanup of subscription for inactive users
     https://confluence.atlassian.com/jirakb/keep-receiving-subscription-emails-from-deleted-filters-314450232.html
  */
@@ -20,7 +19,7 @@ def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupAllSubscriptionsFo
 log.setLevel(Level.DEBUG)
 
 /**
- * Method to delete subscriptions filters
+ * Method to delete private filters
  */
 
 // This script can be run from Jira -> Administration -> Add-ons -> Script Console

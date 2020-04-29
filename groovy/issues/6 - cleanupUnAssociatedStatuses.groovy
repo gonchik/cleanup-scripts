@@ -16,9 +16,7 @@ statusManager.statuses.each {
     try {
         statusManager.removeStatus(it.id)
         sb.append("Removed status ${it.name}<br/>\n")
-    } catch (IllegalStateException e){
-        log.error(e)
-    } catch (IllegalArgumentException e){
+    } catch (Exception e) {
         log.error(e)
     }
 }
