@@ -9,8 +9,10 @@ https://confluence.atlassian.com/adminjiraserver/project-screens-schemes-and-fie
 
 Usage
 -----
-Most of scripts have a variable `isPreview` on top. 
+Most of the scripts have a variable `isPreview` on top. 
 Don't forget to change the boolean value to execute.
+
+branch: `Jira-7` related to Jira 7.x releases.
 
 Development
 -----------
