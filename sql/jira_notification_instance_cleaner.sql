@@ -1,14 +1,14 @@
-/* Count number of email references */
+-- Count number of email references
 select count(ID)
 FROM notificationinstance;
 
 SET SQL_SAFE_UPDATES=0;
-/* Delete unassociated messageID without references to tickets */
+-- Delete unassociated messageID without references to tickets
 DELETE
 FROM notificationinstance
 where SOURCE not in (select ID from jiraissue);
 
-/* Delete references to issues with resolution and NOT updated last 12 week */
+-- Delete references to issues with resolution and NOT updated last 12 week */
 DELETE
 FROM notificationinstance
 where SOURCE IN (select ID
@@ -17,7 +17,7 @@ where SOURCE IN (select ID
 						UPDATED < (NOW() - INTERVAL 12 WEEK)
 					);
 
-/* Delete references to closed issues  and NOT updated last 4 week */
+-- Delete references to closed issues  and NOT updated last 4 week
 DELETE
 FROM notificationinstance
 where SOURCE IN ( select ID
@@ -27,12 +27,12 @@ where SOURCE IN ( select ID
 										where pname in ('Closed', 'Done') )
 						AND UPDATED < (NOW() - INTERVAL 4 WEEK));
 
-/* Remove empty MESSAGEID rows */
+-- Remove empty MESSAGEID rows
 DELETE FROM notificationinstance
 where messageid like '';
 
 
-/* Check duplicates of MessageID */
+-- Check duplicates of MessageID
 SELECT SOURCE, MESSAGEID, COUNT(MESSAGEID)
 FROM notificationinstance
 GROUP BY MESSAGEID
@@ -41,7 +41,7 @@ LIMIT 0, 10;
 
 
 
-/* Remove duplicated MESSAGEID rows, keep lowest id */
+-- Remove duplicated MESSAGEID rows, keep lowest id
 delete n1
 FROM notificationinstance n1,
 notificationinstance n2
