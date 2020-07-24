@@ -31,7 +31,7 @@ import com.onresolve.scriptrunner.runner.customisers.WithPlugin
 SprintIssueService sprintIssueService
 
 
-def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanFutureSprintValues")
+final def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanFutureSprintValues")
 log.setLevel(Level.DEBUG)
 def loggedInUser = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser()
 IssueManager issueManager = ComponentAccessor.getIssueManager()
@@ -41,7 +41,7 @@ CustomField sprintField = customerFieldManager.getCustomFieldObjectByName("Sprin
 
 def issueIndexingService = ComponentAccessor.getComponent(IssueIndexingService.class)
 def sb = new StringBuilder()
-if (isPreview == true) {
+if (isPreview) {
     sb.append("<b>Please, note it works as preview. For execute change variable isPreview = true </b><br/><br/>\n")
 } else {
     sb.append("<b>Please, note it works in execute mode</b><br/><br/>\n")
@@ -52,34 +52,39 @@ String jqlSearch = 'Sprint  in futureSprints() and status in (Closed, Done)  '
 
 
 SearchService.ParseResult parseResult = searchService.parseQuery(loggedInUser, jqlSearch)
-if (parseResult.isValid()) {
-    def searchResult = searchService.search(loggedInUser, parseResult.getQuery(), PagerFilter.getUnlimitedFilter())
-    def issues = searchResult.issues.collect { issueManager.getIssueObject(it.id) }
+if (!parseResult.isValid()) {
+    sb.append("JQL is wrong")
+    return sb.toString()
+}
+def searchResult = searchService.search(loggedInUser, parseResult.getQuery(), PagerFilter.getUnlimitedFilter())
+def issues = searchResult.results.collect { issueManager.getIssueObject(it.id) }
 
-    for (issue in issues) {
-        def customFieldsSprints = sprintField.getValue(issue)
-        log.debug customFieldsSprints
-        def newSprintValues = []
-        def changed = false
-        for (sprint in customFieldsSprints){
-            if (sprint.state == Sprint.State.FUTURE && !sprint.active){
-                changed = true
-                continue;
-            }
-            newSprintValues.add(sprint)
+for (issue in issues) {
+    def customFieldsSprints = sprintField.getValue(issue)
+    log.debug customFieldsSprints
+    def newSprintValues = []
+    def changed = false
+    for (sprint in customFieldsSprints) {
+        if (sprint.state == Sprint.State.FUTURE && !sprint.active) {
+            changed = true
+            continue;
         }
-        if (newSprintValues.size == 0) { newSprintValues = null; changed = true; }
+        newSprintValues.add(sprint)
+    }
+    if (newSprintValues.size == 0) {
+        newSprintValues = null; changed = true;
+    }
 
-        sb.append("Removing future sprint for  ${issue.key} <br />\n")
-        if ( changed && !isPreview ){
-            sprintField.updateValue(null, issue, new ModifiedValue(null, newSprintValues), new DefaultIssueChangeHolder())
-            boolean wasIndexing = ImportUtils.isIndexIssues()
-            ImportUtils.setIndexIssues(true);
-            log.debug("Reindex issue ${issue.key}")
-            issueIndexingService.reIndex(issue)
-            ImportUtils.setIndexIssues(wasIndexing)
-        }
+    sb.append("Removing future sprint for  ${issue.key} <br />\n")
+    if (changed && !isPreview) {
+        sprintField.updateValue(null, issue, new ModifiedValue(null, newSprintValues), new DefaultIssueChangeHolder())
+        boolean wasIndexing = ImportUtils.isIndexIssues()
+        ImportUtils.setIndexIssues(true);
+        log.debug("Reindex issue ${issue.key}")
+        issueIndexingService.reIndex(issue)
+        ImportUtils.setIndexIssues(wasIndexing)
     }
 }
+
 
 return sb.toString()

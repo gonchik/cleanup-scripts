@@ -1,4 +1,5 @@
 /*
+ *
     This script do cleanup of dashboards for inactive users
  */
 boolean isPreview = true
@@ -20,7 +21,7 @@ def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupDashBoardsForInact
 log.setLevel(Level.DEBUG)
 
 /**
- * Method to delete private dasboards
+ * Method to delete private dashboards
  */
 
 // This script can be run from Jira -> Administration -> Add-ons -> Script Console
