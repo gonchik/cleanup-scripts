@@ -15,7 +15,7 @@ final PageManager pageManager = ComponentLocator.getComponent(PageManager)
 final SpaceManager spaceManager = ComponentLocator.getComponent(SpaceManager)
 
 boolean allSpaces = false
-def spaceKey = "CONDUCTOR50"
+def spaceKey = "CONDUCTOR"
 def spaces = []
 
 if (allSpaces) {
@@ -24,28 +24,22 @@ if (allSpaces) {
     spaces = spaceManager.getSpace(spaceKey)
 }
 
+
 for (def space : spaces) {
     log.debug "Review space: " + space.name
     def pages = pageManager.getPages(space, true)
     for (Page page : pages) {
         log.debug "Review page: " + page.getNameForComparison()
-        cleanAttachedPreviousVersionsFromContent(page)
-        log.debug "End review pages. "
-    }
-}
-
-
-private void cleanAttachedPreviousVersionsFromContent(Page page) {
-    AttachmentManager attachmentManager = ComponentLocator.getComponent(AttachmentManager)
-    def attachments = attachmentManager.getLatestVersionsOfAttachments(page)
-    if (attachments == null || attachments.size == 0) {
-        log.debug "Empty attachments"
-        return
-    }
-    for (def attachment : attachments) {
-        attachmentManager.getPreviousVersions(attachment).each { it ->
-            log.debug("Removing " + it.getFileName() + "")
-            attachmentManager.removeAttachmentVersionFromServer(it)
+        def pageVersions = pageManager.getVersionHistorySummaries(page);
+        for (def hPage : pageVersions) {
+            def coe = pageManager.getPage(hPage.id)
+            if (coe == null) {
+                continue
+            }
+            pageManager.removeHistoricalVersion(coe)
         }
+        log.debug "End review pages."
     }
 }
+
+
