@@ -9,13 +9,13 @@ import com.atlassian.confluence.pages.Page
 import com.atlassian.confluence.core.ContentEntityObject
 
 
-def log = Logger.getLogger("com.gonchik.scripts.groovy.confluence.attachmentCleaner")
+def log = Logger.getLogger("com.gonchik.scripts.groovy.confluence.pageVersionsCleaner")
 log.setLevel(Level.DEBUG)
 final PageManager pageManager = ComponentLocator.getComponent(PageManager)
 final SpaceManager spaceManager = ComponentLocator.getComponent(SpaceManager)
 
 boolean allSpaces = false
-def spaceKey = "CONDUCTOR"
+def spaceKey = "CONDUCTOR50"
 def spaces = []
 
 if (allSpaces) {
@@ -41,5 +41,5 @@ for (def space : spaces) {
         log.debug "End review pages."
     }
 }
-
+log.debug "---- End review spaces ---"
 

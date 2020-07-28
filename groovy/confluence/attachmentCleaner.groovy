@@ -49,3 +49,5 @@ private void cleanAttachedPreviousVersionsFromContent(Page page) {
         }
     }
 }
+
+log.debug "---- End review spaces ---"
