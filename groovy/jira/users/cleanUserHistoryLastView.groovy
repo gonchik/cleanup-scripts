@@ -13,9 +13,10 @@ import org.apache.log4j.Level
 def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupLastViewHistoryForInactiveUsers")
 log.setLevel(Level.DEBUG)
 
-// This script shows how to clean up the votes from inactive users
+boolean cleanForActiveUsers = false
+// This script shows how to clean up the history items from inactive users
 UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
-UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
+UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(cleanForActiveUsers).includeInactive(true).maxResults(100000).build()
 def userHistoryManager = ComponentAccessor.getComponent(UserHistoryManager.class)
 def sb = new StringBuilder()
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
