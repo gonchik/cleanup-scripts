@@ -28,6 +28,6 @@ SELECT distinct	table_schema as database_name,
 		PLUGIN_INFO_STORAGE.pluginkey,
         PLUGIN_INFO_STORAGE.pluginenabled
 FROM information_schema.tables
-left join PLUGIN_INFO_STORAGE on pluginhash like substring(replace(table_name, 'AO_', ''),1, 6)
+LEFT JOIN PLUGIN_INFO_STORAGE on pluginhash like substring(replace(table_name, 'AO_', ''),1, 6)
 WHERE table_type = 'BASE TABLE' and table_name like 'AO_%'
-order by table_name, table_schema;
+ORDER BY table_name, table_schema;

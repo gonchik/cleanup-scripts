@@ -5,4 +5,5 @@ SELECT f.name, i.fieldidentifier, count(*)
 FROM fieldscreen f, fieldscreenlayoutitem i, fieldscreentab t
 WHERE f.id = t.fieldscreen
     AND i.fieldscreentab = t.id
-GROUP BY f.name, i.fieldidentifier HAVING count(*) > 1;
+GROUP BY f.name, i.fieldidentifier
+HAVING count(*) > 1;
