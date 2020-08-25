@@ -1,11 +1,15 @@
 boolean isPreview = true
-// https://kb.botronsoft.com/x/gYBk
-// Find Agile boards without any base filter
+/*
+ * Find Agile boards without any base filter
+ * https://confluence.atlassian.com/jirakb/jira-software-boards-not-visible-after-filter-deletion-779158656.html
+ */
+
 import com.atlassian.greenhopper.model.rapid.RapidView
 import com.atlassian.greenhopper.manager.rapidview.RapidViewManager
 import com.onresolve.scriptrunner.runner.customisers.JiraAgileBean
 import com.atlassian.jira.issue.search.SearchRequestManager
 import com.atlassian.jira.component.ComponentAccessor
+import com.atlassian.jira.config.properties.APKeys
 
 public class NoCheck implements RapidViewManager.RapidViewPermissionCheck {
     public boolean check(RapidView view) {
@@ -17,20 +21,22 @@ public class NoCheck implements RapidViewManager.RapidViewPermissionCheck {
 SearchRequestManager srm = ComponentAccessor.getComponent(SearchRequestManager)
 
 def sb = new StringBuilder()
-if (isPreview == true) {
+if (isPreview) {
     sb.append("<b>Please, note it works as preview. For execute change variable isPreview = true </b><br/><br/>\n")
 } else {
     sb.append("<b>Please, note it works in execute mode</b><br/><br/>\n")
 }
 
 
-sb.append("<b>Board id</b> - Name - <b> Owner </b><br />\n")
+sb.append("<b>Board id</b> - Name - <b> Owner </b> - LINK <br />\n")
+def baseUrl = ComponentAccessor.getApplicationProperties().getString(APKeys.JIRA_BASEURL)
 rapidViewManager.getAll(new NoCheck()).value.each { b ->
     if (srm.getSearchRequestById(b.savedFilterId) == null) {
         if (!isPreview) {
             def res = rapidViewManager.delete(b)
         }
-        sb.append("${b.id} - ${b.name} - ${b.owner}<br />\n")
+        sb.append("<a href='${baseUrl}/secure/RapidBoard.jspa?rapidView=/${b.id}'>${b.id}</a> - ${b.name} - ${b.owner}")
+        sb.append("<br />\n")
     }
 }
 

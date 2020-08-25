@@ -8,7 +8,7 @@ log.setLevel(Level.DEBUG)
 
 def schemeManager = ComponentAccessor.fieldScreenSchemeManager
 def sb = new StringBuilder()
-if (isPreview == true) {
+if (isPreview) {
     sb.append("<b>Please, note it works as preview. For execute change variable isPreview = true </b><br/><br/>\n")
 } else {
     sb.append("<b>Please, note it works in execute mode</b><br/><br/>\n")

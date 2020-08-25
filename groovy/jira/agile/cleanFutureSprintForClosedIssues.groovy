@@ -1,6 +1,8 @@
-/* This script works without notification and history and as a service */
 boolean isPreview = true
-
+String jqlSearch = 'Sprint in futureSprints() and status in (Closed, Done)  '
+/*
+ * That script works as checker of future sprint in Closed or Done statuses
+ */
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.CustomFieldManager
 import com.atlassian.jira.issue.fields.CustomField
@@ -48,7 +50,7 @@ if (isPreview) {
 }
 
 
-String jqlSearch = 'Sprint  in futureSprints() and status in (Closed, Done)  '
+
 
 
 SearchService.ParseResult parseResult = searchService.parseQuery(loggedInUser, jqlSearch)
