@@ -30,4 +30,5 @@ for (field in fields) {
 output = "Investigated ${fields.size()} of fields"
 sb.append(output + br)
 log.debug(output)
+
 return sb.toString()
