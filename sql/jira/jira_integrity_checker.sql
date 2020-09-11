@@ -1,4 +1,5 @@
 -- https://confluence.atlassian.com/jirakb/how-to-run-the-workflow-integrity-checks-in-sql-658179102.html
+-- https://jira.atlassian.com/browse/JRASERVER-4241
 -- check Workflow Entry States are Correct
 SELECT jiraissue.id issue_id,
        jiraissue.workflow_id,
