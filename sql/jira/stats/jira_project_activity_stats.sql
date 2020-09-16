@@ -12,5 +12,5 @@ INNER JOIN project p ON p.ID = i.PROJECT
 INNER JOIN nodeassociation na ON na.source_node_id=p.id
 INNER JOIN projectcategory pc ON na.sink_node_id=pc.id
 WHERE  na.sink_node_entity='ProjectCategory' and na.association_type='ProjectCategory'
-GROUP BY i.PROJECT, p.pname
-ORDER BY MAX(i.UPDATED) ASC, i.PROJECT, p.pname
+GROUP BY i.PROJECT, p.pname, p.pkey, pc.cname
+ORDER BY MAX(i.UPDATED) ASC, p.pname
