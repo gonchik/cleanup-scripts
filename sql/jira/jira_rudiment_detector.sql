@@ -11,4 +11,6 @@ SELECT count(ID) FROM AO_575BF5_DEV_SUMMARY;
 -- truncate AO_575BF5_DEV_SUMMARY;
 -- truncate AO_575BF5_PROVIDER_ISSUE;
 
-
+-- Investigate stucked values
+FROM entity_property
+WHERE json_value LIKE  '%9223371721494775807%';
