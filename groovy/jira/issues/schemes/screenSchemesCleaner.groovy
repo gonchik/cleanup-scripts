@@ -4,7 +4,7 @@ import com.atlassian.jira.issue.fields.screen.FieldScreenSchemeManager
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
 
-def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupUsUsedIssueTypeScreenManager")
+def log = Logger.getLogger("com.gonchik.scripts.groovy.screenSchemesCleaner")
 log.setLevel(Level.DEBUG)
 
 def schemeManager = ComponentAccessor.getComponent(FieldScreenSchemeManager.class)

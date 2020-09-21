@@ -4,7 +4,7 @@ import com.atlassian.jira.component.ComponentAccessor
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
 
-def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupUsUsedIssueTypeSchemes")
+def log = Logger.getLogger("com.gonchik.scripts.groovy.issueTypeSchemesCleaner")
 log.setLevel(Level.DEBUG)
 
 def schemeManager = ComponentAccessor.issueTypeSchemeManager
