@@ -1,5 +1,5 @@
 boolean isPreview = true
-// This script fo cleanup of Issue Type Schemes
+// This script for cleanup of Issue Type Schemes
 import com.atlassian.jira.component.ComponentAccessor
 import org.apache.log4j.Logger
 import org.apache.log4j.Level

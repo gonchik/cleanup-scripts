@@ -1,5 +1,5 @@
 boolean isPreview = true
-
+// This script for cleanup of unused notification schemes
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.notification.NotificationSchemeManager
 

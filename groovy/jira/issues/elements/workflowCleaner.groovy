@@ -1,5 +1,5 @@
 boolean isPreview = true
-// This script investigate the workflows and workflows schemes
+// This script investigate the workflows
 import com.atlassian.jira.component.ComponentAccessor
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
@@ -26,22 +26,6 @@ workflowManager.workflows.each {
                 workflowManager.deleteWorkflow(it)
             }
         }
-    }
-}
-
-// Review workflow schemes
-schemeManager.schemeObjects.each {
-    try {
-        if (schemeManager.getProjectsUsing(schemeManager.getWorkflowSchemeObj(it.id)).size() == 0) {
-            sb.append("Workflow scheme remove candidate: ${it.name}<br/>\n")
-            if (!isPreview) {
-                schemeManager.deleteScheme(it.id)
-            }
-        }
-    }
-    catch (Exception e) {
-        log.error('Something wrong, ' + e)
-        sb.append("Error: " + e + "<br/>\n")
     }
 }
 return sb.toString()

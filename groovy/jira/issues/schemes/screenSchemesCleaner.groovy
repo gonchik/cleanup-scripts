@@ -1,4 +1,6 @@
 boolean isPreview = true
+// This script for cleanup of unused screen schemes
+
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.fields.screen.FieldScreenSchemeManager
 import org.apache.log4j.Logger
