@@ -1,4 +1,5 @@
 boolean isPreview = true
+// This script do cleanup unused issue type screen schemes
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.fields.screen.issuetype.IssueTypeScreenSchemeManager
 import org.apache.log4j.Logger

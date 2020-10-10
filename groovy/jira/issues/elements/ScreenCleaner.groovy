@@ -1,5 +1,5 @@
 boolean isPreview = true
-
+// This script for cleanup of the screens
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.fields.screen.FieldScreenFactory
 import com.atlassian.jira.issue.fields.screen.FieldScreenManager

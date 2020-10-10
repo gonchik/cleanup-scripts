@@ -30,5 +30,7 @@ schemeManager.getFieldScreenSchemes().each {
         sb.append("Error: " + e + "<br/>\n")
     }
 }
-schemeManager.refresh()
+if (!isPreview) {
+    schemeManager.refresh()
+}
 return sb.toString()
