@@ -1,10 +1,7 @@
 /*
 *  Review without relation records in Confluence
 */
-select CONTENTID from EXTRNLNKS where CONTENTID not in (select CONTENTID from CONTENT);
-select CONTENT from CONTENTLOCK where CONTENT not in (select CONTENTID from CONTENT);
 select CONTENTID from BODYCONTENT where CONTENTID not in (select CONTENTID from CONTENT);
-select CONTENTID from TRACKBACKLINKS where CONTENTID not in (select CONTENTID from CONTENT);
 select CONTENT_ID from CONTENT_PERM_SET where CONTENT_ID not in (select CONTENTID from CONTENT);
 select CONTENTID from CONTENT_LABEL where CONTENTID not in (select CONTENTID from CONTENT);
 select PAGEID from NOTIFICATIONS where PAGEID not in (select CONTENTID from CONTENT);
@@ -29,4 +26,10 @@ select SPACEID from CONTENT where SPACEID not in (select SPACEID from SPACES);
 select PREVVER from PAGETEMPLATES where PREVVER not in (select TEMPLATEID from PAGETEMPLATES);
 select HOMEPAGE from SPACES where HOMEPAGE not in (select CONTENTID from CONTENT);
 select SPACEDESCID from SPACES where SPACEDESCID not in (select CONTENTID from CONTENT);
+
+/* Not available on Confluence 7.4.x below requests */
+select CONTENTID from EXTRNLNKS where CONTENTID not in (select CONTENTID from CONTENT);
+select CONTENT from CONTENTLOCK where CONTENT not in (select CONTENTID from CONTENT);
+select CONTENTID from TRACKBACKLINKS where CONTENTID not in (select CONTENTID from CONTENT);
+-- migrated into spacepermissions table
 select SPACEGROUPID from SPACES where SPACEGROUPID is not null AND SPACEGROUPID not in (select SPACEGROUPID from SPACEGROUPS);

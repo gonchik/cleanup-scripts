@@ -1,99 +1,101 @@
 -- That script help you cleanup the draft pages and improve speedup of Synchrony
 -- https://confluence.atlassian.com/confkb/how-to-manually-remove-stale-drafts-from-confluence-database-951392345.html
 -- diagnostics
-SELECT d.contentid, d.title, d.prevver, d.lastmoddate, c.lastmoddate
+SELECT d.CONTENTID, d.TITLE, d.PREVVER, d.LASTMODDATE, c.LASTMODDATE
 FROM CONTENT d
 JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate;
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE;
 
 -- action
 SET SQL_SAFE_UPDATES=0;
-DELETE FROM NOTIFICATIONS WHERE CONTENTID IN (SELECT d.contentid
+
+DELETE FROM NOTIFICATIONS WHERE CONTENTID IN (SELECT d.CONTENTID
 FROM CONTENT d
 JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate);
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
 
-DELETE FROM CONFANCESTORS WHERE ANCESTORID IN (SELECT d.contentid
+DELETE FROM CONFANCESTORS WHERE ANCESTORID IN (SELECT d.CONTENTID
 FROM CONTENT d
 JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate);
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
 
-DELETE FROM CONFANCESTORS WHERE DESCENDENTID IN (SELECT d.contentid
+DELETE FROM CONFANCESTORS WHERE DESCENDENTID IN (SELECT d.CONTENTID
 FROM CONTENT d
 JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate);
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
 
-DELETE FROM BODYCONTENT WHERE CONTENTID IN (SELECT d.contentid
+DELETE FROM BODYCONTENT WHERE CONTENTID IN (SELECT d.CONTENTID
 FROM CONTENT d
 JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate);
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
 
-DELETE FROM CONTENTPROPERTIES WHERE CONTENTID IN (SELECT d.contentid
+DELETE FROM CONTENTPROPERTIES WHERE CONTENTID IN (SELECT d.CONTENTID
 FROM CONTENT d
 JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate);
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
 
-DELETE FROM LINKS WHERE CONTENTID IN (SELECT d.contentid
+DELETE FROM LINKS WHERE CONTENTID IN (SELECT d.CONTENTID
 FROM CONTENT d
 JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate);
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
 
-DELETE FROM CONTENT_LABEL WHERE contentid IN (SELECT d.contentid
+DELETE FROM CONTENT_LABEL WHERE CONTENTID IN (SELECT d.CONTENTID
 FROM CONTENT d
 JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate);
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
 
-DELETE FROM usercontent_relation WHERE targetcontentid IN (SELECT d.contentid
-FROM CONTENT d
-JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate);
-
-DELETE FROM extrnlnks WHERE CONTENTID IN (SELECT d.contentid
+DELETE FROM extrnlnks WHERE CONTENTID IN (SELECT d.CONTENTID
 FROM CONTENT d JOIN CONTENT c
- ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
- AND d.prevver IS NOT NULL
- AND c.lastmoddate > d.lastmoddate);
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
 
-DELETE FROM likes WHERE CONTENTID IN (SELECT d.contentid
+DELETE FROM likes WHERE CONTENTID IN (SELECT d.CONTENTID
 FROM CONTENT d
 JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate);
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
 
-DELETE FROM CONTENT WHERE CONTENTID IN (SELECT d.contentid
+DELETE FROM CONTENT WHERE CONTENTID IN (SELECT d.CONTENTID
 FROM CONTENT d
 JOIN CONTENT c
-  ON d.prevver = c.contentid
-WHERE d.content_status = 'draft'
-  AND d.prevver IS NOT NULL
-  AND c.lastmoddate > d.lastmoddate);
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
+
+/* Changed on the the Confluence 7.4.x */
+DELETE FROM usercontent_relation WHERE targetcontentid IN (SELECT d.CONTENTID
+FROM CONTENT d
+JOIN CONTENT c
+  ON d.PREVVER = c.CONTENTID
+WHERE d.CONTENT_STATUS = 'draft'
+  AND d.PREVVER IS NOT NULL
+  AND c.LASTMODDATE > d.LASTMODDATE);
