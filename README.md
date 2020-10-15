@@ -12,7 +12,9 @@ Usage
 Most of the scripts have a variable `isPreview` on top. 
 Don't forget to change the boolean value to execute.
 
-branch: `Jira-7` related to Jira 7.x releases.
+branch: 
+`master` - is for Jira 8.x releases
+`jira-7` related to Jira 7.x releases.
 
 Development
 -----------
