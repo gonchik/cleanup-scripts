@@ -1,3 +1,5 @@
+-- @todo rewrite for T-SQL (MSSQL)
+-- works well on MySQL, PostgreSQL
 -- detect duplicate card colours
 SELECT *
 FROM AO_60DB71_CARDCOLOR
