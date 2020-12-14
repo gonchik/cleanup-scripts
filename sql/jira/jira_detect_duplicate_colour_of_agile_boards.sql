@@ -3,9 +3,10 @@ SELECT *
 FROM AO_60DB71_CARDCOLOR
 WHERE ID in
     (SELECT ID FROM
-        (SELECT t.*, count(val) as c
-        FROM AO_60DB71_CARDCOLOR t
-        GROUP BY RAPID_VIEW_ID, val HAVING c>1) dup);
+        ( SELECT t.ID,t.RAPID_VIEW_ID, count(val)
+			FROM AO_60DB71_CARDCOLOR t
+			GROUP BY t.RAPID_VIEW_ID, val
+			HAVING count(val) > 1 ) dup);
 
 -- delete duplicates
 /*
@@ -13,8 +14,8 @@ WHERE ID in
 DELETE FROM AO_60DB71_CARDCOLOR
 WHERE ID in
     (SELECT ID FROM
-        (SELECT t.*, count(val) as c
+        (SELECT t.ID, count(val)
         FROM AO_60DB71_CARDCOLOR t
-        GROUP BY RAPID_VIEW_ID, val HAVING c>1) dup);
+        GROUP BY RAPID_VIEW_ID, val HAVING count(val)>1) dup);
 
 */
