@@ -1,4 +1,8 @@
-def isPreview = false
+def isPreview = true
+/*
+    That script clean last view activity,
+    just in case it was related to the performance degradation in Jira Service Desk and Jira Software for the 10k+
+ */
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.UserHistoryItem;
 import com.atlassian.jira.user.UserHistoryManager;
