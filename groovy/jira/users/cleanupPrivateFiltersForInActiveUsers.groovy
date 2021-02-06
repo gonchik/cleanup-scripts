@@ -1,7 +1,8 @@
+boolean isPreview = true
 /*
     This script do cleanup of filters for inactive users
  */
-boolean isPreview = true
+
 import com.atlassian.jira.bc.JiraServiceContextImpl
 import com.atlassian.jira.bc.JiraServiceContext
 import com.atlassian.jira.bc.portal.PortalPageService

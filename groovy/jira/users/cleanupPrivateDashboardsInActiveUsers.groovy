@@ -1,8 +1,9 @@
+boolean isPreview = false
 /*
  *
     This script do cleanup of dashboards for inactive users
  */
-boolean isPreview = true
+
 import com.atlassian.jira.bc.JiraServiceContextImpl
 import com.atlassian.jira.bc.JiraServiceContext
 import com.atlassian.jira.bc.portal.PortalPageService
@@ -25,7 +26,15 @@ log.setLevel(Level.DEBUG)
  */
 
 // This script can be run from Jira -> Administration -> Add-ons -> Script Console
+def sb = new StringBuilder()
+if (isPreview) {
+    sb.append("<b>Please, note it works as preview. For execute change variable isPreview = true </b><br/><br/>\n")
+} else {
+    sb.append("<b>Please, note it works in execute mode</b><br/><br/>\n")
+}
+sb.append("| ID | Name | FavouriteCounts | Owner | Is Private |")
 log.info("| ID | Name | FavouriteCounts | Owner | Is Private |")
+sb.append("<br/>")
 UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
@@ -38,6 +47,9 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
                 portalPageService.deletePortalPage(serviceContext, (long) page.id)
             }
             log.debug("| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |")
+            sb.append("| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} <br/>\n")
+
         }
     }
 }
+return sb.toString()

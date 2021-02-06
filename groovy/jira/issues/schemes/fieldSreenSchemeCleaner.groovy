@@ -1,5 +1,7 @@
 boolean isPreview = true
 import com.atlassian.jira.component.ComponentAccessor
+import com.atlassian.jira.issue.fields.screen.FieldScreenSchemeManager
+
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
 

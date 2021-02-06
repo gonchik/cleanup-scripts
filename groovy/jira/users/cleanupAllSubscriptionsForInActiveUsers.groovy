@@ -1,8 +1,9 @@
+boolean isPreview = true
 /*
     This script do cleanup of subscription for inactive users
     https://confluence.atlassian.com/jirakb/keep-receiving-subscription-emails-from-deleted-filters-314450232.html
  */
-boolean isPreview = true
+
 import com.atlassian.jira.bc.JiraServiceContextImpl
 import com.atlassian.jira.bc.JiraServiceContext
 import com.atlassian.jira.bc.filter.SearchRequestService
