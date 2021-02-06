@@ -47,8 +47,8 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
                 portalPageService.deletePortalPage(serviceContext, (long) page.id)
             }
             log.debug("| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |")
-            sb.append("| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} <br/>\n")
-
+            sb.append("| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |")
+            sb.append("<br/>\n")
         }
     }
 }

@@ -25,7 +25,15 @@ log.setLevel(Level.DEBUG)
  */
 
 // This script can be run from Jira -> Administration -> Add-ons -> Script Console
+def sb = new StringBuilder()
+if (isPreview) {
+    sb.append("<b>Please, note it works as preview. For execute change variable isPreview = true </b><br/><br/>\n")
+} else {
+    sb.append("<b>Please, note it works in execute mode</b><br/><br/>\n")
+}
+sb.append("| ID | Name | FavouriteCounts | Owner | Is Private |")
 log.info("| ID | Name | FavouriteCounts | Owner | Is Private |")
+sb.append("<br/>")
 UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
@@ -38,6 +46,9 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
                 searchRequestService.deleteFilter(serviceContext, (long) filter.id)
             }
             log.debug("| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |")
+            sb.append("| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |")
+            sb.append("<br/>\n")
         }
     }
 }
+return sb.toString()
