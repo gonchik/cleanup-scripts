@@ -1,3 +1,5 @@
+boolean isPreview = true
+
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.bc.user.search.UserSearchService
 import com.atlassian.jira.bc.user.search.UserSearchParams
@@ -16,7 +18,9 @@ VoteManager voteManager = ComponentAccessor.getComponent(VoteManager.class)
 def sb = new StringBuilder()
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
     ApplicationUser userToRemove = appUser
-    voteManager.removeVotesForUser(userToRemove)
+    if (!isPreview) {
+        voteManager.removeVotesForUser(userToRemove)
+    }
     sb.append("${userToRemove.name}<br/>\n")
 }
 return sb.toString()

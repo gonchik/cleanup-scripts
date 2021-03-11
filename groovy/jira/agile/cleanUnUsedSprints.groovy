@@ -1,5 +1,9 @@
 // https://jira.atlassian.com/browse/JSWSERVER-11263
 // kudos to Jamie Echlin
+/*
+    Attention: the user must has all needful rights
+ */
+
 boolean isPreview = true
 
 import com.atlassian.greenhopper.service.sprint.Sprint

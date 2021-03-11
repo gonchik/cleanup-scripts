@@ -19,7 +19,7 @@ select count(*) from issuelink where destination not in (select id from jiraissu
 /* Delete orphan records*/
 /* Disclaimer: easy to remove, time wasting to repair */
 /* Please, check DB scheme before remove something */
-/* That commands works well on 6.4.x and 7.x version. */
+/* That commands works well on 6.4.x and 7.x version, 8.x. */
 /*
 SET SQL_SAFE_UPDATES=0;
 delete from fileattachment where issueID not in(select ID from jiraissue);
