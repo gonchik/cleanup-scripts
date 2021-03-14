@@ -1,0 +1,4 @@
+-- com.opensymphony.workflow.FactoryException
+-- https://developer.atlassian.com/server/jira/platform/database-schema/
+-- https://confluence.atlassian.com/jirakb/jira-crashes-and-throws-unknown-workflow-name-error-230819861.html
+-- https://confluence.atlassian.com/jirakb/unable-to-transition-workflow-due-to-duplicate-entry-error-373260771.html
