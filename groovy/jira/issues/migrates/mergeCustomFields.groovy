@@ -1,6 +1,6 @@
 /*
 *  That script just migrate and merge 2 custom fields with the same types
-*   This script works without notification and as a service
+*  This script works without notification and as a service
 *
 * */
 
@@ -24,28 +24,32 @@ import com.atlassian.jira.web.bean.PagerFilter
 def log = Logger.getLogger("com.gonchik.scripts.groovy.migrate.values")
 log.setLevel(Level.DEBUG)
 
-String jqlSearch = '"External issue ID 1" is not EMPTY'
+def sourceFieldName = "External issue ID 3"
+def destFieldName = "External issue ID"
+String jqlSearch = ' "${sourceFieldName}" is not EMPTY'
 boolean cleanSourceField = false
 
 CustomFieldManager fieldManager = ComponentAccessor.getCustomFieldManager()
-CustomField sourceCustomField = fieldManager.getCustomFieldObjectByName("External issue ID 1")
-CustomField destinationCustomField = fieldManager.getCustomFieldObjectByName("External issue ID")
+CustomField sourceCustomField = fieldManager.getCustomFieldObjectByName("${sourceFieldName}")
+CustomField destinationCustomField = fieldManager.getCustomFieldObjectByName("${destFieldName}")
 def issueIndexingService = ComponentAccessor.getComponent(IssueIndexingService.class)
-
+def output = new StringBuilder()
 def user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser()
 IssueManager issueManager = ComponentAccessor.getIssueManager()
 SearchService searchService = ComponentAccessor.getComponent(SearchService.class)
 SearchService.ParseResult parseResult = searchService.parseQuery(user, jqlSearch)
 if (!parseResult.isValid()) {
     log.debug("JQL is not correct")
-    return 1
+    output.append("JQL is not correct")
+    return output.toString()
 }
 
 def searchResult = searchService.search(user, parseResult.getQuery(), PagerFilter.getUnlimitedFilter())
 def issues = searchResult.results.collect { issueManager.getIssueObject(it.id) }
 
 for (issue in issues) {
-    log.debug("Before change is " + issue.getCustomFieldValue(destinationCustomField))
+    log.debug("Before change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key}")
+    output.append("Before change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key}")
     //Transition issue by transition name and not by transition id, very useful for queries with issues with different workflows
     def value = sourceCustomField.getValue(issue)
     MutableIssue issueToUpdate = (MutableIssue) issue
@@ -62,7 +66,9 @@ for (issue in issues) {
     log.warn("Reindex issue ${issue.key} ${issue.id}")
     issueIndexingService.reIndex(issue)
     ImportUtils.setIndexIssues(wasIndexing)
-    log.debug("After change is " + issue.getCustomFieldValue(destinationCustomField))
+    log.debug("After change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key}")
+    output.append("After change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key}")
 }
 
 
+return output.toString()
