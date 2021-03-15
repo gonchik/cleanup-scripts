@@ -50,8 +50,8 @@ def searchResult = searchService.search(user, parseResult.getQuery(), PagerFilte
 def issues = searchResult.results.collect { issueManager.getIssueObject(it.id) }
 
 for (issue in issues) {
-    log.debug("Before change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key}")
-    output.append("Before change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key} <br/>")
+    log.debug("${issue.key}- before change is ${destinationCustomField.getValue(issue)}")
+    output.append("${issue.key} - before change is ${destinationCustomField.getValue(issue)} <br/>")
     //Transition issue by transition name and not by transition id, very useful for queries with issues with different workflows
     def value = sourceCustomField.getValue(issue)
     MutableIssue issueToUpdate = (MutableIssue) issue
@@ -68,8 +68,8 @@ for (issue in issues) {
     log.warn("Reindex issue ${issue.key} ${issue.id}")
     issueIndexingService.reIndex(issue)
     ImportUtils.setIndexIssues(wasIndexing)
-    log.debug("After change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key}")
-    output.append("After change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key} <br/>")
+    log.debug("${issue.key} - after change is ${destinationCustomField.getValue(issue)}")
+    output.append("${issue.key} - after change is ${destinationCustomField.getValue(issue)} <br/>")
 }
 
 
