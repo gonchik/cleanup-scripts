@@ -24,9 +24,11 @@ import com.atlassian.jira.web.bean.PagerFilter
 def log = Logger.getLogger("com.gonchik.scripts.groovy.migrate.values")
 log.setLevel(Level.DEBUG)
 
+String jqlSearch = ' "External issue ID 3" is not EMPTY'
 def sourceFieldName = "External issue ID 3"
 def destFieldName = "External issue ID"
-String jqlSearch = ' "${sourceFieldName}" is not EMPTY'
+
+// That parameter can be used if you want clean data
 boolean cleanSourceField = false
 
 CustomFieldManager fieldManager = ComponentAccessor.getCustomFieldManager()
@@ -40,7 +42,7 @@ SearchService searchService = ComponentAccessor.getComponent(SearchService.class
 SearchService.ParseResult parseResult = searchService.parseQuery(user, jqlSearch)
 if (!parseResult.isValid()) {
     log.debug("JQL is not correct")
-    output.append("JQL is not correct")
+    output.append("JQL is not correct <br/>")
     return output.toString()
 }
 
@@ -49,7 +51,7 @@ def issues = searchResult.results.collect { issueManager.getIssueObject(it.id) }
 
 for (issue in issues) {
     log.debug("Before change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key}")
-    output.append("Before change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key}")
+    output.append("Before change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key} <br/>")
     //Transition issue by transition name and not by transition id, very useful for queries with issues with different workflows
     def value = sourceCustomField.getValue(issue)
     MutableIssue issueToUpdate = (MutableIssue) issue
@@ -67,7 +69,7 @@ for (issue in issues) {
     issueIndexingService.reIndex(issue)
     ImportUtils.setIndexIssues(wasIndexing)
     log.debug("After change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key}")
-    output.append("After change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key}")
+    output.append("After change is ${issue.getCustomFieldValue(destinationCustomField)} for ${issue.key} <br/>")
 }
 
 
