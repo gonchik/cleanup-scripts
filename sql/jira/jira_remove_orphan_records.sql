@@ -3,8 +3,16 @@
 -- exist without links attachments
 select count(*) from fileattachment where issueid not in (select id from jiraissue);
 
+/*
+    SELECT count(*)
+    FROM fileattachment fa
+    LEFT JOIN jiraissue ji
+    ON fa.issueid = ji.id
+    WHERE ji.id is null
+*/
+
 -- messageId collector table
-select count(*) from notificationinstance where SOURCE not in (select id from jiraissue);
+select count(*) from notificationinstance where SOURCE not in (select id from jiraissue where id is not null);
 
 -- lost comments
 select count(*) from jiraaction where issueid not in (select id from jiraissue);

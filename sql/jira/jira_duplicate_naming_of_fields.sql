@@ -8,4 +8,4 @@ SELECT ID, cfname, CUSTOMFIELDTYPEKEY FROM customfield
 			FROM customfield
 			GROUP BY UPPER(cfname)
 			HAVING COUNT(*) > 1)
-ORDER BY cfname
+ORDER BY cfname;

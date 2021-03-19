@@ -21,7 +21,7 @@ final def log = Logger.getLogger("com.gonchik.scripts.groovy.migrateIntoTaskType
 log.setLevel(Level.DEBUG)
 
 String jqlSearch = 'type= "Crash Dump"'
-def newIssueTypeId = "1"
+def newIssueTypeId = "3"
 
 def user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser()
 IssueManager issueManager = ComponentAccessor.getIssueManager()
@@ -43,7 +43,7 @@ for (issue in issues) {
     def oldIssueType = issue.issueTypeObject.name
     MutableIssue mutableIssue = issue
     log.debug("old issue type is ${oldIssueType}")
-    def newSummary = "${oldIssueType}:" + issue.summary
+    def newSummary = "${oldIssueType}: " + issue.summary
     mutableIssue.setSummary(newSummary.take(150))
     mutableIssue.setIssueTypeId(newIssueTypeId)
     mutableIssue.store()
