@@ -4,7 +4,7 @@
 
 -- let's check consistency 2 tables
 SELECT count(*)
-FROM AO_54307E_SLAAUDITLOG
+FROM "AO_54307E_SLAAUDITLOG"
 where "ID" not in (SELECT "SLA_AUDIT_LOG_ID"
                     FROM "AO_54307E_SLAAUDITLOGDATA");
 
@@ -34,10 +34,18 @@ WHERE AL."ID" is null;
 
 
 
--- Let's cleanup old audit logs
+-- Let's cleanup older than 4 months audit logs in one transaction
+
+SELECT count("SLA_AUDIT_LOG_ID")
+FROM "AO_54307E_SLAAUDITLOGDATA" AD
+where "SLA_AUDIT_LOG_ID" in (select "ID"
+                FROM "AO_54307E_SLAAUDITLOG"
+                WHERE to_timestamp("EVENT_TIME"/1000) < NOW() - INTERVAL '120 days');
+
+
 SELECT count(*)
 FROM "AO_54307E_SLAAUDITLOG"
-WHERE to_timestamp("EVENT_TIME"/1000) < NOW() - INTERVAL '90 days';
+WHERE to_timestamp("EVENT_TIME"/1000) < NOW() - INTERVAL '120 days';
 
 
 
