@@ -3,18 +3,27 @@
 
 
 -- let's check consistency 2 tables
+-- query via NOT IN
 SELECT count(*)
 FROM "AO_54307E_SLAAUDITLOG"
 where "ID" not in (SELECT "SLA_AUDIT_LOG_ID"
                     FROM "AO_54307E_SLAAUDITLOGDATA");
 
-
+-- query via Left Join
 SELECT count(*)
 FROM "AO_54307E_SLAAUDITLOG"  AL
 LEFT JOIN "AO_54307E_SLAAUDITLOGDATA" AD
         ON AD."SLA_AUDIT_LOG_ID" = AL."ID"
 WHERE AD."SLA_AUDIT_LOG_ID" is null;
 
+
+/*
+    -- not recommended for pgsql
+    DELETE
+    FROM "AO_54307E_SLAAUDITLOG"
+    WHERE "ID" not in (SELECT "SLA_AUDIT_LOG_ID"
+                    FROM "AO_54307E_SLAAUDITLOGDATA");
+*/
 
 
 SELECT count(*)

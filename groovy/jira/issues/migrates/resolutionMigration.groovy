@@ -39,7 +39,6 @@ if (!parseResult.isValid()) {
 
 def searchResult = searchService.search(user, parseResult.getQuery(), PagerFilter.getUnlimitedFilter())
 def issues = searchResult.results.collect { issueManager.getIssueObject(it.id) }
-final changeHistoryManager = ComponentAccessor.changeHistoryManager
 
 for (issue in issues) {
     if (!newResolutionId) {

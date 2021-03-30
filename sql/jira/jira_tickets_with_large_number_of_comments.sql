@@ -5,5 +5,6 @@ select concat(p.pkey,'-',i.issuenum) as issue, count(i.id)
 from jiraaction a, jiraissue i, project p
 where i.project = p.id and i.id = a.issueid
 group by p.pkey,i.issuenum
+having count(i.id) > 100
 order by count (i.id) desc
 limit 100;

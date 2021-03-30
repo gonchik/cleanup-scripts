@@ -8,7 +8,7 @@ select count(*) from fileattachment where issueid not in (select id from jiraiss
     FROM fileattachment fa
     LEFT JOIN jiraissue ji
     ON fa.issueid = ji.id
-    WHERE ji.id is null
+    WHERE ji.id is null;
 */
 
 -- messageId collector table
