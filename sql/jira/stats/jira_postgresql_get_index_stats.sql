@@ -3,6 +3,8 @@
     Get stats of your DB indexes.
     Interesting to understand which indexes is not used on your instance.
     After you can easier review tables via \dt command
+    Also, better to make an overview via
+        https://wiki.postgresql.org/wiki/Index_Maintenance
 */
 
 SELECT s.schemaname,
