@@ -31,8 +31,8 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
     // get the first user of the first group which has the ADMIN privilege...
     // cannot use current user, not really sure who that is when run as a service
     def adminUser = userUtil.getJiraSystemAdministrators()[0]
-    sb.append("Activating user ${user.getName()}  as admin" + BR)
-    log.debug("Activating user  ${user.getName()} as admin")
+    sb.append("Reviewing user ${user.getName()}" + BR)
+    log.debug("Reviewing user  ${user.getName()}")
     // Remove user from all groups...
     def groups = userUtil.getGroupsForUser(user.name)
     if (!groups.isEmpty() && !isPreview) {
