@@ -14,6 +14,11 @@ log.setLevel(Level.DEBUG)
 
 UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
+
+def sb = new StringBuilder()
+def BR = "<br/>\n"
+log.debug("Start review users")
+sb.append("Start review users" + BR)
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
     ApplicationUser user = appUser
     def userUtil = ComponentAccessor.userUtil
@@ -26,9 +31,13 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
             try {
                 if (!isPreview){userUtil.removeUserFromGroup(group, user)}
                 log.info(user.name + " removed from group " + group.name)
+                sb.append(user.name + " removed from group " + group.name + BR)
             } catch (Exception e) {
                 log.info(user.name + " should be reviewed in AD (read-only) group " + group.name)
+                sb.append(user.name + " should be reviewed in AD (read-only) group " + group.name + BR)
             }
         }
     }
 }
+
+return sb

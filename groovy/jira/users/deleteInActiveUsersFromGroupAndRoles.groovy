@@ -30,9 +30,9 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
     def userUtil = ComponentAccessor.userUtil
     // get the first user of the first group which has the ADMIN privilege...
     // cannot use current user, not really sure who that is when run as a service
-    def adminUser = userUtil.getJiraAdministrators()[0]
-    sb.append("deactivateUser ${user.getName()}" + BR)
-    log.debug("deactivateUser ${user.getName()}")
+    def adminUser = userUtil.getJiraSystemAdministrators()[0]
+    sb.append("Activating user ${user.getName()}  as admin" + BR)
+    log.debug("Activating user  ${user.getName()} as admin")
     // Remove user from all groups...
     def groups = userUtil.getGroupsForUser(user.name)
     if (!groups.isEmpty() && !isPreview) {
@@ -42,7 +42,7 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
             sb.append(userToRemove.name + " from groups" + BR)
         } catch (Exception e) {
             log.info(user.name + " should be reviewed in AD")
-            sb.append(user.name + " should be reviewed in AD")
+            sb.append(user.name + " should be reviewed in AD" + BR)
             log.error(e)
         }
     }
@@ -50,10 +50,10 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
     ProjectRoleService projectRoleService = (ProjectRoleService) ComponentAccessor.getComponentOfType(ProjectRoleService.class)
     SimpleErrorCollection errorCollection = new SimpleErrorCollection()
     log.debug("Removing all roles references for ${user.getName()}")
-    sb.append("Removing all roles references for ${user.getName()}")
+    sb.append("Removing all roles references for ${user.getName()}" + BR)
     projectRoleService.getProjectsContainingRoleActorByNameAndType(adminUser, user.getName(), 'atlassian-user-role-actor', errorCollection).each { Project project ->
         log.debug("Remove user ${user.getName()} from role: ${project.getName()}")
-        sb.append("Remove user ${user.getName()} from role: ${project.getName()}")
+        sb.append("Remove user ${user.getName()} from role: ${project.getName()}" + BR)
     }
     if (!isPreview) {
         projectRoleService.removeAllRoleActorsByNameAndType(adminUser, user.getName(), 'atlassian-user-role-actor', errorCollection)
