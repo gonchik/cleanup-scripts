@@ -18,7 +18,7 @@ def BR = "<br/>\n"
 log.debug("Start review users")
 sb.append("Start review users" + BR)
 
-for (Group group : allGroups) {
+for (def group : allGroups) {
     def userCount = groupManager.getUsersInGroupCount(group)
     if (userCount && userCount > 0) {
         continue;
