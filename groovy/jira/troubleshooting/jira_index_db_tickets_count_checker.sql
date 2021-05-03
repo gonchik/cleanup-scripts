@@ -15,27 +15,18 @@ import com.atlassian.jira.issue.index.IssueIndexingService
 
 
 def log = Logger.getLogger("com.gonchik.scripts.groovy.updateExactIndexOfTickets")
-log.setLevel(Level.INFO)
+log.setLevel(Level.DEBUG)
 
 def user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser()
 IssueManager issueManager = ComponentAccessor.getIssueManager()
 def issueIndexingService = ComponentAccessor.getComponent(IssueIndexingService.class)
+def projectManager = ComponentAccessor.getProjectManager()
+def project = projectManager.getProjectObjByKey("SALE")
+long countInProject = issueManager.getIssueCountForProject(project.id)
+log.debug countInProject
 
-def rows = getUnresolvedTickets('2021-04-01', '2021-05-01')
 
-skipProject = ['SALE', 'UC', 'EDO']
-for (def row : rows) {
-    long ticketId = row[0] as long
 
-    def issue = issueManager.getIssueObject(ticketId)
-    if (!issue) {continue;}
-    if (skipProject.contains(issue.getProjectObject().getKey() )){continue;}
-    boolean wasIndexing = ImportUtils.isIndexIssues()
-    ImportUtils.setIndexIssues(true);
-    // log.info("Reindex issue ${issue.key} ${issue.id}")
-    issueIndexingService.reIndex(issue)
-    ImportUtils.setIndexIssues(wasIndexing)
-}
 
 
 def getUnresolvedTickets(from, to) {
@@ -45,19 +36,12 @@ def getUnresolvedTickets(from, to) {
     Sql sql = new Sql(conn)
     def values = []
     try {
-        String s = """SELECT j.id 
-                      FROM jiraissue j
-                      WHERE resolution is null and created > '${from}' and created < '${to}' """
-
-        s =  """SELECT count(j.id)
-						FROM jiraissue j
-						WHERE resolution is null 
-						and project =12410 """
-
+        String s = "SELECT j.id " +
+                "FROM jiraissue j " +
+                "WHERE resolution is null and created > '${from}' and created < '${to}' "
         values = sql.rows(s)
     } finally {
         sql.close()
     }
     return values;
 }
-log.info "Done!"
