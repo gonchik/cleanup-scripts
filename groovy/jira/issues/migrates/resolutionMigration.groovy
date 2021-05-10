@@ -44,7 +44,9 @@ for (issue in issues) {
     if (!newResolutionId) {
         return
     }
+    def oldResolutionDate = issue.getResolutionDate()
     issue.setResolutionId(newResolutionId)
+    issue.setResolutionDate(oldResolutionDate)
     issue.store()
     def changed = true
     if (changed) {

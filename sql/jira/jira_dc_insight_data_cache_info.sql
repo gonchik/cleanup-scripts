@@ -3,6 +3,6 @@
 -- https://documentation.mindville.com/display/ICV60/How+do+I+configure+the+clustermessage+retention+period+to+automatically+clear
 select count(id)
 FROM clustermessage
-WHERE message like '%INSIGHT%' and  message_time < NOW() - INTERVAL '3 days';
+WHERE message like '%INSIGHT%' and  message_time < NOW() - INTERVAL '1 days';
 
--- delete FROM clustermessage WHERE message like '%INSIGHT%' and  message_time < NOW() - INTERVAL '3 days';
+-- delete FROM clustermessage WHERE message like '%INSIGHT%' and  message_time < NOW() - INTERVAL '1 days';

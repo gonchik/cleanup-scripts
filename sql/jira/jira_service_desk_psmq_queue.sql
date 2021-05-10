@@ -3,17 +3,18 @@
 -- PSMQ automation thread loops over queue due to message count discrepancy
 
 select Q."NAME", Q."MESSAGE_COUNT", count(M."ID") as real_message_count
-from "AO_319474_QUEUE" as Q
-left join "AO_319474_MESSAGE" as  M  on M."QUEUE_ID" = q."ID"
+from "AO_319474_QUEUE"  Q
+left join "AO_319474_MESSAGE" M  on M."QUEUE_ID" = q."ID"
 group by Q."NAME", Q."MESSAGE_COUNT"
 having count(M."ID") = 0 AND Q."MESSAGE_COUNT" != 0;
 
 
+-- if you found rows you can run the next query
 /**
     update "AO_319474_QUEUE" set "MESSAGE_COUNT" = 0
     where "NAME" in (select Q."NAME"
-                    from "AO_319474_QUEUE" as Q
-                    left join "AO_319474_MESSAGE" as  M  on M."QUEUE_ID" = q."ID"
+                    from "AO_319474_QUEUE"  Q
+                    left join "AO_319474_MESSAGE"   M  on M."QUEUE_ID" = q."ID"
                     group by Q."NAME", Q."MESSAGE_COUNT"
                     having count(M."ID") = 0 AND Q."MESSAGE_COUNT" != 0);
 */

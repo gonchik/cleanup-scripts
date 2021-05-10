@@ -1,12 +1,12 @@
--- detect old hipchat history
+-- detect old HipChat history
 SELECT count(id)
 FROM entity_property
 WHERE ENTITY_NAME = 'hipchat.integration.caches.issue-mentions';
 
 
 /*
-
-SELECT count(id)
+-- cleaning that old data
+DELETE
 FROM entity_property
 WHERE ENTITY_NAME = 'hipchat.integration.caches.issue-mentions';
 
