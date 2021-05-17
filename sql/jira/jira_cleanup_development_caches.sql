@@ -3,10 +3,12 @@
 
 -- mysql dialect
 -- SELECT count(ID) FROM AO_575BF5_PROVIDER_ISSUE;
+-- truncate AO_575BF5_PROVIDER_ISSUE;
+
 
 -- PostgreSQL dialect
 SELECT count("ID") FROM "AO_575BF5_PROVIDER_ISSUE";
--- truncate AO_575BF5_DEV_SUMMARY;
+-- truncate "AO_575BF5_PROVIDER_ISSUE;"
 
 
 
@@ -18,4 +20,4 @@ SELECT count("ID") FROM "AO_575BF5_PROVIDER_ISSUE";
 SELECT count("ID") FROM "AO_575BF5_DEV_SUMMARY";
 
 
--- truncate AO_575BF5_PROVIDER_ISSUE;
+-- truncate AO_575BF5_DEV_SUMMARY;

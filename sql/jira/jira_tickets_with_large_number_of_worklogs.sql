@@ -5,10 +5,11 @@
 -- https://jira.atlassian.com/browse/JRASERVER-71980
 
 
-select concat(p.pkey,'-',i.issuenum) as issue, count(a.id)
+select concat(p.pkey,'-',i.issuenum) as issue, count(a.id) as CountWorklogs
 from worklog a, jiraissue i, project p
-where i.project = p.id and i.id = a.issueid
+where i.project = p.id
+    and i.id = a.issueid
 group by p.pkey,i.issuenum
 having count(a.id) > 900
-order by count (a.id) desc
+order by CountWorklogs desc
 limit 100;
