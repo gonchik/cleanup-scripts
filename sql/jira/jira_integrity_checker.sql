@@ -19,6 +19,17 @@ OR     OS_WFENTRY.state = 0;
 -- fix by
 -- UPDATE OS_WFENTRY SET state = 1 WHERE id in (OS_WFENTRY_ID_VALUES)
 
+/*
+SELECT concat( 'UPDATE OS_WFENTRY SET state = 1 WHERE id in (',
+       jiraissue.workflow_id, ');')
+FROM   jiraissue
+JOIN   OS_WFENTRY
+ON     jiraissue.workflow_id = OS_WFENTRY.id
+WHERE  OS_WFENTRY.state IS NULL
+OR     OS_WFENTRY.state = 0;
+*/
+
+
 -- Jira Issues with Null Status
 SELECT jiraissue.id,
        jiraissue.issuenum,
