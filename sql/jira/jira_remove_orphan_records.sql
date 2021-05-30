@@ -13,14 +13,44 @@ select count(*) from fileattachment where issueid not in (select id from jiraiss
 
 -- messageId collector table
 select count(*) from notificationinstance where SOURCE not in (select id from jiraissue where id is not null);
+/*
+    SELECT count(*)
+    FROM notificationinstance ni
+    LEFT JOIN jiraissue ji
+    ON ni.SOURCE = ji.id
+    WHERE ji.id is null;
+*/
+
 
 -- lost comments
 select count(*) from jiraaction where issueid not in (select id from jiraissue);
+/*
+    SELECT count(*)
+    FROM jiraaction ja
+    LEFT JOIN jiraissue ji
+    ON ja.issueid = ji.id
+    WHERE ji.id is null;
+*/
+
 
 -- change item and group is history
 select count(*) from changegroup where issueid not in (select id from jiraissue);
-select count(*) from changeitem where groupid not in (select id from changegroup);
+/*
+    SELECT count(*)
+    FROM changegroup cg
+    LEFT JOIN jiraissue ji
+    ON cg.issueid = ji.id
+    WHERE ji.id is null;
+*/
 
+select count(*) from changeitem where groupid not in (select id from changegroup); -- not-recommended for psql
+/*
+    SELECT count(*)
+    FROM changeitem ci
+    LEFT JOIN changegroup cg
+    ON ci.groupid = cg.id
+    WHERE cg.id is null;
+*/
 
 select count(*) from OS_CURRENTSTEP where ENTRY_ID not in (select WORKFLOW_ID from jiraissue);
 select count(*) from OS_HISTORYSTEP where ENTRY_ID not in (select WORKFLOW_ID from jiraissue);
