@@ -1,6 +1,7 @@
 /*
     500 CacheException error thrown during upgrade/restore of Jira server
     https://confluence.atlassian.com/jirakb/500-cacheexception-error-thrown-during-upgrade-restore-of-jira-server-800858895.html
+    https://jira.atlassian.com/browse/JRASERVER-70651
 */
 
 
