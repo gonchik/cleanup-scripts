@@ -4,11 +4,12 @@
 
 -- let's check consistency 2 tables
 -- query via NOT IN
+/*
 SELECT count(*)
 FROM "AO_54307E_SLAAUDITLOG"
 where "ID" not in (SELECT "SLA_AUDIT_LOG_ID"
                     FROM "AO_54307E_SLAAUDITLOGDATA");
-
+*/
 -- query via Left Join
 SELECT count(*)
 FROM "AO_54307E_SLAAUDITLOG"  AL
@@ -26,12 +27,14 @@ WHERE AD."SLA_AUDIT_LOG_ID" is null;
 */
 
 
+-- the  query via not in
+/*
 SELECT count(*)
 FROM "AO_54307E_SLAAUDITLOGDATA"
 WHERE "SLA_AUDIT_LOG_ID" NOT IN (SELECT "ID"
 			                    FROM "AO_54307E_SLAAUDITLOG")
 			                    ;
-
+*/
 
 SELECT count("SLA_AUDIT_LOG_ID")
 FROM "AO_54307E_SLAAUDITLOGDATA" AD
