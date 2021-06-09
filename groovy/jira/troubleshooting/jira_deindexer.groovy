@@ -36,7 +36,7 @@ if (!adminCheckPassed) {
     log.error(currentUser.toString() + " does not have admin rights, won't continue...");
     return;
 }
-log.info(currentUser + " is an admin, continuing...");
+log.info(currentUser.toString() + " is an admin, continuing...");
 
 if (issueId == null) {
     log.error("issueId parameter does not exist. Call this page with ?issueId=xxxxx");
