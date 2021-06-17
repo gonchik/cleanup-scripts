@@ -52,6 +52,31 @@ select count(*) from changeitem where groupid not in (select id from changegroup
     WHERE cg.id is null;
 */
 
+select count(*) from changegroup cg where id not in (select groupid from changeitem);
+/*
+    SELECT count(*)
+    FROM changegroup cg
+    LEFT JOIN changeitem ci
+    ON ci.groupid = cg.id
+    WHERE ci.groupid is null;
+*/
+
+
+/*
+-- cleaning in psql
+
+    CREATE TEMP TABLE ids AS select cg.id
+    FROM changegroup cg
+    LEFT JOIN changeitem ci
+    ON ci.groupid = cg.id
+    WHERE ci.groupid is null;
+
+    delete from changegroup cg where cg.id in (select id from ids);
+    drop table ids;
+*/
+
+
+
 select count(*) from OS_CURRENTSTEP where ENTRY_ID not in (select WORKFLOW_ID from jiraissue);
 select count(*) from OS_HISTORYSTEP where ENTRY_ID not in (select WORKFLOW_ID from jiraissue);
 select count(*) from worklog where issueid not in (select ID from jiraissue);

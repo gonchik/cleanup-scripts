@@ -9,3 +9,9 @@
 | AO_9BFD01_FIELD_AD            | com.intenso.jira.plugins.ad-integration-manager | Deviniti |
 | AO_9BFD01_USER_AD             | com.intenso.jira.plugins.ad-integration-manager | Deviniti |
 | AO_9BFD01_USER_ATTR           | com.intenso.jira.plugins.ad-integration-manager | Deviniti |
+| AO_2AE210_ACTIVITY_LOG        | com.intenso.jira.plugins.jsd-extender           | Deviniti |
+| AO_2AE210_FIELD_OPTION        | com.intenso.jira.plugins.jsd-extender           | Deviniti |
+| AO_2AE210_JSD_BUNDLED_FIELD   | com.intenso.jira.plugins.jsd-extender           | Deviniti |
+| AO_2AE210_JSDEXTENDER         | com.intenso.jira.plugins.jsd-extender           | Deviniti |
+| AO_2AE210_JSD_BUNDLED_CFG     | com.intenso.jira.plugins.jsd-extender           | Deviniti |
+| AO_2AE210_TECH_CF_FOR_SLA     | com.intenso.jira.plugins.jsd-extender           | Deviniti |
