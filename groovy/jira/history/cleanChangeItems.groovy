@@ -40,8 +40,8 @@ def searchResult = searchService.search(user, parseResult.getQuery(), PagerFilte
 def issues = searchResult.results.collect { issueManager.getIssueObject(it.id) }
 final changeHistoryManager = ComponentAccessor.changeHistoryManager
 for (issue in issues) {
-    changeHistoryManager.removeAllChangeItems(issue)
+    // changeHistoryManager.removeAllChangeItems(issue)
     log.debug("Removed change items for ${issue.key}")
-    // changeHistoryManager.getAllChangeItems(issue).each { log.debug it}
+    changeHistoryManager.getAllChangeItems(issue).each { log.debug it}
     // changeHistoryManager.getChangeHistories(issue).each { log.debug it}
 }

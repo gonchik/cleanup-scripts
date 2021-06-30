@@ -11,4 +11,5 @@ FROM customfield
     LEFT JOIN customfieldvalue  on customfield.id = customfieldvalue.customfield
 GROUP BY customfield.id
 ORDER BY count(*) DESC
+LIMIT 100
 ;
