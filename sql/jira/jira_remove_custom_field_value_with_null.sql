@@ -6,4 +6,10 @@ SELECT * FROM customfieldvalue where issue is null;
 -- DELETE from customfieldvalue where issue is null;
 
 -- detect empty rows
-select * from customfieldvalue where  stringvalue is null and numbervalue is null and textvalue is null and datevalue is null limit 10;
+SELECT *
+FROM customfieldvalue
+WHERE  stringvalue is null
+AND numbervalue is null
+AND textvalue is null
+AND datevalue is null
+limit 10;
