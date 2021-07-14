@@ -1,4 +1,4 @@
-boolean isPreview = true
+boolean isPreview = false
 // This script investigate the workflows
 import com.atlassian.jira.component.ComponentAccessor
 import org.apache.log4j.Logger
@@ -23,7 +23,9 @@ workflowManager.workflows.each {
         if (schemes.size() == 0) {
             sb.append("Workflow remove candidate: ${it.name}<br/>\n")
             if (!isPreview) {
-                workflowManager.deleteWorkflow(it)
+                try {
+                    workflowManager.deleteWorkflow(it)
+                } catch (Exception e) {}
             }
         }
     }

@@ -26,7 +26,7 @@ log.setLevel(Level.DEBUG)
 // This script can be run from Jira -> Administration -> Add-ons -> Script Console
 UserSearchService userSearchService = ComponentAccessor.getOSGiComponentInstanceOfType(UserSearchService.class)
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
-def subscriptionManager = 	ComponentAccessor.getOSGiComponentInstanceOfType(SubscriptionManager.class)
+def subscriptionManager = ComponentAccessor.getOSGiComponentInstanceOfType(SubscriptionManager.class)
 
 
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {

@@ -12,10 +12,12 @@ def schemeManager = ComponentAccessor.issueTypeScreenSchemeManager
 def sb = new StringBuilder()
 if (isPreview) {
     sb.append("<b>Please, note it works as preview. For execute change variable isPreview = true </b><br/><br/>\n")
+    sb.append("Will be deleted issue type screen schemes with no associated projects:<br/><br/>\n")
 } else {
     sb.append("<b>Please, note it works in execute mode</b><br/><br/>\n")
+    sb.append("Deleted issue type screen schemes with no associated projects:<br/><br/>\n")
 }
-sb.append("Deleted issue type screen schemes with no associated projects:<br/><br/>\n")
+
 schemeManager.issueTypeScreenSchemes.each {
     if (it.isDefault()) {
         return
