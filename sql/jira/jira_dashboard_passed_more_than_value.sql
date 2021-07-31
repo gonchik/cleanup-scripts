@@ -20,7 +20,7 @@ from portalpage
 where username in (select username
                     from portalpage
                     group by username,pagename
-                    having count(pagename) > 1)
+                    having count(pagename) > 1);
 -- Delete all the rows except one row for each of those users using the ID of the row.
 
 

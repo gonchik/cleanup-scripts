@@ -4,9 +4,9 @@
     https://jira.atlassian.com/browse/JRASERVER-70651
 */
 
-
-
-select * from nodeassociation where source_node_entity = 'Project' and source_node_id not in (select id from project);
-
+SELECT *
+FROM nodeassociation
+WHERE source_node_entity = 'Project'
+    AND source_node_id NOT IN (SELECT id FROM project);
 
 -- delete from nodeassociation where source_node_entity = 'Project' and source_node_id not in (select id from project);
