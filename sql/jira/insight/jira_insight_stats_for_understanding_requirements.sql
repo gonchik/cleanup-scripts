@@ -13,7 +13,7 @@ select count("ID")
 FROM "AO_8542F1_IFJ_OBJ_ATTR";
 
 
--- count of attibute values usually the same as previous one
+-- count of attribute values usually the same as previous one
 select count("ID")
 FROM "AO_8542F1_IFJ_OBJ_ATTR_VAL"  ;
 
