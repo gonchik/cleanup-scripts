@@ -13,6 +13,7 @@ def sb = new StringBuilder()
 
 UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
+def line = ""
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
     ApplicationUser user = appUser
     def userUtil = ComponentAccessor.userUtil
@@ -20,11 +21,13 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
     ProjectRoleService projectRoleService = ComponentAccessor.getComponent(ProjectRoleService.class)
     SimpleErrorCollection errorCollection = new SimpleErrorCollection()
     projectRoleService.getProjectsContainingRoleActorByNameAndType(user.getName(), 'atlassian-user-role-actor', errorCollection).each { Project project ->
-        def line = "Remove user ${user.getName()} from roles reference: ${project.getName()} <br>"
-        sb.append(line)
         if (!isPreview) {
+            line = "Removed user ${user.getName()} from roles reference: ${project.getName()} <br>"
             projectRoleService.removeAllRoleActorsByNameAndType(user.getName(), 'atlassian-user-role-actor', errorCollection)
+        } else {
+            line = "Remove user ${user.getName()} from roles reference: ${project.getName()} <br>"
         }
+        sb.append(line)
     }
 }
 return sb.toString()

@@ -24,7 +24,13 @@ log.setLevel(Level.DEBUG)
  */
 
 // This script can be run from Jira -> Administration -> Add-ons -> Script Console
-log.info("| ID | Name | FavouriteCounts | Owner | Is Private |")
+
+def sb = new StringBuilder()
+def line = "| ID | Name | FavouriteCounts | Owner | Is Private |"
+sb.append(line)
+log.info(line)
+def BR = "<br/>\n"
+
 UserSearchService userSearchService = ComponentAccessor.getComponent(UserSearchService.class)
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
@@ -38,7 +44,9 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
             portalPageService.updatePortalPage(serviceContext, page, isFavourite)
             favouritesManager.removeFavourite(appUser, page)
         }
-        log.debug("| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |")
+        line = "| ${page.id} | ${page.name} | ${page.favouriteCount} | ${page.ownerUserName} | ${page.permissions.isPrivate()} |"
+        sb.append(line + BR)
+        log.debug(line)
     }
 
     // decrease the filter counts
@@ -49,6 +57,11 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
             searchRequestService.updateFilter(serviceContext, filter, isFavourite)
             favouritesManager.removeFavourite(appUser, filter)
         }
-        log.debug("| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |")
+        line = "| ${filter.id} | ${filter.name} | ${filter.favouriteCount} | ${filter.ownerUserName} | ${filter.permissions.isPrivate()} |"
+        sb.append(line + BR)
+        log.debug(line)
     }
 }
+
+
+return sb.toString()

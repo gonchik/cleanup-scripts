@@ -17,7 +17,7 @@ if (isPreview) {
 } else {
     sb.append("<b>Please, note it works in execute mode</b><br/><br/>\n")
 }
-sb.append("Deleted issue type schemes with no associated projects:<br/><br/>\n")
+sb.append("Deleted issue type with no associated projects:<br/><br/>\n")
 issueTypeManager.issueTypes.each {
     try {
         if (!issueTypeManager.hasAssociatedIssues(it)) {
