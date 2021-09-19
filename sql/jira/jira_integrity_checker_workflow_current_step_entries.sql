@@ -4,7 +4,7 @@
 select concat(concat(P.pkey, '-'), I.issuenum)
 from jiraissue I
          join project P on P.id = I.project
-         left join os_currentstep C on C.entry_id = I.workflow_id
+         left join OS_CURRENTSTEP C on C.entry_id = I.workflow_id
 where C.id is null;
 
 
@@ -14,4 +14,4 @@ where C.id is null;
 
 select concat(concat('insert into os_currentstep values ((select max(id)+1 from os_currentstep),', workflow_id), ',1,0,'''',now(),null,null,''open'',null)')
 from jiraissue
-where workflow_id not in (select entry_id from os_currentstep);
+where workflow_id not in (select entry_id from OS_CURRENTSTEP);
