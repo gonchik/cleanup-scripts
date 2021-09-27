@@ -17,7 +17,7 @@ final Logger log = LoggerFactory.getLogger(this.getClass())
 log.warn("Review threading")
 
 // jql
-final def JQL = "created < startOfMonth(-10) "
+final def JQL = "order by created "
 //Thread number
 THREADS = 300
 pool = Executors.newFixedThreadPool(THREADS)
@@ -31,7 +31,7 @@ def issueManager = ComponentAccessor.getIssueManager()
 
 // task
 def deleteTicket = { ticket ->
-    log.warn(ticket.key)
+    // log.warn(ticket.key)
     issueManager.deleteIssueNoEvent(ticket)
 }
 
@@ -46,7 +46,7 @@ def up = issues.collect { ur ->
     }
 }
 
-log.warn(up)
+
 pool.shutdown()
 
 
@@ -55,9 +55,12 @@ def List<Issue> getIssues() {
     def searchProvider = ComponentAccessor.getComponent(SearchProvider.class)
     def issueManager = ComponentAccessor.getIssueManager()
     ApplicationUser user = ComponentAccessor.jiraAuthenticationContext.loggedInUser
-    def query = jqlQueryParser.parseQuery(JQL)
+    def query = jqlQueryParser.parseQuery("order by created ")
     def searchQuery = SearchQuery.create(query, user)
-    def searchResult = searchProvider.search(searchQuery, PagerFilter.getUnlimitedFilter())
+    def searchResult = searchProvider.search(searchQuery, PagerFilter.newPageAlignedFilter(0, 5000))
     def issues = searchResult.getResults()*.document.collect { issueManager.getIssueObject(it.getValues('issue_id').first() as Long) };
     return issues
 }
+
+log.warn("done!")
+return "Well Done!"

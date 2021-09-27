@@ -1,5 +1,6 @@
 boolean isPreview = true
 // This script investigate the workflows
+// Remove all Inactive or Drafts Workflows in Jira
 import com.atlassian.jira.component.ComponentAccessor
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
