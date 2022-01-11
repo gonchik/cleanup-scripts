@@ -1,3 +1,4 @@
+-- SQL equivalents for Jira server's workflow integrity checks
 -- Jira Issues with Null Status
 -- https://confluence.atlassian.com/jirakb/sql-equivalents-for-jira-server-s-workflow-integrity-checks-658179102.html
 

@@ -1,4 +1,5 @@
 /*
+-- SQL equivalents for Jira server's workflow integrity checks
 -- Execute the Administration -> System -> Integrity Checker
 -- Execute the Administration -> System -> Indexing
 */

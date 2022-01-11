@@ -1,3 +1,4 @@
+-- Find mapped linked issues
 SELECT count(id)
 FROM entity_property
 WHERE ENTITY_NAME = 'fusion.caches.issue';
