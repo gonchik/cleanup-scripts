@@ -1,4 +1,6 @@
--- This query returns list of largest (by data size) tables.
+/*
+ * This query returns list of largest (by data size) tables.
+ */
 select schemaname as table_schema,
     relname as table_name,
     pg_size_pretty(pg_total_relation_size(relid)) as total_size,

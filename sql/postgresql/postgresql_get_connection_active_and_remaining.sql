@@ -1,5 +1,8 @@
--- PostgreSQL
--- Number of active connections and remaining connections
+/*
+ *
+ * Number of active connections and remaining connections
+ * used for easy analyze the situation of requests
+ */
 
 select max_conn,used,res_for_super,max_conn-used-res_for_super res_for_normal
 from

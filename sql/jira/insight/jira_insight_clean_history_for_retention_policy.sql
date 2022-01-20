@@ -1,4 +1,8 @@
--- retention policy for insight
+/*
+ *
+ * Retention policy for insight for Jira SM ad DC
+ *
+ */
 
 SELECT count("ID")
 FROM "AO_8542F1_IFJ_OBJ_HIST" hist

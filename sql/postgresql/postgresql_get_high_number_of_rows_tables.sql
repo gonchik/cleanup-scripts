@@ -1,4 +1,8 @@
--- list of high number of rows tables
+/*
+ *
+ * Get list of high number of rows tables, helps to the detecting where large tables
+ *
+ */
 
 select n.nspname as table_schema,
        c.relname as table_name,

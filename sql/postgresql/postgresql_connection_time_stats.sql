@@ -1,4 +1,10 @@
--- provide a connection stats
+/*
+ *
+ * Provide a connection stats for PostgreSQL clients
+ *
+ */
+
+
 with states as
     (select datname, client_addr, case
         when now() - state_change < interval '10 seconds' then '10sec'

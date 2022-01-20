@@ -1,4 +1,8 @@
--- Get overview of high number of rows tables
+/*
+ *
+ * Get overview of high number of rows tables
+ *
+ */
 
 select row_count,
        count(*) as tables
