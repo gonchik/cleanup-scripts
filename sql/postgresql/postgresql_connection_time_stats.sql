@@ -1,7 +1,7 @@
 /*
- *
- * Provide a connection stats for PostgreSQL clients
- *
+
+    Provide a connection stats for PostgreSQL clients
+    Purpose: activity of clients
  */
 
 
