@@ -1,4 +1,3 @@
---    https://jira.atlassian.com/browse/JRASERVER-71350
 /*
  * Batched notifications execute periodical tasks (every 14 days) to clean up old events
  * from the AO_733371_EVENT and AO_733371_EVENT_RECIPIENT tables.
@@ -19,6 +18,9 @@
  *  - The cleanup tasks take several hours to complete,
  *   with the CPU spiking to 100% usage during that period.
  *   General slowness is experienced on Jira due to this.
+ *
+ *   Links: https://jira.atlassian.com/browse/JRASERVER-71350
+ *          https://jira.atlassian.com/browse/JSWSERVER-20794
  */
 
 truncate "AO_733371_EVENT" CASCADE;
