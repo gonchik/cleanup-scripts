@@ -31,15 +31,6 @@ OR     OS_WFENTRY.state = 0;
 */
 
 
-
--- Jira is trying to do index recovery on invalid issue data coming from Lucene indexes
--- https://jira.atlassian.com/browse/JRASERVER-70248
--- check issue number null tickets
-select id,issuenum,project from jiraissue where issuenum is null;
-
--- fix
-delete from jiraissue where issuenum is null;
-
 -- check issue number null tickets
 select id,issuenum,project from jiraissue where project is null;
 
