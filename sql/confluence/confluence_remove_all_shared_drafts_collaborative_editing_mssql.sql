@@ -1,0 +1,218 @@
+/*
+ How to remove all shared drafts and start with a clean state using Collaborative Editing
+ Purpose: Important Definitions
+    To understand more about this KB, the following definitions are necessary:
+    CE: Collaborative Editing.
+    Personal draft: a draft that is visible only by its creator and was saved while Collaborative Editing was disabled.
+    Shared draft: a draft that can be shared with collaborators other than just its creator and was saved while Collaborative Editing was enabled.
+    More information about drafts can be found in How Do Drafts Work on Confluence.
+    Link: https://confluence.atlassian.com/confkb/how-to-remove-all-shared-drafts-and-start-with-a-clean-state-using-collaborative-editing-974360865.html
+ */
+
+------- Make child of drafts orphan pages -------
+--- SQL query to count affected records ---
+select count(c.CONTENTID) from CONTENT c join CONTENT d on d.CONTENTID=c.PARENTID where d.CONTENT_STATUS='draft';
+
+--- SQL query to update affected records ---
+update CONTENT set PARENTID=null where CONTENTID in (select c.CONTENTID from CONTENT c join CONTENT d on d.CONTENTID=c.PARENTID where d.CONTENT_STATUS='draft');
+
+
+
+------- Delete notifications related to drafts -------
+--- SQL query to count affected records ---
+select count(*) from NOTIFICATIONS where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from NOTIFICATIONS where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete drafts that are child in CONFANCESTORS -------
+--- SQL query to count affected records ---
+select count(*) from CONFANCESTORS where DESCENDENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from CONFANCESTORS where DESCENDENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete drafts that are ancestors in CONFANCESTORS -------
+--- SQL query to count affected records ---
+select count(*) from CONFANCESTORS where ANCESTORID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from CONFANCESTORS where ANCESTORID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete body of drafts -------
+--- SQL query to count affected records ---
+select count(CONTENTID) from BODYCONTENT where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from BODYCONTENT where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete links related to drafts -------
+--- SQL query to count affected records ---
+select count(*) from LINKS where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from LINKS where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete labels relation to drafts -------
+--- SQL query to count affected records ---
+select count(*) from CONTENT_LABEL where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from CONTENT_LABEL where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to count affected records ---
+select count(*) from CONTENT_LABEL where CONTENTID in (select c.CONTENTID from CONTENT c join CONTENT_LABEL cl on cl.CONTENTID=c.CONTENTID where c.CONTENTID in (select a.CONTENTID from CONTENT a join CONTENT d on d.CONTENTID=a.PAGEID where a.CONTENTTYPE='ATTACHMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE'));
+
+--- SQL query to update affected records ---
+delete from CONTENT_LABEL where CONTENTID in (select c.CONTENTID from CONTENT c join CONTENT_LABEL cl on cl.CONTENTID=c.CONTENTID where c.CONTENTID in (select a.CONTENTID from CONTENT a join CONTENT d on d.CONTENTID=a.PAGEID where a.CONTENTTYPE='ATTACHMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE'));
+
+
+
+------- Delete users relation to drafts -------
+--- SQL query to count affected records ---
+select count(*) from USERCONTENT_RELATION where TARGETCONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from USERCONTENT_RELATION where TARGETCONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+--- !! THIS TABLE DOES NOT EXIST AFTER CONFLUENCE 7.X !! ---
+------- Delete external links related to drafts -------
+--- SQL query to count affected records ---
+select count(*) from EXTRNLNKS where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from EXTRNLNKS where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete likes related to drafts -------
+--- SQL query to count affected records ---
+select count(*) from LIKES where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from LIKES where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete attachment properties related to drafts -------
+--- SQL query to count affected records ---
+select count(PROPERTYID) from CONTENTPROPERTIES where CONTENTID in (select a.CONTENTID from CONTENT a join CONTENT d on d.CONTENTID=a.PAGEID where a.CONTENTTYPE='ATTACHMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from CONTENTPROPERTIES where CONTENTID in (select a.CONTENTID from CONTENT a join CONTENT d on d.CONTENTID=a.PAGEID where a.CONTENTTYPE='ATTACHMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete image properties related to drafts -------
+--- SQL query to count affected records ---
+select count(*) from IMAGEDETAILS where ATTACHMENTID in (select a.CONTENTID from CONTENT a join CONTENT d on d.CONTENTID=a.PAGEID where a.CONTENTTYPE='ATTACHMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from IMAGEDETAILS where ATTACHMENTID in (select a.CONTENTID from CONTENT a join CONTENT d on d.CONTENTID=a.PAGEID where a.CONTENTTYPE='ATTACHMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete previous versions of attachments related to drafts -------
+--- SQL query to count affected records ---
+select count(a.CONTENTID) from CONTENT a join CONTENT d on d.CONTENTID=a.PAGEID where a.CONTENTTYPE='ATTACHMENT' and a.PREVVER is not NULL and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE';
+
+--- SQL query to update affected records ---
+delete from CONTENT where CONTENTID in (select a.CONTENTID from CONTENT a join CONTENT d on d.CONTENTID=a.PAGEID where a.CONTENTTYPE='ATTACHMENT' and a.PREVVER is not NULL and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete attachments related to drafts -------
+--- SQL query to count affected records ---
+select count(CONTENTID) from CONTENT where CONTENTID in (select a.CONTENTID from CONTENT a join CONTENT d on d.CONTENTID=a.PAGEID where a.CONTENTTYPE='ATTACHMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from CONTENT where CONTENTID in (select CONTENTID from CONTENT where CONTENTID in (select a.CONTENTID from CONTENT a join CONTENT d on d.CONTENTID=a.PAGEID where a.CONTENTTYPE='ATTACHMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE'));
+
+
+
+------- Delete properties of comments related to drafts -------
+--- SQL query to count affected records ---
+select count(cp.PROPERTYID) from CONTENTPROPERTIES cp join CONTENT c on c.CONTENTID=cp.CONTENTID join CONTENT d on d.CONTENTID=c.PAGEID where c.CONTENTTYPE='COMMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE';
+
+--- SQL query to update affected records ---
+delete from CONTENTPROPERTIES where PROPERTYID in (select cp.PROPERTYID from CONTENTPROPERTIES cp join CONTENT c on c.CONTENTID=cp.CONTENTID join CONTENT d on d.CONTENTID=c.PAGEID where c.CONTENTTYPE='COMMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete body of comments related to drafts -------
+--- SQL query to count affected records ---
+select count(bc.BODYCONTENTID) from BODYCONTENT bc join CONTENT c on c.CONTENTID=bc.CONTENTID join CONTENT d on d.CONTENTID=c.PAGEID where c.CONTENTTYPE='COMMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE';
+
+--- SQL query to update affected records ---
+delete from BODYCONTENT where BODYCONTENTID in (select bc.BODYCONTENTID from BODYCONTENT bc join CONTENT c on c.CONTENTID=bc.CONTENTID join CONTENT d on d.CONTENTID=c.PAGEID where c.CONTENTTYPE='COMMENT' and d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete any other contents related to drafts -------
+--- SQL query to count affected records ---
+select count(CONTENTID) from CONTENT where PAGEID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from CONTENT where CONTENTID in (select CONTENTID from CONTENT where PAGEID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE'));
+
+
+
+------- Delete restrictions related to drafts – first query -------
+--- SQL query to count affected records ---
+select count(cp.ID) from CONTENT_PERM cp join CONTENT_PERM_SET cps on cps.ID=cp.CPS_ID join CONTENT d on d.CONTENTID=cps.CONTENT_ID where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE';
+
+--- SQL query to update affected records ---
+delete from CONTENT_PERM where ID in (select cp.ID from CONTENT_PERM cp join CONTENT_PERM_SET cps on cps.ID=cp.CPS_ID join CONTENT d on d.CONTENTID=cps.CONTENT_ID where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete restrictions related to drafts – second query -------
+--- SQL query to count affected records ---
+select count(cps.ID) from CONTENT_PERM_SET cps join CONTENT d on d.CONTENTID=cps.CONTENT_ID where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE';
+
+--- SQL query to update affected records ---
+delete from CONTENT_PERM_SET where ID in (select cps.ID from CONTENT_PERM_SET cps join CONTENT d on d.CONTENTID=cps.CONTENT_ID where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete properties related to drafts -------
+--- SQL query to count affected records ---
+select count(*) from CONTENTPROPERTIES where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+--- SQL query to update affected records ---
+delete from CONTENTPROPERTIES where CONTENTID in (select d.CONTENTID from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE');
+
+
+
+------- Delete contents that are drafts -------
+--- SQL query to count affected records ---
+select count(d.CONTENTID) from CONTENT d where d.CONTENT_STATUS = 'draft' and d.CONTENTTYPE = 'PAGE';
+
+--- SQL query to update affected records ---
+delete from CONTENT where CONTENT_STATUS = 'draft' and CONTENTTYPE = 'PAGE';
+
+
+
+------- Clear Synchrony IDs from the BANDANA table -------
+--- SQL query to update affected records ---
+delete from BANDANA where BANDANAKEY = 'synchrony_collaborative_editor_app_registered'
+                       or BANDANAKEY = 'synchrony_collaborative_editor_app_secret'
+                       or BANDANAKEY = 'synchrony_collaborative_editor_app_id';
+
+
+
+------- Clear tables associated to Synchrony -------
+truncate table "EVENTS";
+truncate table "SECRETS";
+truncate table "SNAPSHOTS";
