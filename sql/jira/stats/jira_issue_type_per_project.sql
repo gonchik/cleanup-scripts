@@ -1,5 +1,8 @@
--- How many issue types there are per project in Jira
--- https://confluence.atlassian.com/jirakb/how-to-query-the-jira-database-for-issue-type-statistics-per-project-993922099.html
+/*
+    How many issue types there are per project in Jira
+    Purpose: Admins may want to pull statistics of how many issue types there are per project in Jira.
+    link: https://confluence.atlassian.com/jirakb/how-to-query-the-jira-database-for-issue-type-statistics-per-project-993922099.html
+*/
 
 
 SELECT p.pkey, it.pname, COUNT(i.id)

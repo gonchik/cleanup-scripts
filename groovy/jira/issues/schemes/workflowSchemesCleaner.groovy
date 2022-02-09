@@ -1,5 +1,8 @@
 boolean isPreview = true
-// This script investigate the workflows and workflows schemes
+/*
+ *   This script investigate workflows schemes
+ *
+ */
 
 import com.atlassian.jira.component.ComponentAccessor
 import org.apache.log4j.Logger
@@ -11,7 +14,7 @@ log.setLevel(Level.DEBUG)
 def workflowManager = ComponentAccessor.workflowManager
 def schemeManager = ComponentAccessor.workflowSchemeManager
 def sb = new StringBuilder()
-
+sb.append("Start to detect unused workflow schemes")
 if (isPreview) {
     sb.append("<b>Please, note it works as preview. For execute change variable isPreview = true </b><br/><br/>\n")
 } else {
