@@ -1,7 +1,10 @@
 boolean isPreview = true
 /*
     This script do cleanup of subscription for inactive users
-    https://confluence.atlassian.com/jirakb/keep-receiving-subscription-emails-from-deleted-filters-314450232.html
+    Purpose: reduce extra checking during send subscriptions
+    Link: https://confluence.atlassian.com/jirakb/keep-receiving-subscription-emails-from-deleted-filters-314450232.html
+    Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
+    Contribution: Gonchik Tsymzhitov
  */
 
 import com.atlassian.jira.bc.JiraServiceContextImpl
@@ -19,16 +22,11 @@ import org.apache.log4j.Level
 def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupAllSubscriptionsForInActiveUsers")
 log.setLevel(Level.DEBUG)
 
-/**
- * Method to delete private filters
- */
-
-// This script can be run from Jira -> Administration -> Add-ons -> Script Console
 UserSearchService userSearchService = ComponentAccessor.getOSGiComponentInstanceOfType(UserSearchService.class)
 UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQuery(true).includeActive(false).includeInactive(true).maxResults(100000).build()
 def subscriptionManager = ComponentAccessor.getOSGiComponentInstanceOfType(SubscriptionManager.class)
 
-
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
     subscriptionManager.deleteSubscriptionsForUser(appUser)
 }
+log.debug("Cleaned up not needed subscriptions")

@@ -1,5 +1,10 @@
 boolean isPreview = true
-
+/*
+    Clean up the votes from inactive users
+    Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
+    Tested Environment: Jira 8.20.5, 8.13.3
+    Contribution: Gonchik Tsymzhitov
+ */
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.bc.user.search.UserSearchService
 import com.atlassian.jira.bc.user.search.UserSearchParams

@@ -1,5 +1,10 @@
 boolean isPreview = true
-// cleanup inactive users groups
+/*
+    Remove inactive (disabled) users from groups
+    Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
+    Tested Environment: Jira 8.20.5, 8.13.3
+    Contribution: Gonchik Tsymzhitov
+ */
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.bc.user.search.UserSearchService
 import com.atlassian.jira.bc.user.search.UserSearchParams
@@ -17,8 +22,8 @@ UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQ
 
 def sb = new StringBuilder()
 def BR = "<br/>\n"
-log.debug("Start review users")
-sb.append("Start review users" + BR)
+log.debug("Start to review users")
+sb.append("Start to review users" + BR)
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
     ApplicationUser user = appUser
     def userUtil = ComponentAccessor.userUtil
@@ -27,11 +32,16 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
     // Remove user from all groups...
     def groups = userUtil.getGroupsForUser(user.name)
     if (!groups.isEmpty()) {
-        for (def group : groups){
+        for (def group : groups) {
             try {
-                if (!isPreview){userUtil.removeUserFromGroup(group, user)}
-                log.info(user.name + " removed from group " + group.name)
-                sb.append(user.name + " removed from group " + group.name + BR)
+                if (!isPreview) {
+                    userUtil.removeUserFromGroup(group, user)
+                    log.info(user.name + " removed from group " + group.name)
+                    sb.append(user.name + " removed from group " + group.name + BR)
+                } else {
+                    log.info(user.name + " will be removed from group " + group.name)
+                    sb.append(user.name + " will be removed from group " + group.name + BR)
+                }
             } catch (Exception e) {
                 log.info(user.name + " should be reviewed in AD (read-only) group " + group.name)
                 sb.append(user.name + " should be reviewed in AD (read-only) group " + group.name + BR)

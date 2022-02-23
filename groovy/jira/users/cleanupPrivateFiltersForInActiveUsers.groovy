@@ -1,6 +1,9 @@
 boolean isPreview = true
 /*
     This script do cleanup of filters for inactive users
+    Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
+    Tested Environment: Jira 8.20.5, 8.13.3
+    Contribution: Gonchik Tsymzhitov
  */
 
 import com.atlassian.jira.bc.JiraServiceContextImpl
@@ -24,7 +27,6 @@ log.setLevel(Level.DEBUG)
  * Method to delete private filters
  */
 
-// This script can be run from Jira -> Administration -> Add-ons -> Script Console
 def sb = new StringBuilder()
 if (isPreview) {
     sb.append("<b>Please, note it works as preview. For execute change variable isPreview = true </b><br/><br/>\n")

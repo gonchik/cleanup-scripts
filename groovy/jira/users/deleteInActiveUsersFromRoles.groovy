@@ -1,5 +1,10 @@
 boolean isPreview = true
-// remove inactive users from project roles
+/*
+    Remove inactive users from project roles in Projects
+    Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
+    Tested Environment: Jira 8.20.5, 8.13.3
+    Contribution: Gonchik Tsymzhitov
+ */
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.component.pico.ComponentManager
 import com.atlassian.jira.bc.user.search.UserSearchService
@@ -22,10 +27,10 @@ for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)
     SimpleErrorCollection errorCollection = new SimpleErrorCollection()
     projectRoleService.getProjectsContainingRoleActorByNameAndType(user.getName(), 'atlassian-user-role-actor', errorCollection).each { Project project ->
         if (!isPreview) {
-            line = "Removed user ${user.getName()} from roles reference: ${project.getName()} <br>"
+            line = "Removing user ${user.getName()} from roles reference: ${project.getName()} <br>"
             projectRoleService.removeAllRoleActorsByNameAndType(user.getName(), 'atlassian-user-role-actor', errorCollection)
         } else {
-            line = "Remove user ${user.getName()} from roles reference: ${project.getName()} <br>"
+            line = "Planning to remove user ${user.getName()} from roles reference: ${project.getName()} <br>"
         }
         sb.append(line)
     }

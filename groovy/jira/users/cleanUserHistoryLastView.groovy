@@ -2,6 +2,9 @@ def isPreview = true
 /*
     That script clean last view activity,
     just in case it was related to the performance degradation in Jira Service Desk and Jira Software for the 10k+
+    Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
+    Tested Environment: Jira 8.20.5, 8.13.3
+    Contribution: Gonchik Tsymzhitov
  */
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.user.UserHistoryItem;
