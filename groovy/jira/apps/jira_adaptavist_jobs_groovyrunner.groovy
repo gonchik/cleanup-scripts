@@ -32,8 +32,9 @@ String jobJson = result
 def rawJobs = new JsonSlurper().parseText(jobJson)
 
 
-def retJobs = rawJobs.collect{	rawJob->
+def retJobs = rawJobs.collect { rawJob ->
     def retJob = [:]
+    retJob.id = rawJob.id
     retJob.note = rawJob.FIELD_NOTES
     retJob.interval = rawJob.FIELD_INTERVAL
     retJob.schedulteType = rawJob.scheduleType
@@ -53,6 +54,7 @@ sb.append("<th>Description</th>")
 sb.append("<th>JQL</th>")
 sb.append("<th>Workflow action</th>")
 sb.append("<th>InActive</th>")
+sb.append("<th>UUID</th>")
 sb.append("</tr>")
 
 retJobs.each {
@@ -63,6 +65,7 @@ retJobs.each {
     sb.append("<td>" + it.jql + "</td>")
     sb.append("<td>" + it.wfaction + "</td>")
     sb.append("<td>" + it.disabled + "</td>")
+    sb.append("<td>" + it.id + "</td>")
     sb.append("</tr>")
 }
 sb.append("</table>")
