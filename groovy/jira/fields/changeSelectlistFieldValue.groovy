@@ -20,8 +20,8 @@ final def log = Logger.getLogger("com.gonchik.scripts.groovy.migrateToComment")
 log.setLevel(Level.DEBUG)
 
 
-String jqlSearch = 'project = TESTDB'
-long toField = 108881
+String jqlSearch = 'project = test'
+long toField = 000000
 def user = ComponentAccessor.getJiraAuthenticationContext().getLoggedInUser()
 IssueManager issueManager = ComponentAccessor.getIssueManager()
 SearchService searchService = ComponentAccessor.getComponent(SearchService.class)
