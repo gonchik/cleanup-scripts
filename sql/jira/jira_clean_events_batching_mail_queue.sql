@@ -23,4 +23,6 @@
  *          https://jira.atlassian.com/browse/JSWSERVER-20794
  */
 
+select count(*) from "AO_733371_EVENT";
+
 truncate "AO_733371_EVENT" CASCADE;

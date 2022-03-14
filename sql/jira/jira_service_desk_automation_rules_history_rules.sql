@@ -6,9 +6,11 @@
  *
  */
 select count(*) from "AO_9B2E3B_EXEC_RULE_MSG_ITEM";
+-- clean exact table
 truncate "AO_9B2E3B_EXEC_RULE_MSG_ITEM";
 
 select count(*) from "AO_9B2E3B_IF_COND_EXECUTION";
+-- clean exact table
 truncate "AO_9B2E3B_IF_COND_EXECUTION" CASCADE ;
 
 -- remove all history of running
