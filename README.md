@@ -14,13 +14,14 @@ Don't forget to change the boolean value to execute.
 
 branch: 
 `master` - is for Jira 8.x releases
+`jira-9` - is for Jira 9.x releases
 `jira-7` related to Jira 7.x releases.
 
 Development
 -----------
 
 Feel free to provide a PR for any situation - improvements, new feature, docs, typo etc.
-As it's licensed with MIT rights, feel modify and reuse how do you want. 
+As it's licensed with Apache 2.0 rights, feel modify and reuse how do you want. 
 
 Additional 
 -----------
