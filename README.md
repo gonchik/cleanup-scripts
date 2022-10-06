@@ -1,7 +1,7 @@
 cleanup-scripts
 ---------------
 
-Scripts for cleanup Atlassian Jira (Groovy, Python and SQL).
+Scripts for cleanup Atlassian Jira & Confluence (Groovy, Python and SQL).
 I hope these scripts will help you do a continuous cleanup. 
 
 Reference:
@@ -27,3 +27,5 @@ Additional
 -----------
 Tool for check if your Jira instance is affected by the bug JRA-47568 and should be used in conjunction with the SSLPoke tool.
     https://bitbucket.org/atlassianlabs/httpclienttest/src
+
+You can use for groovy runner - Scriptrunner, Mercury for Jira, MyGroovy, Insight, JMWE

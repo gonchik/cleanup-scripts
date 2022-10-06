@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.gonchik.scripts.groovy.jira</groupId>
     <artifactId>automation</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <organization>
         <name>Gonchik Tsymzhitov</name>
@@ -57,7 +57,7 @@
     </dependencies>
 
     <properties>
-        <jira.version>8.5.0</jira.version>
+        <jira.version>8.20.0</jira.version>
         <jira.greenhopper.version>${jira.version}</jira.greenhopper.version>
         <scriptrunner.version>5.9.1-p5</scriptrunner.version>
         <amps.version>8.0.2</amps.version>
