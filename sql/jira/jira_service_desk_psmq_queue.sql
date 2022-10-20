@@ -2,11 +2,11 @@
 -- https://jira.atlassian.com/browse/JSDSERVER-5493
 -- PSMQ automation thread loops over queue due to message count discrepancy
 
-select Q."NAME", Q."MESSAGE_COUNT", count(M."ID") as real_message_count
-from "AO_319474_QUEUE"  Q
-left join "AO_319474_MESSAGE" M  on M."QUEUE_ID" = q."ID"
-group by Q."NAME", Q."MESSAGE_COUNT"
-having count(M."ID") = 0 AND Q."MESSAGE_COUNT" != 0;
+SELECT Q."NAME", Q."MESSAGE_COUNT", count(M."ID") as real_message_count
+FROM "AO_319474_QUEUE"  Q
+         LEFT JOIN "AO_319474_MESSAGE" M  on M."QUEUE_ID" = q."ID"
+GROUP BY Q."NAME", Q."MESSAGE_COUNT"
+HAVING count(M."ID") = 0 AND Q."MESSAGE_COUNT" != 0;
 
 
 -- if you found rows you can run the next query

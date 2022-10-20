@@ -10,4 +10,4 @@ WHERE i.project = p.id and i.id = f.issueid
 GROUP BY p.pkey,i.issuenum
 HAVING count(i.id) > 100
 ORDER BY count (i.id) desc
-    LIMIT 100;
+LIMIT 100;

@@ -112,9 +112,9 @@ delete FROM searchrequest WHERE authorname not in (select lower_user_name from c
 */
 
 -- https://jira.atlassian.com/browse/JSWSERVER-9906
-select count(*) from AO_60DB71_ISSUERANKING  where  (ISSUE_ID >0) AND ISSUE_ID not in  (select id from jiraissue) ;
+select count(*) from "AO_60DB71_ISSUERANKING"  where  ("ISSUE_ID" >0) AND "ISSUE_ID" not in  (select id from jiraissue) ;
 -- this should return none if the number of tails is right.
-select count(*) from AO_60DB71_ISSUERANKING WHERE "NEXT_ID" IS NULL GROUP BY "CUSTOM_FIELD_ID" HAVING COUNT(*) > 1;
+select count(*) from "AO_60DB71_ISSUERANKING" WHERE "NEXT_ID" IS NULL GROUP BY "CUSTOM_FIELD_ID" HAVING COUNT(*) > 1;
 
 -- this should return none, otherwise you may have duplicate values on ISSUE_ID
 select count("ISSUE_ID") FROM AO_60DB71_ISSUERANKING GROUP BY "ISSUE_ID", "CUSTOM_FIELD_ID" HAVING COUNT(*) > 1;
