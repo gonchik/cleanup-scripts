@@ -10,7 +10,6 @@ SELECT "FIELD_ID",
 FROM "AO_60DB71_LEXORANK"
 WHERE "TYPE" IN (0, 2);
 
-
 -- Oracle DB
 /*
 SELECT
@@ -31,6 +30,14 @@ FROM "dbo.AO_60DB71_LEXORANK"
 WHERE "TYPE" IN (0, 2);
 */
 
+-- MySQL
+/*
+    SELECT FIELD_ID,
+       TYPE,
+       substring(RANK FROM 1 FOR 1) AS bucket
+    FROM AO_60DB71_LEXORANK
+    WHERE TYPE IN (0, 2);
+ */
 
 --
 SELECT propertyvalue
