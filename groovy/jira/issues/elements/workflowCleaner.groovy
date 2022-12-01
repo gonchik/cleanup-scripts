@@ -15,7 +15,7 @@ def workflowManager = ComponentAccessor.workflowManager
 def schemeManager = ComponentAccessor.workflowSchemeManager
 def sb = new StringBuilder()
 
-sb.append("Start to look unused workflows")
+sb.append("Start to look unused workflows<br/>")
 if (isPreview) {
     sb.append("<b>Please, note it works as preview. <br/>\n For execute change variable isPreview = true </b><br/><br/>\n")
 } else {
