@@ -1,6 +1,8 @@
--- That script help you cleanup the draft pages and improve speedup of Synchrony
--- https://confluence.atlassian.com/confkb/how-to-manually-remove-stale-drafts-from-confluence-database-951392345.html
--- diagnostics
+/*
+ That script help you cleanup the draft pages and improve speedup of Synchrony diagnostics
+ link: https://confluence.atlassian.com/confkb/how-to-manually-remove-stale-drafts-from-confluence-database-951392345.html
+
+*/
 SELECT d.CONTENTID, d.TITLE, d.PREVVER, d.LASTMODDATE, c.LASTMODDATE
 FROM CONTENT d
 JOIN CONTENT c
