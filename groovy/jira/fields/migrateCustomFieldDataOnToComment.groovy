@@ -1,7 +1,10 @@
-/* This script works without notification and as a service
+/*
+*   This script works without notification and as a service
 *  migrate custom field value into comment
-* Please, be aware you need to set fieldName value */
-
+*  Please, be aware you need to set fieldName value
+*
+*  Environment (last check): Jira Software 8.20.16, Scriptrunner 7.10.0
+*/
 
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.CustomFieldManager

@@ -1,6 +1,10 @@
-/* This script works without notification and as a service
+/*
+*
+*  This script works without notification and as a service
 *  migrate custom field value into comment
-* Please, be aware you need to set fieldName value */
+*  Please, be aware you need to set fieldName value
+
+*/
 
 
 import com.atlassian.jira.component.ComponentAccessor

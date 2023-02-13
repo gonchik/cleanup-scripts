@@ -1,6 +1,6 @@
 boolean isPreview = true
 /*
-    This script do cleanup of filters for inactive users
+    This script do cleanup of private filters for inactive users
     Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
     Tested Environment: Jira 8.20.5, 8.13.3
     Contribution: Gonchik Tsymzhitov

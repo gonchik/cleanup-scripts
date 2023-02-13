@@ -4,7 +4,7 @@
    link: https://confluence.atlassian.com/jirakb/sql-equivalents-for-jira-server-s-workflow-integrity-checks-658179102.html
 */
 
-SELECT concat(concat(P.pkey, '-'), I.issuenum) as 'Ticket'
+SELECT concat(concat(P.pkey, '-'), I.issuenum) as "ticket"
 FROM jiraissue I
          join project P on P.id = I.project
          left join OS_CURRENTSTEP C on C.entry_id = I.workflow_id

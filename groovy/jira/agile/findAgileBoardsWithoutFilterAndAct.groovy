@@ -1,12 +1,14 @@
 boolean isPreview = true
 /*
  * Find Agile boards without any base filter
- * https://confluence.atlassian.com/jirakb/jira-software-boards-not-visible-after-filter-deletion-779158656.html
+ * link: https://confluence.atlassian.com/jirakb/jira-software-boards-not-visible-after-filter-deletion-779158656.html
+ * Environment (last check): Jira Software 8.20.16, Scriptrunner 7.10.0
  */
 
 import com.atlassian.greenhopper.model.rapid.RapidView
 import com.atlassian.greenhopper.manager.rapidview.RapidViewManager
 import com.onresolve.scriptrunner.runner.customisers.JiraAgileBean
+import com.onresolve.scriptrunner.runner.customisers.WithPlugin
 import com.atlassian.jira.issue.search.SearchRequestManager
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.config.properties.APKeys
@@ -17,7 +19,9 @@ public class NoCheck implements RapidViewManager.RapidViewPermissionCheck {
     }
 }
 
-@JiraAgileBean RapidViewManager rapidViewManager
+@WithPlugin("com.pyxis.greenhopper.jira")
+@JiraAgileBean
+RapidViewManager rapidViewManager
 SearchRequestManager srm = ComponentAccessor.getComponent(SearchRequestManager)
 
 def sb = new StringBuilder()

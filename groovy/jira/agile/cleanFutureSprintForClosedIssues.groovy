@@ -2,6 +2,8 @@ boolean isPreview = true
 String jqlSearch = 'Sprint in futureSprints() and status in (Closed, Done)  '
 /*
  * That script works as checker of future sprint in Closed or Done statuses
+ * Contributor: Gonchik Tsymzhitov
+ *
  */
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.CustomFieldManager

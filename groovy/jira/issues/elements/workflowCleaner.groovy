@@ -2,6 +2,9 @@ boolean isPreview = true
 /*
  *  This script investigate the workflows
  *   Purpose: Remove all Inactive or Drafts Workflows in Jira
+     Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
+     Tested Environment: Jira 8.20.16
+     Contribution: Gonchik Tsymzhitov
  */
 
 import com.atlassian.jira.component.ComponentAccessor

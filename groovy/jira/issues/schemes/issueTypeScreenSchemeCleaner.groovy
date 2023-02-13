@@ -1,5 +1,10 @@
 boolean isPreview = true
-// This script do cleanup unused issue type screen schemes
+/*
+    Detect unused of issue type screen schemes
+    Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
+    Tested Environment: Jira 8.20.16
+    Contribution: Gonchik Tsymzhitov
+ */
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.issue.fields.screen.issuetype.IssueTypeScreenSchemeManager
 import org.apache.log4j.Logger

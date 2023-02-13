@@ -1,5 +1,8 @@
 /*
     This script do decrease of counters filters, dashboards for inactive users
+    Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
+    Tested Environment: Jira 8.20.5, 8.13.3
+    Contribution: Gonchik Tsymzhitov
  */
 boolean isPreview = true
 import com.atlassian.jira.bc.JiraServiceContextImpl

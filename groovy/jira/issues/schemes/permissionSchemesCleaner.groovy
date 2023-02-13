@@ -1,6 +1,10 @@
 boolean isPreview = true
-// This script for cleanup of unused permission schemes
-
+/*
+    This script for cleanup of unused permission schemes
+    Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
+    Tested Environment: Jira 8.20.16
+    Contribution: Gonchik Tsymzhitov
+ */
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.permission.PermissionSchemeManager
 
