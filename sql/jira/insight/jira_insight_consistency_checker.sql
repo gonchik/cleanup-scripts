@@ -23,6 +23,7 @@ select *
 from "AO_8542F1_IFJ_OBJ_WATCH"
 where "OBJECT_ID" is null;
 
+-- detect attributes without linkage to object
 select *
 from "AO_8542F1_IFJ_OBJ_ATTR_VAL"
-where "REFERENCED_OBJECT_ID" is null;
+where "OBJECT_ATTRIBUTE_ID" is null;
