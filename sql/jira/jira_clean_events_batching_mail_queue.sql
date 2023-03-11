@@ -27,7 +27,13 @@ select count(*) from "AO_733371_EVENT";
 
 TRUNCATE "AO_733371_EVENT" CASCADE;
 
--- MySQL
+/*
+ *
+ *
+ *   MySQL
+ *
+ *
+*/
 /*
     SELECT count(*) FROM AO_733371_EVENT;
 

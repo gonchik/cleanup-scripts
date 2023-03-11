@@ -56,8 +56,6 @@ for (issue in issues) {
             issue.getUpdated(), issue.getUpdated(),
             false, false)
     myCustomField.updateValue(null, issue, new ModifiedValue(null, null), new DefaultIssueChangeHolder())
-    boolean wasIndexing = ImportUtils.isIndexIssues()
-    ImportUtils.setIndexIssues(true)
     issueIndexingService.reIndex(issue)
 }
 def line = "Script successfully migrated data from ${fieldName} into comment for ${issues.size()} issues"
