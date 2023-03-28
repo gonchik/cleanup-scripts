@@ -21,8 +21,6 @@
 | AO_A415DF_                  |   com.radiantminds.roadmaps-jira     | Advanced Roadmaps (formerly Portfolio for Jira) |
 | AO_82B313                   |    com.atlassian.teams    | Advanced Roadmaps Team Management |
 | AO_D9132D                   |  com.atlassian.jpo        | Advanced Roadmaps plans           |
-
-
 | AO_54307E	| | Jira Service Management |
 | AO_2C4E5C	| | Jira Service Management - Jira Email Processing Plugin |
 | AO_9B2E3B	| | Jira Service Management - Automation |
