@@ -18,6 +18,7 @@
 | AO_4B00E6_SCRIPT_RUN_RESULT | com.onresolve.jira.groovy.groovyrunner          |       Adaptavist |
 | AO_4B00E6_UPGRADE_BACKUP    | com.onresolve.jira.groovy.groovyrunner          |       Adaptavist |
 | AO_8542F1_*                 |        | Insight for Jira |
+| AO_A415DF_                  |        | Advanced Roadmaps (formerly Portfolio for Jira) |
 AO_54307E	Jira Service Management
 AO_2C4E5C	Jira Service Management - Jira Email Processing Plugin
 AO_9B2E3B	Jira Service Management - Automation
