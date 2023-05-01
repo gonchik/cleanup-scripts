@@ -2,7 +2,7 @@
     Database bloat, detect wastedbytes.
  */
 
-ELECT
+SELECT
     current_database(), schemaname, tablename, /*reltuples::bigint, relpages::bigint, otta,*/
     ROUND((CASE WHEN otta=0 THEN 0.0 ELSE sml.relpages::float/otta END)::numeric,1) AS tbloat,
     CASE WHEN relpages < otta THEN 0 ELSE bs*(sml.relpages-otta)::BIGINT END AS wastedbytes,
