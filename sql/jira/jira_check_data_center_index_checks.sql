@@ -21,7 +21,7 @@ FROM worklog
 
 
 --- number of unversioned comments
-select count(*)
+SELECT count(*)
 FROM jiraaction
         LEFT JOIN comment_version ON comment_version.comment_id = jiraaction.id
         WHERE actiontype = 'comment'  AND comment_version.comment_id is null;

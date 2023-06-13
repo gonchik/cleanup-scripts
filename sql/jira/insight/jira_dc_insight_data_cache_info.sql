@@ -6,7 +6,7 @@
  *
  */
 
-SELECT count(id)
+SELECT count(id) as "Count of messages"
 FROM clustermessage
 WHERE message like '%INSIGHT%' and  message_time < NOW() - INTERVAL '3 hours';
 
