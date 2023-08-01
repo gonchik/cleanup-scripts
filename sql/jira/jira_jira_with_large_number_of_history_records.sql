@@ -5,14 +5,13 @@
  */
 
 
-SELECT concat(p.pkey,'-',ji.issuenum) as issue, count(ji.id)
+SELECT concat(p.pkey, '-', ji.issuenum) as issue, count(ji.id)
 FROM changeitem ci
          JOIN changegroup cg on cg.id = ci.groupid
          JOIN jiraissue ji on cg.issueid = ji.id
          JOIN project p on p.id = ji.project
-GROUP BY ji.issuenum,p.pkey
-ORDER BY count(ji.id) desc
-limit 100;
+GROUP BY ji.issuenum, p.pkey
+ORDER BY count(ji.id) desc limit 100;
 
 -- MS SQL request
 /*

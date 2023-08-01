@@ -9,7 +9,7 @@
 
 -- PostgreSQL dialect
 SELECT count("ID") FROM "AO_575BF5_PROVIDER_ISSUE";
--- truncate "AO_575BF5_PROVIDER_ISSUE;"
+-- truncate "AO_575BF5_PROVIDER_ISSUE";
 
 
 

@@ -11,11 +11,11 @@
 select jiraissue.id issue_id,
        jiraissue.workflow_id,
        OS_WFENTRY.*
-from   jiraissue
-join   OS_WFENTRY
-on     jiraissue.workflow_id = OS_WFENTRY.id
-where  OS_WFENTRY.state is null
-or     OS_WFENTRY.state = 0;
+from jiraissue
+         join OS_WFENTRY
+              on jiraissue.workflow_id = OS_WFENTRY.id
+where OS_WFENTRY.state is null
+   or OS_WFENTRY.state = 0;
 
 -- fix by
 -- UPDATE OS_WFENTRY SET state = 1 WHERE id in (OS_WFENTRY_ID_VALUES)
@@ -32,7 +32,9 @@ OR     OS_WFENTRY.state = 0;
 
 
 -- check issue number null tickets
-select id,issuenum,project from jiraissue where project is null;
+select id, issuenum, project
+from jiraissue
+where project is null;
 
 -- fix
 -- delete FROM jiraissue WHERE project IS NULL;

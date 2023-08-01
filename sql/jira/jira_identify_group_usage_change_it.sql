@@ -10,16 +10,13 @@
 */
 
 -- Project Roles ---
-SELECT
-  pra.roletypeparameter AS "Group",
-  pr.name AS "Project Role",
-  p.pname AS "Project"
-FROM
-  projectroleactor pra
-  LEFT JOIN projectrole pr ON pra.projectroleid = pr.id
-  LEFT JOIN project p ON pra.pid = p.id
-WHERE
-  pra.roletype = 'atlassian-group-role-actor'
+SELECT pra.roletypeparameter AS "Group",
+       pr.name               AS "Project Role",
+       p.pname               AS "Project"
+FROM projectroleactor pra
+       LEFT JOIN projectrole pr ON pra.projectroleid = pr.id
+       LEFT JOIN project p ON pra.pid = p.id
+WHERE pra.roletype = 'atlassian-group-role-actor'
   AND pra.roletypeparameter in ('helpdesk', 'administrators');
 
 
