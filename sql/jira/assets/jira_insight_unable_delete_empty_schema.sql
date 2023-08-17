@@ -5,7 +5,6 @@
  Detect orphaned elements
  */
 
-
 SELECT *
 FROM "AO_8542F1_IFJ_OBJ"
 WHERE "ID" IS NULL;

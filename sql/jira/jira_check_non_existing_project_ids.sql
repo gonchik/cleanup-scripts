@@ -6,7 +6,7 @@
 SELECT *
 FROM nodeassociation
 WHERE source_node_entity = 'Project'
-       and source_node_id not in (select id from project);
+  and source_node_id not in (select id from project);
 
 -- fix
 -- delete from nodeassociation where source_node_entity = 'Project' and source_node_id not in (select id from project);

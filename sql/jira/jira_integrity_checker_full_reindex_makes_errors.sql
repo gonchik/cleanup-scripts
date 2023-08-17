@@ -5,7 +5,11 @@
    Link: https://confluence.atlassian.com/jirakb/full-reindex-failing-at-100-with-1-error-in-jira-1047548462.html
 */
 
-SELECT id,issuenum,project FROM jiraissue WHERE issuenum IS null;
+SELECT id, issuenum, project
+FROM jiraissue
+WHERE issuenum IS null;
 
 -- fix possible problem
-DELETE FROM jiraissue WHERE issuenum IS NULL;
+DELETE
+FROM jiraissue
+WHERE issuenum IS NULL;

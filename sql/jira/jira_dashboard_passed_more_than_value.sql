@@ -8,19 +8,19 @@
 -- Diagnosis
 select username, pagename, count(pagename)
 from portalpage
-group by username,pagename
+group by username, pagename
 having count(pagename) > 1;
 
 
 
 -- Resolution
 -- method 1
-select username,id
+select username, id
 from portalpage
 where username in (select username
-                    from portalpage
-                    group by username,pagename
-                    having count(pagename) > 1);
+                   from portalpage
+                   group by username, pagename
+                   having count(pagename) > 1);
 -- Delete all the rows except one row for each of those users using the ID of the row.
 
 

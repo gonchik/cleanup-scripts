@@ -14,9 +14,10 @@
 
     link: https://confluence.atlassian.com/migrationkb/auditing-user-email-domains-by-querying-the-application-database-1180146477.html
  */
-select right(cwd_user.email_address, strpos(reverse(cwd_user.email_address), '@') - 1), count(*)
+select right (cwd_user.email_address, strpos(reverse(cwd_user.email_address), '@') - 1), count (*)
 from cwd_user
-    inner join cwd_directory cd on cd.id = cwd_user.directory_id
+    inner join cwd_directory cd
+on cd.id = cwd_user.directory_id
 where cd.active = 1
 group by 1
 order by 2 desc;

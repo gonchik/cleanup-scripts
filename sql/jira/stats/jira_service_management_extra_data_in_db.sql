@@ -41,9 +41,11 @@ where id in (select id
                      from customfield
                      where customfieldtypekey like 'com.atlassian.servicedesk%')));
 
-delete
-from changeitem
-where field in
-      (select cfname
-       from customfield
-       where customfieldtypekey like 'com.atlassian.servicedesk%');
+-- Second command
+
+DELETE
+FROM changeitem
+WHERE field in
+      (SELECT cfname
+       FROM customfield
+       WHERE customfieldtypekey like 'com.atlassian.servicedesk%');

@@ -8,7 +8,17 @@
 
 SELECT count(id) as "Count of messages"
 FROM clustermessage
-WHERE message like '%INSIGHT%' and  message_time < NOW() - INTERVAL '3 hours';
+WHERE message like '%INSIGHT%'
+  and message_time < NOW() - INTERVAL '3 hours';
 
 -- Request to delete longer then 3 hour Insight Data cluster messages
--- DELETE FROM clustermessage WHERE message like '%INSIGHT%' and  message_time < NOW() - INTERVAL '3 hours';
+/*
+
+
+DELETE
+FROM clustermessage
+WHERE message like '%INSIGHT%'
+  and message_time < NOW() - INTERVAL '3 hours';
+
+
+ */
