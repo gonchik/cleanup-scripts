@@ -7,15 +7,21 @@
  *       https://wiki.postgresql.org/wiki/Index_Maintenance
 */
 
-SELECT s.schemaname,
+SELECT
+       s.schemaname,
        s.relname AS tablename,
        s.indexrelname AS indexname,
        pg_size_pretty(pg_relation_size(s.indexrelid::regclass)) AS index_size,
-       idx_tup_read,
-       idx_tup_fetch,
-       idx_scan
+       psut.idx_scan,
+       psut.seq_scan,
+       CASE WHEN (psut.seq_scan + psut.idx_scan) = 0 THEN
+            0
+       ELSE
+            (100 * psut.idx_scan / (psut.seq_scan + psut.idx_scan))
+        END AS percent_of_times_index_used
 FROM pg_catalog.pg_stat_user_indexes s
-   JOIN pg_catalog.pg_index i ON s.indexrelid = i.indexrelid
+    LEFT JOIN pg_stat_user_tables AS psut ON psut.relid = s.relid
+    JOIN pg_catalog.pg_index i ON s.indexrelid = i.indexrelid
 WHERE
   s.idx_scan = 0      					-- has never been scanned
   AND 0 <>ALL (i.indkey)  				-- no index column is an expression
@@ -24,4 +30,4 @@ WHERE
          (SELECT 1 FROM pg_catalog.pg_constraint c
           WHERE c.conindid = s.indexrelid)
 ORDER BY pg_relation_size(s.indexrelid) DESC
-LIMIT 30;
+;
