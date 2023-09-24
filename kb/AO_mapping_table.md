@@ -66,6 +66,7 @@
 | AO_D195E9_   |                                                 |                                            Herzum approval plugin |
 | AO_D1CA32_   |                                                 |                                                  Refined for Jira |
 | AO_D4AF4C_   |                                                 |                                                 Mobility for JIRA |
+| AO_D4B4E5_   |            com.stiltsoft.jira.smart-attachments |                                                 Smart Attachments |	
 | AO_D530BB_   |                                                 |              Jira Service Desk/Management Canned Responses Plugin |
 | AO_D9132D_   |                                                 |                Advanced Roadmaps plans (was Portfolio Live Plans) |
 | AO_D9132D_   |                com.atlassian.jpo                |                                           Advanced Roadmaps plans |
