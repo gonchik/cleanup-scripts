@@ -3,7 +3,10 @@
     Purpose: Make analysis of link type overall
  */
 
-SELECT it.pname,
-		(SELECT count(ji.id) from jiraissue ji where it.id = ji.issuetype) as "Number of tickets"
-FROM issuetype it
-ORDER BY 2 ASC;
+SELECT it.pname     AS "Issue Type",
+       COUNT(ji.id) AS "Number Of tickets"
+FROM jiraissue ji
+         INNER JOIN public.issuetype it ON ji.issuetype = it.id
+-- WHERE ji.created BETWEEN '2023-01-01' AND '2023-06-01'
+GROUP BY it.id
+ORDER BY 2 DESC;

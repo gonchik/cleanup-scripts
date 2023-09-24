@@ -13,7 +13,7 @@ def delegator = (DelegatorInterface) ComponentAccessor.getComponent(DelegatorInt
 String helperName = delegator.getGroupHelperName("default")
 
 
-def sqlStmt = /Select t."SETTING" From "AO_4B00E6_STASH_SETTINGS" t Where t."KEY" = 'scheduled_jobs'/
+def sqlStmt = /SELECT t."SETTING" FROM "AO_4B00E6_STASH_SETTINGS" t WHERE t."KEY" = 'scheduled_jobs'/
 
 
 Connection conn = ConnectionFactory.getConnection(helperName)

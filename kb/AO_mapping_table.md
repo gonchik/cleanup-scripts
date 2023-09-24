@@ -43,7 +43,7 @@
 | AO_86ED1B_   |                                                 |                                                  Tempo Timesheets |
 | AO_88263F_   |                                                 |                                        Support Healthcheck Plugin | 
 | AO_8AC478_   |                                                 |                                            Softwareplant BigGantt |
-| AO_8BAD1B_   |       com.almworks.jira.structure	              |                                                         Structure |
+| AO_8BAD1B_   |          com.almworks.jira.structure	           |                                                         Structure |
 | AO_97EDAB_   |                                                 |                            Atlassian Jira - Plugins - Invite User |
 | AO_9B2E3B_   |                                                 |                              Jira Service Management - Automation |
 | AO_9BFD01_   | com.intenso.jira.plugins.ad-integration-manager |                                                          Deviniti |
@@ -73,3 +73,4 @@
 | AO_E8B6CC_   |                                                 |                                   Jira DVCS Connector (Bitbucket) | 
 | AO_ED669C_   |                                                 |                                     SSO for Atlassian Data Center |
 | AO_F1B27B_   |                                                 |                                    Atlassian Timed Promise Plugin |
+| AO_C77861_   |               com.atlassian.audit               |                                            Atlassian Audit Plugin |
