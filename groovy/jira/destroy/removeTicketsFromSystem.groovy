@@ -50,7 +50,7 @@ def up = issues.collect { ur ->
 pool.shutdown()
 
 
-def List<Issue> getIssues() {
+List<Issue> getIssues() {
     def jqlQueryParser = ComponentAccessor.getComponent(JqlQueryParser.class)
     def searchProvider = ComponentAccessor.getComponent(SearchProvider.class)
     def issueManager = ComponentAccessor.getIssueManager()

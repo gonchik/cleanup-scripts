@@ -13,8 +13,8 @@ import com.atlassian.jira.issue.search.SearchRequestManager
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.config.properties.APKeys
 
-public class NoCheck implements RapidViewManager.RapidViewPermissionCheck {
-    public boolean check(RapidView view) {
+class NoCheck implements RapidViewManager.RapidViewPermissionCheck {
+    boolean check(RapidView view) {
         return true
     }
 }
