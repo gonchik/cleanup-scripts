@@ -50,6 +50,7 @@
 | AO_A020FF_   |                                                 |                   Atlassian Centralized License Visibility Plugin |
 | AO_A07C39_   |                                                 |                                   Microsoft Teams for Jira Server |
 | AO_A0B856_   |                                                 |                                         Atlassian WebHooks Plugin |
+| AO_A1636C_   |         com.atlassian.cps.activityIcon          |                                                 Activity for Jira |
 | AO_A415DF_   |         com.radiantminds.roadmaps-jira          |                   Advanced Roadmaps (formerly Portfolio for Jira) |
 | AO_A83C21_   |                                                 |                                               Better PDF Exporter |
 | AO_A9375F_   |                                                 |                                                  Mail.ru: My ToDo |
@@ -66,7 +67,7 @@
 | AO_D195E9_   |                                                 |                                            Herzum approval plugin |
 | AO_D1CA32_   |                                                 |                                                  Refined for Jira |
 | AO_D4AF4C_   |                                                 |                                                 Mobility for JIRA |
-| AO_D4B4E5_   |            com.stiltsoft.jira.smart-attachments |                                                 Smart Attachments |	
+| AO_D4B4E5_   |      com.stiltsoft.jira.smart-attachments       |                                                 Smart Attachments |	
 | AO_D530BB_   |                                                 |              Jira Service Desk/Management Canned Responses Plugin |
 | AO_D9132D_   |                                                 |                Advanced Roadmaps plans (was Portfolio Live Plans) |
 | AO_D9132D_   |                com.atlassian.jpo                |                                           Advanced Roadmaps plans |
@@ -74,4 +75,5 @@
 | AO_E8B6CC_   |                                                 |                                   Jira DVCS Connector (Bitbucket) | 
 | AO_ED669C_   |                                                 |                                     SSO for Atlassian Data Center |
 | AO_F1B27B_   |                                                 |                                    Atlassian Timed Promise Plugin |
+| AO_F1B27B_   |           com.decadis.xtools-for-jira           |                                            Admin Toolbox for Jira |
 | AO_C77861_   |               com.atlassian.audit               |                                            Atlassian Audit Plugin |
