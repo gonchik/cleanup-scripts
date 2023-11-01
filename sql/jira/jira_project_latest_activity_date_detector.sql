@@ -1,6 +1,6 @@
 /* Prepare list of not active projects */
 SET
-@latestActivityDate='2019-01-01 00:00:00';
+@latestActivityDate='2023-01-01 00:00:00';
 
 SELECT pc.cname AS 'Project Category', p.id AS 'Project ID', p.pkey AS 'Project Key', p.pname AS 'Project Name', MAX(i.updated) AS 'Latest activity', COUNT(*) AS 'Issue count'
 FROM jiraissue AS i

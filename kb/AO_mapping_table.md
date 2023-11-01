@@ -53,6 +53,7 @@
 | AO_A1636C_   |         com.atlassian.cps.activityIcon          |                                                 Activity for Jira |
 | AO_A415DF_   |         com.radiantminds.roadmaps-jira          |                   Advanced Roadmaps (formerly Portfolio for Jira) |
 | AO_A83C21_   |                                                 |                                               Better PDF Exporter |
+| AO_A912D8    |     com.k15t.backbone.backbone-issue-sync	      |                                      Backbone Issue Sync for Jira |
 | AO_A9375F_   |                                                 |                                                  Mail.ru: My ToDo |
 | AO_AC3877_   |                                                 |                                    Atlassian Rate Limiting Plugin |
 | AO_AEFED0_   |                                                 |                                        System Plugin: Tempo Teams |

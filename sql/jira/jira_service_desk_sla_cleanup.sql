@@ -9,3 +9,4 @@ WHERE PROPERTY_KEY = 'sd.sla.audit.log.cleanup.days';
 
 -- possible cleanup all data of SLA AUDIT LOG
 truncate "AO_54307E_SLAAUDITLOG" cascade;
+truncate "AO_54307E_SLAAUDITLOGDATA";
