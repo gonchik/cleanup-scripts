@@ -9,7 +9,8 @@
 
 -- PostgreSQL dialect
 SELECT count("ID") FROM "AO_575BF5_PROVIDER_ISSUE";
--- truncate "AO_575BF5_PROVIDER_ISSUE";
+
+TRUNCATE TABLE "AO_575BF5_PROVIDER_ISSUE";
 
 
 
@@ -17,12 +18,14 @@ SELECT count("ID") FROM "AO_575BF5_PROVIDER_ISSUE";
 -- mysql dialect
 /*
     SELECT count(ID) FROM AO_575BF5_DEV_SUMMARY;
-
     TRUNCATE AO_575BF5_DEV_SUMMARY;
  */
 
+
+
 -- PostgreSQL dialect
+-- calculate count
 SELECT count("ID") FROM "AO_575BF5_DEV_SUMMARY";
 
-
--- truncate "AO_575BF5_DEV_SUMMARY";
+-- Execution
+TRUNCATE TABLE "AO_575BF5_DEV_SUMMARY";
