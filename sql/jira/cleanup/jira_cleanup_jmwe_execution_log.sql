@@ -3,8 +3,8 @@
  */
 
 
-select count(*)
-from "AO_7AEB56_EXECUTION_LOG";
+SELECT count(*)
+FROM "AO_7AEB56_EXECUTION_LOG";
 
 
 -- cleanup table
