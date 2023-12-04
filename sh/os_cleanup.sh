@@ -101,7 +101,7 @@ echo 'VMWARE related logs'
 find /var/log/ -type f -name 'vmware-vmsvc-root.*.log' -delete
 find /var/log/ -type f -name 'vmware-network.*.log' -delete
 find /var/log/ -type f -name 'vmware-vmsvc.*.log' -delete
- find /var/log -type f -name '*.[0-9]' -delete
+find /var/log -type f -name '*.[0-9]' -delete
 
 
 echo 'Remove rotated logs in /var/log of VMware network'
