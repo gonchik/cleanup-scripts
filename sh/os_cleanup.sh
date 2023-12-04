@@ -162,13 +162,13 @@ atlassian_jira_cleanup() {
   JIRA_HOME=/var/atlassian/application-data/jira
   JIRA_INSTALL=/opt/atlassian/jira/current
   echo "Reviewing the ${JIRA_HOME}"
+  find ${JIRA_HOME}/log -type f -name '*.log.*' -delete
   rm -f ${JIRA_HOME}/log/atlassian-jira.log.*
   rm -f ${JIRA_HOME}/log/atlassian-servicedesk.log.*
   rm -f ${JIRA_HOME}/log/insight_automation.log.*
   rm -f ${JIRA_HOME}/log/insight_import.log.*
   rm -f ${JIRA_HOME}/log/atlassian-jira-perf.log.*
   rm -f ${JIRA_HOME}/log/atlassian-jira-slow-queries.log.*
-  rm -f ${JIRA_HOME}/sharedhome/analytics-logs/*
   rm -f ${JIRA_HOME}/log/atlassian-jira-app-monitoring.log.*
   rm -f ${JIRA_HOME}/log/insight_audit.log.*
   rm -f ${JIRA_HOME}/log/atlassian-jira-security.log.*
@@ -181,7 +181,9 @@ atlassian_jira_cleanup() {
   rm -f ${JIRA_HOME}/log/atlassian-jira-http-access.log.*
   rm -f ${JIRA_HOME}/log/insight_objectschema_export.log.*
   rm -f ${JIRA_HOME}/log/jira-diagnostics.log.*
+  find ${JIRA_HOME}/log/nfj-jira-* -type f -mtime +2 -delete
   rm -f ${JIRA_HOME}/log/jfr/*
+  rm -f ${JIRA_HOME}/sharedhome/analytics-logs/*
   find ${JIRA_HOME}/sharedhome/log -type f -name '*.log.*' -delete
   find ${JIRA_HOME}/tmp -mtime +1 -type f -delete
   echo  'Cleaning tmp attachments based on the https://jira.atlassian.com/browse/JRASERVER-71824'
