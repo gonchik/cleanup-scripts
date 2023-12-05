@@ -216,6 +216,18 @@ atlassian_confluence_cleanup() {
 }
 
 
+atlassian_bitbucket_cleanup() {
+  # check folder exists for Atlassian
+  echo 'Clean Bitbucket logs and temp files'
+  BITBUCKET_HOME=/var/atlassian/application-data/bitbucket
+  find ${BITBUCKET_HOME}/log -type f -name '*.gz' -delete
+  # Remove old search log files
+  echo "Removing old search log files in ${BITBUCKET_HOME}/log/search"
+  find ${BITBUCKET_HOME}/log/search -type f -mtime +30 -delete
+  echo "Remove old temp files"
+  find ${BITBUCKET_HOME}/temp -type f -mtime +1 -delete
+}
+
 posgresql_cleanup() {
   echo 'Truncate logs of PostgreSQL'
   find /var/lib/pgsql/11/data/pg_log/ -name "*.log"  -exec truncate {} --size 0 \;
