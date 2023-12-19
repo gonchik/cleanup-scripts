@@ -97,12 +97,18 @@ find /var/log/ -type f -name 'btmp-*' -delete
 echo 'Remove Boot log info'
 find /var/log/ -type f -name 'boot.log-*' -delete
 find /var/log/ -type f -name 'yum.log-*' -delete
-echo 'VMWARE related logs'
+echo 'VMware related logs'
 find /var/log/ -type f -name 'vmware-vmsvc-root.*.log' -delete
 find /var/log/ -type f -name 'vmware-network.*.log' -delete
 find /var/log/ -type f -name 'vmware-vmsvc.*.log' -delete
 find /var/log -type f -name '*.[0-9]' -delete
+echo 'Clean DNF librepo'
+find /var/log -type f -name 'dnf.librepo.log-*' -delete
 
+echo 'Clean SSSD'
+find /var/log -type f -name 'sssd.log-*' -delete
+find /var/log -type f -name 'sssd_implicit_files.log-*' -delete
+find /var/log -type f -name 'sssd_nss.log-*' -delete
 
 echo 'Remove rotated logs in /var/log of VMware network'
 find /var/log/ -type f -name 'vmware-network.*.log' -delete
