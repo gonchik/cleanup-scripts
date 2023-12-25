@@ -1,3 +1,7 @@
+/*
+    Jira Service Management queue cleanup
+ */
+
 DELETE
 FROM "AO_319474_QUEUE_PROPERTY"
 WHERE "QUEUE_ID" in (SELECT "ID"

@@ -1,6 +1,7 @@
 /*
- Insight producing "InvalidCacheLoadException: loadAll failed to return a value for xxx" or "This attribute needs to be indexed" errors
- https://confluence.atlassian.com/jirakb/insight-producing-invalidcacheloadexception-loadall-failed-to-return-a-value-for-xxx-or-this-attribute-needs-to-be-indexed-errors-1063163284.html
+    Insight producing "InvalidCacheLoadException:
+    loadAll failed to return a value for xxx" or "This attribute needs to be indexed" errors
+    https://confluence.atlassian.com/jirakb/insight-producing-invalidcacheloadexception-loadall-failed-to-return-a-value-for-xxx-or-this-attribute-needs-to-be-indexed-errors-1063163284.html
  */
 
 SELECT "ID", "NAME", "REMOVABLE", "TYPE", "LABEL", "INDEXED"

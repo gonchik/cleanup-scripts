@@ -1,5 +1,5 @@
 /*
-    Cleanup JMWE execution log
+    Cleanup JMWE (Jira Misc Workflow Extensions) execution log
  */
 
 

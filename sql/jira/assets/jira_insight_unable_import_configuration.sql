@@ -1,6 +1,6 @@
 /*
- Unable to open Import configuration in Insight
- link: https://confluence.atlassian.com/jirakb/unable-to-open-import-configuration-in-insight-1072214509.html
+    Unable to open Import configuration in Insight
+    link: https://confluence.atlassian.com/jirakb/unable-to-open-import-configuration-in-insight-1072214509.html
  */
 
 
