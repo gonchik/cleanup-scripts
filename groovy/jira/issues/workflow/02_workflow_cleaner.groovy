@@ -1,10 +1,14 @@
 boolean isPreview = true
 /*
- *  This script investigate the workflows
- *   Purpose: Remove all Inactive or Drafts Workflows in Jira
-     Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
-     Tested Environment: Jira 8.20.16
-     Contribution: Gonchik Tsymzhitov
+    This script investigate the workflows
+    Purpose: Remove all Inactive or Drafts Workflows in Jira
+    Additional:
+    This script can be run from Jira:
+        -> Administration -> Scriptrunner -> Console
+    or
+        -> Administration -> Apps -> Script Console
+    Tested Environment: Jira 8.20.x, 9.4.x
+    Contribution: Gonchik Tsymzhitov
  */
 
 import com.atlassian.jira.component.ComponentAccessor
@@ -33,7 +37,8 @@ workflowManager.workflows.each {
             if (!isPreview) {
                 try {
                     workflowManager.deleteWorkflow(it)
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
             }
         }
     }

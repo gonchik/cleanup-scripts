@@ -1,8 +1,12 @@
 boolean isPreview = true
 /*
      This script investigate workflows schemes
-     Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
-     Tested Environment: Jira 8.20.16
+     Additional:
+     This script can be run from Jira:
+        -> Administration -> Scriptrunner -> Console
+     or
+        -> Administration -> Apps -> Script Console
+     Tested Environment: Jira 8.20.x, 9.4.x
      Contribution: Gonchik Tsymzhitov
  */
 
