@@ -9,3 +9,17 @@ SELECT "ID", "NAME", "REMOVABLE", "TYPE", "LABEL", "INDEXED"
 FROM "AO_8542F1_IFJ_OBJ_TYPE_ATTR"
 WHERE ("REMOVABLE" = 'false' OR "TYPE" = 1)
   AND ("INDEXED" != 'true' OR "INDEXED" is NULL);
+
+
+-- Set only the necessary attributes to be indexed
+UPDATE "AO_8542F1_IFJ_OBJ_TYPE_ATTR"
+SET "INDEXED" = 'true'
+WHERE ("REMOVABLE" = 'false' OR "TYPE" = 1)
+  AND ("INDEXED" != 'true' OR "INDEXED" is NULL);
+
+
+
+-- Set all attributes but 'textarea' types to be indexed:
+UPDATE "AO_8542F1_IFJ_OBJ_TYPE_ATTR"
+SET "INDEXED" = 'true'
+WHERE "DEFAULT_TYPE_ID" != 9 AND ("INDEXED" != 'true' OR "INDEXED" is NULL);

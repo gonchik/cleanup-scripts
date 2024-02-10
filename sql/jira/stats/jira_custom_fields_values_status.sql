@@ -5,11 +5,19 @@ SELECT count(id)
 FROM customfieldvalue;
 
 -- it's just yet another small calculator it's better to use from the
-SELECT
-	   customfield.id, customfield.cfname, count(*)
+SELECT customfield.id,
+       customfield.cfname,
+       count(*)
 FROM customfield
-    LEFT JOIN customfieldvalue  on customfield.id = customfieldvalue.customfield
+         LEFT JOIN customfieldvalue on customfield.id = customfieldvalue.customfield
 GROUP BY customfield.id
-ORDER BY count(*) DESC
-LIMIT 100
+ORDER BY count(*) DESC LIMIT 10
 ;
+
+
+-- simple version
+SELECT customfield, count(customfield)
+FROM customfieldvalue
+GROUP BY customfield
+ORDER 2 DESC
+    limit 10;
