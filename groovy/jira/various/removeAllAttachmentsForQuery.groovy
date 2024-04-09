@@ -39,6 +39,6 @@ for (issue in issues) {
     issueIndexingService.reIndex(issue)
 }
 
-def line = "Script successfully migrated data  for ${issues.size()} issues"
+def line = "Script successfully removed attachments  for ${issues.size()} issues"
 log.debug line
 return line
