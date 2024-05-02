@@ -227,11 +227,23 @@ atlassian_bitbucket_cleanup() {
   echo 'Clean Bitbucket logs and temp files'
   BITBUCKET_HOME=/var/atlassian/application-data/bitbucket
   find ${BITBUCKET_HOME}/log -type f -name '*.gz' -delete
+  rm -f ${BITBUCKET_HOME}/log/atlassian-bitbucket-*.log
+  rm -f ${BITBUCKET_HOME}/log/awesome-graphs-*.log
   # Remove old search log files
   echo "Removing old search log files in ${BITBUCKET_HOME}/log/search"
   find ${BITBUCKET_HOME}/log/search -type f -mtime +30 -delete
   echo "Remove old temp files"
   find ${BITBUCKET_HOME}/temp -type f -mtime +1 -delete
+  find ${BITBUCKET_HOME}/tmp -type f -mtime +1 -delete
+}
+
+atlassian_bamboo_cleanup() {
+   # check folder exists for Atlassian
+  echo 'Clean Bamboo logs and temp files'
+  BAMBOO_HOME="/var/atlassian/application-data/bamboo"
+  echo "Reviewing the ${BAMBOO_HOME}"
+  find ${BAMBOO_HOME}/logs -type f -name '*.log.*' -delete
+  rm -f ${BAMBOO_HOME}/analytics-logs/*
 }
 
 posgresql_cleanup() {
