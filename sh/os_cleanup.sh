@@ -166,7 +166,7 @@ atlassian_jira_cleanup() {
 
   echo 'Clean Jira logs and temp files'
   JIRA_HOME="/var/atlassian/application-data/jira"
-  JIRA_INSTALL="/opt/atlassian/jira"
+  JIRA_INSTALL="/opt/atlassian/jira/current"
   echo "Reviewing the ${JIRA_HOME}"
   find ${JIRA_HOME}/log -type f -name '*.log.*' -delete
   rm -f ${JIRA_HOME}/log/atlassian-jira.log.*
