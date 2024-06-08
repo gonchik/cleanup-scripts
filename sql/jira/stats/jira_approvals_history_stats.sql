@@ -1,4 +1,8 @@
 -- get stats
+/*
+    https://confluence.atlassian.com/jirakb/how-to-find-the-request-type-of-an-issue-using-sql-query-1180150449.html
+
+ */
 select issue.ID                                                                 as "id"
      , (select CAST(CONCAT(pkey, '-', issue.issuenum) as CHAR(255)) ::text
         from project pkey
