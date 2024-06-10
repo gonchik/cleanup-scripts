@@ -5,10 +5,14 @@ cd /opt/atlassian/jira
 wget -c https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-9.4.22.tar.gz
 tar -xzvf atlassian-jira-software-9.4.22.tar.gz
 
+# Main variables
 NEW_RELEASE=atlassian-jira-software-9.4.22-standalone
 OLD_RELEASE=atlassian-jira-software-9.4.15-standalone
+JIRA_USER=jira
+JIRA_HOME=/var/atlassian/application-data/jira
 
-echo "copy jre"
+
+echo "Copying JRE"
 cp -f {${OLD_RELEASE},${NEW_RELEASE}}/jre
 echo 'Rewrite setenv.sh file'
 yes | cp {${OLD_RELEASE},${NEW_RELEASE}}/bin/setenv.sh
@@ -33,14 +37,13 @@ cp {${OLD_RELEASE},${NEW_RELEASE}}/atlassian-jira/images/mail/logo.png
 echo "Custom language pack"
 yes | cp {${OLD_RELEASE},${NEW_RELEASE}}/atlassian-jira/WEB-INF/atlassian-bundled-plugins/jira-core-language-pack-ru_RU-9.8.0.v20230228123141.jar
 
-chown -R jira: ${NEW_RELEASE}/
+chown -R ${JIRA_USER}: ${NEW_RELEASE}/
 
 systemctl stop jira
 unlink current
 ln -s ${NEW_RELEASE} current
 
 echo "Cleaning plugin cache"
-JIRA_HOME=/var/atlassian/application-data/jira
 rm -rf ${JIRA_HOME}/plugins/.bundled-plugins
 rm -rf ${JIRA_HOME}/plugins/.osgi-plugins
 
@@ -58,7 +61,8 @@ rm -rf ${OLD_RELEASE}/temp/*
 # unzip 1050040022
 #
 # cp *.jar dependencies/*.jar ${JIRA_HOME}/sharedhome/plugins/installed-plugins/
-# rm -rf *
+# cd ..
+# rm -rf jsm/
 
 
 systemctl restart jira
