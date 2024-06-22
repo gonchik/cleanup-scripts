@@ -13,7 +13,7 @@ JIRA_HOME=/var/atlassian/application-data/jira
 
 
 echo "Copying JRE"
-cp -f {${OLD_RELEASE},${NEW_RELEASE}}/jre
+cp -rf {${OLD_RELEASE},${NEW_RELEASE}}/jre
 echo 'Rewrite setenv.sh file'
 yes | cp {${OLD_RELEASE},${NEW_RELEASE}}/bin/setenv.sh
 echo 'Rewrite server.xml'
@@ -68,5 +68,5 @@ rm -rf ${OLD_RELEASE}/temp/*
 systemctl restart jira
 
 # Checking logs
-# tail -f /opt/atlassian/jira/logs/catalina.out
-# tail -f /var/atlassian/application-data/jira/log/atlassian-jira.log
+# tail -f ${NEW_RELEASE}/logs/catalina.out
+# tail -f ${JIRA_HOME}/log/atlassian-jira.log
