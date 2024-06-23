@@ -46,7 +46,7 @@ ln -s ${NEW_RELEASE} current
 echo "Cleaning plugin cache"
 rm -rf ${JIRA_HOME}/plugins/.bundled-plugins
 rm -rf ${JIRA_HOME}/plugins/.osgi-plugins
-
+rm -f ${JIRA_HOME}/.jira.home.lock
 echo "Clean old logs from old installation"
 rm -f ${OLD_RELEASE}/logs/*
 rm -rf ${OLD_RELEASE}/temp/*
