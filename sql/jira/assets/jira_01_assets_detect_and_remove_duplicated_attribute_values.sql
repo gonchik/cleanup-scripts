@@ -22,7 +22,7 @@ where "OBJECT_ATTRIBUTE_ID" in (SELECT min(OA2."ID") AS TO_DELETE
                                                        OA2."OBJECT_ID" = SUBQ.OA_OID
                                 GROUP BY OA2."OBJECT_ID", OA2."OBJECT_TYPE_ATTRIBUTE_ID");
 
--- delete duplicate values
+-- delete duplicated values
 
 DELETE
 from "AO_8542F1_IFJ_OBJ_ATTR_VAL"

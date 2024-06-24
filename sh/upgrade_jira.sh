@@ -36,6 +36,9 @@ cp {${OLD_RELEASE},${NEW_RELEASE}}/atlassian-jira/images/mail/logo.png
 
 echo "Custom language pack"
 yes | cp {${OLD_RELEASE},${NEW_RELEASE}}/atlassian-jira/WEB-INF/atlassian-bundled-plugins/jira-core-language-pack-ru_RU-9.8.0.v20230228123141.jar
+echo "Removed cached backup files"
+rm -f ${JIRA_HOME}/customisations-backup/atlassian-jira/WEB-INF/atlassian-bundled-plugins/jira-core-language-pack-ru_RU-9.8.0.v20230228123141.jar
+rm -f ${JIRA_HOME}/customisations/atlassian-jira/WEB-INF/atlassian-bundled-plugins/jira-core-language-pack-ru_RU-9.8.0.v20230228123141.jar
 
 chown -R ${JIRA_USER}: ${NEW_RELEASE}/
 
