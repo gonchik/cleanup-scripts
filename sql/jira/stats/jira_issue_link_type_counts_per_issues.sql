@@ -1,5 +1,5 @@
 /*
-    How many tickets has  exact issue link types in Jira
+    How many tickets has exact issue link types in Jira
  */
 
 select ist.linkname, count(ist.linkname)

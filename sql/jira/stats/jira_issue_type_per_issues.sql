@@ -4,7 +4,7 @@
  */
 
 SELECT it.pname     AS "Issue Type",
-       COUNT(ji.id) AS "Number Of tickets"
+       COUNT(ji.id) AS "Number Of Tickets"
 FROM jiraissue ji
          INNER JOIN public.issuetype it ON ji.issuetype = it.id
 -- WHERE ji.created BETWEEN '2023-01-01' AND '2023-06-01'
