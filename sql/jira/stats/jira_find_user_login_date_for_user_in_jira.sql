@@ -25,3 +25,20 @@ FROM cwd_user u
                     WHERE attribute_name = 'login.lastLoginMillis') AS a ON a.user_id = u.ID
          JOIN cwd_directory d ON u.directory_id = d.id
 ORDER BY "Last Login" DESC;
+
+
+-- MySQL
+SELECT d.directory_name                                                                   AS "Directory",
+       u.user_name                                                                        AS "Username",
+       u.active                                                                           AS "Active",
+       FROM_UNIXTIME(CONVERT(ua.attribute_value / 1000, UNSIGNED INTEGER), '%T %m/%d/%Y') AS "Last Login",
+FROM cwd_user u
+         JOIN (SELECT DISTINCT child_name
+               FROM cwd_membership m
+                        JOIN licenserolesgroup gp ON m.lower_parent_name = gp.GROUP_ID) AS m
+              ON m.child_name = u.user_name
+         LEFT JOIN (SELECT *
+                    FROM cwd_user_attributes ca
+                    WHERE attribute_name = 'login.lastLoginMillis') AS a ON a.user_id = u.ID
+         JOIN cwd_directory d ON u.directory_id = d.id
+ORDER BY "Last Login" DESC;

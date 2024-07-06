@@ -4,6 +4,8 @@
  1 value (maximum cardinality = 1)
 
  link: https://jira.atlassian.com/browse/JSDSERVER-12010
+ doc: https://confluence.atlassian.com/jirakb/duplicated-attribute-values-in-insight-objects-with-cardinality-maximum-1-1114816155.html
+
  */
 -- calculate how many values are duplicated
 SELECT count("ID")
