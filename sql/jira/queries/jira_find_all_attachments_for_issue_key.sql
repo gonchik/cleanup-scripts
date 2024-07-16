@@ -5,9 +5,9 @@
 
 */
 
-select distinct p.pkey || '-' || j.issuenum, fa.filename
-from project p,
+SELECT DISTINCT p.pkey || '-' || j.issuenum, fa.filename
+FROM project p,
      jiraissue j,
      fileattachment fa
-where p.id = j.project
-  and fa.issueid = j.id;
+WHERE p.id = j.project
+  AND fa.issueid = j.id;

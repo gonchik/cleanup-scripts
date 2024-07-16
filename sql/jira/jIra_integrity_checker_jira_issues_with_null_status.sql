@@ -3,6 +3,7 @@
     Jira Issues with Null Status
     link: https://confluence.atlassian.com/jirakb/sql-equivalents-for-jira-server-s-workflow-integrity-checks-658179102.html
 */
+
 SELECT ji.id,
        ji.issuenum,
        ji.issuestatus,
@@ -17,7 +18,7 @@ WHERE  ji.issuestatus is null;
 
 -- And can be fixed by:
 UPDATE jiraissue
-SET    issuestatus = (select state
-                      from   OS_WFENTRY
-                      where  id = workflow_id)
+SET    issuestatus = (SELECT state
+                      FROM   OS_WFENTRY
+                      WHERE  id = workflow_id)
 WHERE  issuestatus is null;

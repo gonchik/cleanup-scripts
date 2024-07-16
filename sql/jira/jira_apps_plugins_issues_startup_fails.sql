@@ -5,7 +5,6 @@
 
 SELECT * FROM pluginstate where pluginenabled = 'false';
 
-
 DELETE FROM pluginstate WHERE pluginkey='<pluginkey from query above>';
 
 
