@@ -2,6 +2,7 @@
 
   Outline a scenario in which users seek to retrieve attachment details
   from Jira tickets for a customizable duration of time, be it days or months.
+  title: SQL query to get the details of attachments uploaded in Jira issues for configurable number of days or months.
   link: https://confluence.atlassian.com/jirakb/sql-query-to-get-the-details-of-attachments-uploaded-in-jira-issues-for-configurable-number-of-days-or-months-1305249650.html
  */
 select fa.id,
