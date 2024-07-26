@@ -1,5 +1,8 @@
 /*
      How to find unused issue types with SQL
+     Problem: A Jira administrator may want to identify any issue types
+     which are not being used across the instance. In other words,
+     no issues of these issue types exist and therefore may be considered unnecessary clutter.
      link: https://confluence.atlassian.com/jirakb/how-to-find-unused-issue-types-with-sql-1072216995.html
  */
 
