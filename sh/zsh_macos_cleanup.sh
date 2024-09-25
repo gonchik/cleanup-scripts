@@ -79,3 +79,7 @@ clear_dns_cache() {
 }
 
 clear_dns_cache
+
+# problem slow auth
+# https://discussions.apple.com/thread/255702055?login=true&sortBy=rank&page=1
+sudo dscl . deletepl /Users/`whoami` accountPolicyData history
