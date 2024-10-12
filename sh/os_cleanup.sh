@@ -214,7 +214,10 @@ atlassian_confluence_cleanup() {
   rm -f ${CONF_HOME}/logs/atlassian-confluence-jmx.log.*
   rm -f ${CONF_HOME}/logs/atlassian-confluence-profiler.log.*
   rm -f ${CONF_HOME}/logs/atlassian-confluence-security.log.*
-  rm -f ${CONF_HOME}/logs/atlassian-confluence-security.log.*
+  rm -f ${CONF_HOME}/logs/atlassian-confluence-app-monitoring.log.*
+  rm -f ${CONF_HOME}/logs/atlassian-confluence-ipd-monitoring.log.*
+  rm -f ${CONF_HOME}/logs/atlassian-confluence-migrations.log.*
+  rm -f ${CONF_HOME}/logs/atlassian-diagnostics.log.*
   rm -f ${CONF_HOME}/analytics-logs/*
   find ${CONF_INSTALL}/temp -mtime +1 -type f -delete
   echo  'Cleaning tmp attachments based on the https://jira.atlassian.com/browse/JRASERVER-71824'
