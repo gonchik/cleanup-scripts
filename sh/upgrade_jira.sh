@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd /opt/atlassian/jira
+cd /opt/atlassian/jira || exit
 
 wget -c https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-9.4.22.tar.gz
 tar -xzvf atlassian-jira-software-9.4.22.tar.gz

@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
 
-cd /opt/atlassian/confluence
+cd /opt/atlassian/confluence || exit
 
-wget -c https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-8.5.11.tar.gz
-tar -xzvf atlassian-confluence-8.5.11.tar.gz
+wget -c https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-8.5.16.tar.gz
+tar -xzvf atlassian-confluence-8.5.16.tar.gz
 
 # Main variables
-NEW_RELEASE=atlassian-confluence-8.5.11
+NEW_RELEASE=atlassian-confluence-8.5.16
 OLD_RELEASE=atlassian-confluence-8.5.7
 APP_USER=confluence
 APP_HOME=/var/atlassian/application-data/confluence/
 
 
 echo "Copying JRE"
-cp -rf {${OLD_RELEASE},${NEW_RELEASE}}/jre
+if [ -d "${OLD_RELEASE}/jre" ]; then
+  cp -rf {${OLD_RELEASE},${NEW_RELEASE}}/jre
+else
+  echo "The directory ${OLD_RELEASE}/jre does not exist."
+fi
+
 echo 'Rewrite setenv.sh file'
 yes | cp {${OLD_RELEASE},${NEW_RELEASE}}/bin/setenv.sh
 echo 'Rewrite server.xml'
