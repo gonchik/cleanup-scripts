@@ -61,7 +61,7 @@
         <jira.greenhopper.version>${jira.version}</jira.greenhopper.version>
         <scriptrunner.version>5.9.1-p5</scriptrunner.version>
         <amps.version>8.0.2</amps.version>
-        <groovy.version>2.4.15</groovy.version>
+        <groovy.version>2.4.21</groovy.version>
     </properties>
 
     <repositories>
