@@ -1,10 +1,10 @@
-# MacOS cleanup
+echo 'MacOS cleanup'
 brew cleanup
 gem cleanup --dryrun
 gem cleanup
 
 echo 'Cleaning up XCode Derived Data and Archives...'
-
+HOME=~
 rm -rf "${HOME}/Library/Caches/CocoaPods"
 xcrun simctl delete unavailable
 rm -rf ~/Library/Developer/Xcode/Archives
@@ -19,11 +19,11 @@ sudo rm -rfv ~/.Trash/* &>/dev/null
 
 echo 'Clearing System Cache Files...'
 sudo rm -rfv /Library/Caches/* &>/dev/null
-sudo rm -rfv /System/Library/Caches/* &>/dev/null
 sudo rm -rfv ~/Library/Caches/* &>/dev/null
-sudo rm -rfv /private/var/folders/bh/*/*/*/* &>/dev/null
+sudo rm -rfv /System/Library/Caches/* &>/dev/null
 
 echo 'Clearing System Log Files...'
+sudo rm -rf /var/log/* &>/dev/null
 sudo rm -rfv /private/var/log/asl/*.asl &>/dev/null
 sudo rm -rfv /Library/Logs/DiagnosticReports/* &>/dev/null
 sudo rm -rfv /Library/Logs/CreativeCloud/* &>/dev/null
@@ -78,6 +78,40 @@ clear_dns_cache() {
   echo ""
 }
 
+# Function to clean  on MacOS-based systems
+clean_macos() {
+  find . -name ".DS_Store" -delete
+}
+
+android_sdk_cleanup_for_mac() {
+  echo 'Deletes the Android Studio application'
+  echo 'Note that this may be different depending on what you named the application as, or whether you downloaded the preview version'
+  rm -Rf /Applications/Android\ Studio.app
+  echo 'Delete All Android Studio related preferences'
+  echo 'The asterisk here should target all folders/files beginning with the string before it'
+  rm -Rf ~/Library/Preferences/AndroidStudio*
+  rm -Rf ~/Library/Preferences/Google/AndroidStudio*
+  echo "Deletes the Android Studio's plist file"
+  rm -Rf ~/Library/Preferences/com.google.android.*
+  echo "Deletes the Android Emulator's plist file"
+  rm -Rf ~/Library/Preferences/com.android.*
+  echo "Deletes mainly plugins (or at least according to what mine (Edric) contains)"
+  rm -Rf ~/Library/Application\ Support/AndroidStudio*
+  rm -Rf ~/Library/Application\ Support/Google/AndroidStudio*
+  echo "Deletes all logs that Android Studio outputs"
+  rm -Rf ~/Library/Logs/AndroidStudio*
+  rm -Rf ~/Library/Logs/Google/AndroidStudio*
+  echo "Deletes Android Studio's caches"
+  rm -Rf ~/Library/Caches/AndroidStudio*
+  rm -Rf ~/Library/Caches/Google/AndroidStudio*
+  echo "Deletes older versions of Android Studio"
+  rm -Rf ~/.AndroidStudio*
+  rm -Rf ~/.gradle
+  rm -Rf /usr/local/var/lib/android-sdk/
+}
+
+android_sdk_cleanup_for_mac
+clean_macos
 clear_dns_cache
 
 # problem slow auth
