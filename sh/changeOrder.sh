@@ -1,0 +1,15 @@
+curl 'https://jira.example.io/secure/admin/StatusUp.jspa?up=§' \
+  -H 'authority: jira.example.io' \
+  -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' \
+  -H 'accept-language: en,ru-RU;q=0.9,ru;q=0.8' \
+  -H 'cookie: '\
+  -H 'dnt: 1' \
+  -H 'referer: https://jira.example.io/secure/admin/ViewStatuses.jspa' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: document' \
+  -H 'sec-fetch-mode: navigate' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'sec-fetch-user: ?1' \
+  -H 'upgrade-insecure-requests: 1' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36' \
+  --compressed
