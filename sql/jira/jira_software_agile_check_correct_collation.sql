@@ -15,4 +15,3 @@ select collation_name
 from INFORMATION_SCHEMA.COLUMNS
 where table_name = 'AO_60DB71_LEXORANK'
   and column_name = 'RANK';
-§
