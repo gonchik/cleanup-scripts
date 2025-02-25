@@ -1,6 +1,6 @@
 boolean isPreview = true
 /*
- * Find Agile boards without any base filter
+ * Agile: detect Agile boards without any base filter
  * link: https://confluence.atlassian.com/jirakb/jira-software-boards-not-visible-after-filter-deletion-779158656.html
  * Environment (last check): Jira Software 8.20.16, Scriptrunner 7.10.0
  */

@@ -1,7 +1,7 @@
 boolean isPreview = true
-String jqlSearch = 'Sprint in futureSprints() and status in (Closed, Done)  '
+String jqlSearch = 'sprint in futureSprints() and (status in (Closed, Done) or statusCategory=Done )'
 /*
- * That script works as checker of future sprint in Closed or Done statuses
+ * Agile: checking future sprints in the status category Done: Closed or Completed.
  * Contributor: Gonchik Tsymzhitov
  *
  */

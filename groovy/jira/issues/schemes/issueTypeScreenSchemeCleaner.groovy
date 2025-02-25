@@ -2,7 +2,7 @@ boolean isPreview = true
 /*
     Detect unused of issue type screen schemes
     Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
-    Tested Environment: Jira 8.20.16
+    Tested Environment: Jira 8.20.16, 9.12.5
     Contribution: Gonchik Tsymzhitov
  */
 import com.atlassian.jira.component.ComponentAccessor

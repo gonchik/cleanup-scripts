@@ -2,7 +2,7 @@ boolean isPreview = true
 /*
     Clean up the votes from inactive users
     Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
-    Tested Environment: Jira 8.20.5, 8.13.3
+    Tested Environment: Jira 8.20.5, 8.13.3, 9.12.5
     Contribution: Gonchik Tsymzhitov
  */
 import com.atlassian.jira.component.ComponentAccessor

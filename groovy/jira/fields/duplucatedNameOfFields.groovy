@@ -1,6 +1,9 @@
-// This script investigate the duplicated naming of fields in the Jira
-// as waiting that request https://jira.atlassian.com/browse/JRASERVER-61376
-// Motivation based on the UX and continuous of mistakes in scripts, add-ons etc.
+/*
+    This script investigate the duplicated naming of fields in the Jira
+    as waiting that request https://jira.atlassian.com/browse/JRASERVER-61376
+    Motivation based on the UX and continuous of mistakes in scripts, add-ons etc.
+
+ */
 
 import com.atlassian.jira.issue.fields.FieldManager
 import com.atlassian.jira.component.ComponentAccessor
@@ -27,7 +30,7 @@ for (field in fields) {
     }
 }
 
-output = "Investigated ${fields.size()} number of fields, where duplicated is ${duplicatedFields}"
+output = br + "Summary: Investigated ${fields.size()} number of fields, where duplicated is ${duplicatedFields}"
 sb.append(output + br)
 log.debug(output)
 

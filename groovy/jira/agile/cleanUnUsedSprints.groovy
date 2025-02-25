@@ -1,6 +1,7 @@
 // https://jira.atlassian.com/browse/JSWSERVER-11263
 // kudos to Jamie Echlin
 /*
+    Agile: checking unused sprints, it means sprints without tickets
     Attention: the user must has all needful rights
  */
 

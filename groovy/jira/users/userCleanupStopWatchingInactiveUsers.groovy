@@ -13,7 +13,7 @@ import com.atlassian.jira.issue.watchers.WatcherManager
 import org.apache.log4j.Logger
 import org.apache.log4j.Level
 
-def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupStopWatchingInactiveUsers")
+def log = Logger.getLogger("com.gonchik.scripts.groovy.userCleanupStopWatchingInactiveUsers")
 log.setLevel(Level.DEBUG)
 
 // this script shows how to clean up the inactive watchers

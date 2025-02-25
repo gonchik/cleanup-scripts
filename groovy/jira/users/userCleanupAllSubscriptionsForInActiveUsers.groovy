@@ -19,7 +19,7 @@ import org.apache.log4j.Logger
 import org.apache.log4j.Level
 
 
-def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupAllSubscriptionsForInActiveUsers")
+def log = Logger.getLogger("com.gonchik.scripts.groovy.userCleanupAllSubscriptionsForInActiveUsers")
 log.setLevel(Level.DEBUG)
 
 UserSearchService userSearchService = ComponentAccessor.getOSGiComponentInstanceOfType(UserSearchService.class)
@@ -27,6 +27,7 @@ UserSearchParams userSearchParams = (new UserSearchParams.Builder()).allowEmptyQ
 def subscriptionManager = ComponentAccessor.getOSGiComponentInstanceOfType(SubscriptionManager.class)
 
 for (ApplicationUser appUser : userSearchService.findUsers("", userSearchParams)) {
+    log.debug("Cleaning subscriptions for ${appUser.name}")
     subscriptionManager.deleteSubscriptionsForUser(appUser)
 }
 log.debug("Cleaned up not needed subscriptions")

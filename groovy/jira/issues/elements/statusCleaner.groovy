@@ -1,5 +1,11 @@
-// please, be informed that script works based on the exception for com.atlassian.jira.config.StatusManager.removeStatus()
-// Disclaimer: please, check on test env before run prod
+/*
+    Delete statuses with no associated workflow
+    please, be informed that script works based on the exception
+    for com.atlassian.jira.config.StatusManager.removeStatus()
+
+    Disclaimer: please, check on test env before run prod
+ */
+
 import com.atlassian.jira.component.ComponentAccessor
 import com.atlassian.jira.config.StatusManager
 import org.apache.log4j.Logger

@@ -3,7 +3,7 @@ boolean isPreview = true
     This script do cleanup of dashboards for inactive users
     Purpose: reduce extra private dashboards
     Additional:  This script can be run from Jira -> Administration -> Add-ons -> Script Console
-    Tested Environment: Jira 8.20.16, 8.13.3
+    Tested Environment: Jira 8.20.16, 8.13.3, 9.12.5
     Contribution: Gonchik Tsymzhitov
  */
 
@@ -25,7 +25,7 @@ def log = Logger.getLogger("com.gonchik.scripts.groovy.cleanupDashBoardsForInact
 log.setLevel(Level.DEBUG)
 
 /**
- * Method to delete private dashboards
+ * Method to delete private dashboards for inActveUsers
  */
 
 def sb = new StringBuilder()
