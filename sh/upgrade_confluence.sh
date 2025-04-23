@@ -2,12 +2,12 @@
 
 cd /opt/atlassian/confluence || exit
 
-wget -c https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-8.5.16.tar.gz
-tar -xzvf atlassian-confluence-8.5.16.tar.gz
+wget -c https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-9.2.3.tar.gz
+tar -xzvf atlassian-confluence-9.2.3.tar.gz
 
 # Main variables
-NEW_RELEASE=atlassian-confluence-8.5.16
-OLD_RELEASE=atlassian-confluence-8.5.7
+NEW_RELEASE=atlassian-confluence-9.2.3
+OLD_RELEASE=atlassian-confluence-8.5.11
 APP_USER=confluence
 APP_HOME=/var/atlassian/application-data/confluence/
 
