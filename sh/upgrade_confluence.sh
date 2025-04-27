@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 
-cd /opt/atlassian/confluence || exit
-
-wget -c https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-9.2.3.tar.gz
-tar -xzvf atlassian-confluence-9.2.3.tar.gz
-
 # Main variables
 NEW_RELEASE=atlassian-confluence-9.2.3
 OLD_RELEASE=atlassian-confluence-8.5.11
 APP_USER=confluence
 APP_HOME=/var/atlassian/application-data/confluence/
+APP_INSTALL_DIR=/opt/atlassian/confluence
+
+cd ${APP_INSTALL_DIR} || exit
+
+wget -c https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-9.2.3.tar.gz
+tar -xzvf atlassian-confluence-9.2.3.tar.gz
+
+
 
 
 echo "Copying JRE"

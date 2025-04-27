@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 
-cd /opt/atlassian/jira || exit
+# Main variables
+NEW_RELEASE=atlassian-jira-software-9.4.22-standalone
+OLD_RELEASE=atlassian-jira-software-9.4.15-standalone
+APP_USER=jira
+APP_HOME=/var/atlassian/application-data/jira
+APP_INSTALL_DIR=/opt/atlassian/jira
+
+cd ${APP_INSTALL_DIR} || exit
 
 wget -c https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-9.4.22.tar.gz
 tar -xzvf atlassian-jira-software-9.4.22.tar.gz
 
-# Main variables
-NEW_RELEASE=atlassian-jira-software-9.4.22-standalone
-OLD_RELEASE=atlassian-jira-software-9.4.15-standalone
-JIRA_USER=jira
-JIRA_HOME=/var/atlassian/application-data/jira
+
 
 
 echo "Copying JRE"
@@ -37,19 +40,19 @@ cp {${OLD_RELEASE},${NEW_RELEASE}}/atlassian-jira/images/mail/logo.png
 echo "Custom language pack"
 yes | cp {${OLD_RELEASE},${NEW_RELEASE}}/atlassian-jira/WEB-INF/atlassian-bundled-plugins/jira-core-language-pack-ru_RU-9.8.0.v20230228123141.jar
 echo "Removed cached backup files"
-rm -f ${JIRA_HOME}/customisations-backup/atlassian-jira/WEB-INF/atlassian-bundled-plugins/jira-core-language-pack-ru_RU-9.8.0.v20230228123141.jar
-rm -f ${JIRA_HOME}/customisations/atlassian-jira/WEB-INF/atlassian-bundled-plugins/jira-core-language-pack-ru_RU-9.8.0.v20230228123141.jar
+rm -f ${APP_HOME}/customisations-backup/atlassian-jira/WEB-INF/atlassian-bundled-plugins/jira-core-language-pack-ru_RU-9.8.0.v20230228123141.jar
+rm -f ${APP_HOME}/customisations/atlassian-jira/WEB-INF/atlassian-bundled-plugins/jira-core-language-pack-ru_RU-9.8.0.v20230228123141.jar
 
-chown -R ${JIRA_USER}: ${NEW_RELEASE}/
+chown -R ${APP_USER}: ${NEW_RELEASE}/
 
 systemctl stop jira
 unlink current
 ln -s ${NEW_RELEASE} current
 
 echo "Cleaning plugin cache"
-rm -rf ${JIRA_HOME}/plugins/.bundled-plugins
-rm -rf ${JIRA_HOME}/plugins/.osgi-plugins
-rm -f ${JIRA_HOME}/.jira.home.lock
+rm -rf ${APP_HOME}/plugins/.bundled-plugins
+rm -rf ${APP_HOME}/plugins/.osgi-plugins
+rm -f ${APP_HOME}/.jira.home.lock
 echo "Clean old logs from old installation"
 rm -f ${OLD_RELEASE}/logs/*
 rm -rf ${OLD_RELEASE}/temp/*
@@ -63,7 +66,7 @@ rm -rf ${OLD_RELEASE}/temp/*
 # wget -c https://marketplace.atlassian.com/download/apps/1213632/version/1050040022
 # unzip 1050040022
 #
-# cp *.jar dependencies/*.jar ${JIRA_HOME}/sharedhome/plugins/installed-plugins/
+# cp *.jar dependencies/*.jar ${APP_HOME}/sharedhome/plugins/installed-plugins/
 # cd ..
 # rm -rf jsm/
 
@@ -72,4 +75,4 @@ systemctl restart jira
 
 # Checking logs
 # tail -f ${NEW_RELEASE}/logs/catalina.out
-# tail -f ${JIRA_HOME}/log/atlassian-jira.log
+# tail -f ${APP_HOME}/log/atlassian-jira.log

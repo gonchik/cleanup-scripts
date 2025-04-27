@@ -37,4 +37,4 @@ rm -f ${APP_HOME}/plugins/.osgi-plugins
 systemctl restart bitbucket
 
 # Checking logs
-#  tail -f ${APP_HOME}/logs/atlassian-bamboo.log
+#  tail -f ${APP_HOME}/logs/atlassian-bitbucket.log
