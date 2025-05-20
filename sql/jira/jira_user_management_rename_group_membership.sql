@@ -107,7 +107,7 @@ where stringvalue = '<OLD_GROUP_NAME>'
                                     'com.atlassian.jira.plugin.system.customfieldtypes:grouppicker'
            ));
 
-
+/*
 3. Find filters and workflows that contain group names
 Group names can also be used in filters and workflows, but just changing them with SQL statements would be too risky and could result in errors. You can run the following queries to get a list of filters and workflows that contain your group names, and then edit them in Jira.
 
@@ -121,6 +121,7 @@ you get a list of filters, go to Issues > Manage filters. Group names will usual
 ’s JQL query.
 
 FIND WORKFLOWS
+*/
 select workflowname
 from jiraworkflows
 where

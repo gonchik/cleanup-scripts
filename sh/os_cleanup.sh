@@ -110,6 +110,12 @@ find /var/log -type f -name 'sssd_nss.log-*' -delete
 echo 'Remove rotated logs in /var/log of VMware network'
 find /var/log/ -type f -name 'vmware-network.*.log' -delete
 
+echo 'Remove rotated logs clamd and dnf records'
+find /var/log/ -type f -name 'clamd.-*' -delete
+find /var/log/ -type f -name 'freshclam.log-*' -delete
+find /var/log/ -type f -name 'dnf.rpm.log-*' -delete
+find /var/log/ -type f -name 'dnf.log-*' -delete
+
 echo "Removing WP-CLI caches..."
 rm -rf /root/.wp-cli/cache/*
 rm -rf /home/*/.wp-cli/cache/*
