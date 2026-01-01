@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Main variables
-NEW_RELEASE=atlassian-jira-software-9.17.5-standalone
+NEW_RELEASE=atlassian-jira-software-10.3.15-standalone
 OLD_RELEASE=atlassian-jira-software-9.4.22-standalone
 APP_USER=jira
 APP_HOME=/var/atlassian/application-data/jira
@@ -9,8 +9,8 @@ APP_INSTALL_DIR=/opt/atlassian/jira
 
 cd ${APP_INSTALL_DIR} || exit
 
-wget -c https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-9.17.5.tar.gz
-tar -xzvf atlassian-jira-software-9.17.5.tar.gz
+wget -c https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-10.3.15.tar.gz
+tar -xzvf atlassian-jira-software-10.3.15.tar.gz
 
 
 
