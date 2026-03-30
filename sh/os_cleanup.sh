@@ -102,6 +102,12 @@ find /var/log -type f -name '*.[0-9]' -delete
 echo 'Clean DNF librepo'
 find /var/log -type f -name 'dnf.librepo.log-*' -delete
 
+echo 'Clean FirewallD'
+find /var/log -type f -name 'firewalld-*' -delete
+
+echo 'Clean Fail2ban'
+find /var/log -type f -name 'fail2ban.log-*' -delete
+
 echo 'Clean SSSD'
 find /var/log -type f -name 'sssd.log-*' -delete
 find /var/log -type f -name 'sssd_implicit_files.log-*' -delete
