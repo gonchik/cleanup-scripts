@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Define color codes for clear terminal output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e "${YELLOW}Starting complete cleanup of Yandex Browser...${NC}"
+
+# 1. Force quit any running Yandex processes
+echo -e "Closing Yandex Browser processes..."
+killall "Yandex" 2>/dev/null
+killall "Yandex Browser" 2>/dev/null
+killall "ru.yandex.desktop.yandex-browser" 2>/dev/null
+
+# 2. Remove the Main Application
+APPLICATIONS=(
+    "/Applications/Yandex.app"
+    "/Applications/Yandex Browser.app"
+    "$HOME/Applications/Yandex.app"
+)
+
+for app in "${APPLICATIONS[@]}"; do
+    if [ -d "$app" ]; then
+        echo -e "Removing application at ${app}..."
+        rm -rf "$app"
+    fi
+done
+
+# 3. Define all residual Library paths
+FILES_TO_REMOVE=(
+    "$HOME/Library/Application Support/Yandex"
+    "$HOME/Library/Caches/Yandex"
+    "$HOME/Library/Caches/ru.yandex.desktop.yandex-browser"
+    "$HOME/Library/Preferences/ru.yandex.desktop.yandex-browser.plist"
+    "$HOME/Library/Preferences/ru.yandex.desktop.yandex-browser.helper.plist"
+    "$HOME/Library/Saved Application State/ru.yandex.desktop.yandex-browser.savedState"
+    "$HOME/Library/HTTPStorages/ru.yandex.desktop.yandex-browser"
+    "$HOME/Library/HTTPStorages/ru.yandex.desktop.yandex-browser.binarycookies"
+    "$HOME/Library/WebKit/ru.yandex.desktop.yandex-browser"
+    "$HOME/Library/Logs/Yandex"
+)
+
+# Delete listed files and directories
+for item in "${FILES_TO_REMOVE[@]}"; do
+    if [ -e "$item" ]; then
+        echo -e "Deleting: ${item}"
+        rm -rf "$item"
+    fi
+done
+
+# 4. Clear wildcard files (LaunchAgents, Containers, and additional caches)
+echo -e "Scanning for additional Yandex files in system subdirectories..."
+find "$HOME/Library/LaunchAgents" -name "*yandex*" -exec rm -rf {} + 2>/dev/null
+find "$HOME/Library/Containers" -name "*yandex*" -exec rm -rf {} + 2>/dev/null
+find "$HOME/Library/Group Containers" -name "*yandex*" -exec rm -rf {} + 2>/dev/null
+
+# 5. Flush DNS Cache to remove stale local network entries
+echo -e "Flushing DNS cache..."
+sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+
+echo -e "${GREEN}Cleanup complete! All Yandex Browser files have been permanently removed.${NC}"
