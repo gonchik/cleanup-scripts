@@ -110,7 +110,21 @@ android_sdk_cleanup_for_mac() {
   rm -Rf /usr/local/var/lib/android-sdk/
 }
 
+clean_rust() {
+    echo "Cleaning Cargo registry and git caches..."
+    rm -rf ~/.cargo/registry/cache ~/.cargo/registry/src ~/.cargo/git/db ~/.cargo/git/checkouts
+
+    echo "Cleaning rustup temporary files..."
+    rm -rf ~/.rustup/downloads ~/.rustup/tmp
+
+    echo "Finding and deleting Rust project 'target' folders..."
+    find ~ -type d -name "target" -exec test -f "{}/.rustc_info.json" \; -print -exec rm -rf "{}" + 2>/dev/null
+
+    echo "Rust cleanup complete!"
+}
+
 android_sdk_cleanup_for_mac
+clean_rust
 clean_macos
 clear_dns_cache
 
