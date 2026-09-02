@@ -1,0 +1,47 @@
+#!/zsh
+
+echo "==> Stopping GlobalProtect services..."
+sudo launchctl unload /Library/LaunchDaemons/com.paloaltonetworks.gp.pangps.plist 2>/dev/null
+sudo launchctl unload /Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist 2>/dev/null
+launchctl unload ~/Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist 2>/dev/null
+
+echo "==> Terminating running processes..."
+sudo killall -9 GlobalProtect PanGPS PanGPA 2>/dev/null
+
+echo "==> Running vendor uninstaller if present..."
+if [ -f /Applications/GlobalProtect.app/Contents/Resources/uninstall_gp.sh ]; then
+    sudo /Applications/GlobalProtect.app/Contents/Resources/uninstall_gp.sh
+fi
+
+echo "==> Removing app bundle and launch files..."
+sudo rm -rf /Applications/GlobalProtect.app
+sudo rm -f /Library/LaunchDaemons/com.paloaltonetworks.gp.pangps.plist
+sudo rm -f /Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist
+rm -f ~/Library/LaunchAgents/com.paloaltonetworks.gp.pangpa.plist
+
+echo "==> Purging system-wide application support, logs, and state..."
+sudo rm -rf "/Library/Application Support/PaloAltoNetworks"
+sudo rm -rf "/Library/Logs/PaloAltoNetworks"
+sudo rm -rf "/Library/Preferences/com.paloaltonetworks.GlobalProtect.plist"
+
+echo "==> Purging user library caches, logs, preferences, and containers..."
+rm -rf ~/Library/Application\ Support/PaloAltoNetworks
+rm -rf ~/Library/Caches/com.paloaltonetworks.GlobalProtect
+rm -rf ~/Library/Logs/PaloAltoNetworks
+rm -rf ~/Library/Preferences/com.paloaltonetworks.GlobalProtect*
+rm -rf ~/Library/Preferences/com.paloaltonetworks.GlobalProtect.plist
+rm -rf ~/Library/Saved\ Application\ State/com.paloaltonetworks.GlobalProtect.savedState
+rm -rf ~/Library/HTTPStorages/com.paloaltonetworks.GlobalProtect
+
+echo "==> Cleaning network extension and system configuration..."
+sudo scutil <<EOF
+remove State:/Network/Service/gpd.pan/IPv4
+remove State:/Network/Service/gpd.pan/DNS
+quit
+EOF
+
+echo "==> Resetting network extensions & flushing DNS..."
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder
+
+echo "==> GlobalProtect complete removal finished!"
