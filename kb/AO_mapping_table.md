@@ -79,3 +79,32 @@
 | AO_F1B27B_  |                                                        |                                    Atlassian Timed Promise Plugin |
 | AO_F1B27B_  |              com.decadis.xtools-for-jira               |                                            Admin Toolbox for Jira |
 | AO_C77861_  |                  com.atlassian.audit                   |                                            Atlassian Audit Plugin |
+
+## Tables to review
+
+Table availability and schema can vary by Jira and app version. Treat direct database access as read-only unless a supported maintenance procedure explicitly requires a change.
+
+| Table | Area / owner | Review notes |
+|---|---|---|
+| `entity_property` | Jira entity properties | Stores entity properties used by Jira and apps. Existing cleanup queries show examples filtered by `ENTITY_NAME` or `PROPERTY_KEY`; confirm the owning feature and impact before deleting rows. |
+| `AO_C77861_AUDIT_ENTITY` | Jira audit log | Jira 8.8 and later use this table for audit records; earlier versions used `audit_log`. Audit action/category and change details include columns such as `ACTION`, `CATEGORY`, `CHANGE_VALUES`, `ENTITY_TIMESTAMP`, and `USER_NAME`. |
+| `AO_54307E_SLAAUDITLOGDATA` | Jira Service Management SLA audit log | Stores SLA troubleshooting audit data. Atlassian notes that this and the companion log table could grow substantially; inspect volume and retention before considering cleanup. |
+| `AO_54307E_SLAAUDITLOG` | Jira Service Management SLA audit log | Companion to `AO_54307E_SLAAUDITLOGDATA`; repository scripts check and clean this table pair. |
+| `AO_D4B4E5_ATTACHMENT_SRCH_META` | Smart Attachments for Jira (Stiltsoft) | Listed by the vendor as an app database table. |
+| `AO_D4B4E5_ATTACHMENT` | Smart Attachments for Jira (Stiltsoft) | Listed by the vendor as an app database table. |
+| `AO_D4B4E5_ATTACHMENT_TMP` | Smart Attachments for Jira (Stiltsoft) | Listed by the vendor as an app database table. |
+| `AO_D4B4E5_ATTACHMENTS_VERSIONS` | Smart Attachments for Jira (Stiltsoft) | Listed by the vendor as an app database table. |
+| `AO_D4B4E5_METADATA_VALUE` | Smart Attachments for Jira (Stiltsoft) | Listed by the vendor as an app database table. |
+| `AO_0201F0_STATS_EVENT_PARAM` | Service Desk Reports plugin | The prefix above maps to Service Desk Reports. The references here do not document this table's columns or lifecycle. |
+
+## References
+
+- Atlassian Support: [Accessing Jira Audit Information through the Database](https://confluence.atlassian.com/jirakb/accessing-jira-audit-information-through-the-database-695107926.html) — audit table name/version transition and example queries.
+- Atlassian Jira issue: [Provide clean up schedule job for AO_54307E_SLAAUDITLOGDATA](https://jira.atlassian.com/browse/JSDSERVER-5266?src=confmacro) — describes the SLA audit tables and potential growth.
+- Stiltsoft: [App tables in the database](https://docs.stiltsoft.com/catat/server-dc/app-tables-in-the-database-124984407.html) — lists database tables used by Smart Attachments for Jira.
+
+## Related repository queries
+
+- [`jira_service_desk_sla_audit_checker.sql`](../sql/jira/jira_service_desk_sla_audit_checker.sql) checks the relationship between the SLA audit log tables.
+- [`jira_service_desk_sla_cleanup.sql`](../sql/jira/jira_service_desk_sla_cleanup.sql) contains cleanup statements for the SLA audit tables; review its database/version assumptions before use.
+- [`jira_metadata_cleaner.sql`](../sql/jira/cleanup/jira_metadata_cleaner.sql) has examples of querying `entity_property`.

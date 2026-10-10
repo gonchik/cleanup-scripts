@@ -7,6 +7,8 @@ I hope these scripts will help you do a continuous cleanup.
 Reference:
 https://confluence.atlassian.com/adminjiraserver/project-screens-schemes-and-fields-938847220.html
 
+AO table mapping and database notes: [`kb/AO_mapping_table.md`](kb/AO_mapping_table.md).
+
 Usage
 -----
 Most of the scripts have a variable `isPreview` on top. 
